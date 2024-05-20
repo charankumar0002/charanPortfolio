@@ -8,14 +8,10 @@ function App() {
   return (
    <>
 <Router>
-  <Header/>
-  <main>
-    <Suspense>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/about" component={About} />
-      
-    </Suspense>
-  </main>
+
+  
+     
+
 </Router>
    </>
   );
