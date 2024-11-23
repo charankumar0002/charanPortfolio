@@ -1,0 +1,32 @@
+.firstPage-container {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(120deg, #1e293b, #0f172a);
+    color: white;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  .name-container {
+  text-align: center;
+}
+
+h1 {
+  font-size: 4rem;
+  margin: 0;
+}
+
+.letter {
+  display: inline-block;
+  opacity: 0;
+  font-size: 5rem; /* Start with a large letter */
+}
+
+.details {
+  font-size: 1.5rem;
+  margin-top: 20px;
+  opacity: 0; /* Start with hidden details */
+}
