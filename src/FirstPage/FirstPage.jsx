@@ -50,7 +50,7 @@ function FirstPage() {
             key={index}
             ref={(el) => (nameRef.current[index] = el)}
             className="letter"
-            style={{ opacity: 0, fontSize: "5rem", display: "inline-block" }}
+            style={{ opacity: 0, fontSize: "5rem", }}
           >
             {letter}
           </span>
