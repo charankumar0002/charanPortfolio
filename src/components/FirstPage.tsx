@@ -9,13 +9,13 @@ const FirstPage: React.FC = () => {
       gsap.fromTo(
         heroRef.current,
         { opacity: 0, y: -100 },
-        { opacity: 1, y: 0, duration: 2 }
+        { opacity: 1, y: 200, duration: 2 }
       );
     }
   }, []);
 
   return (
-    <div ref={heroRef} className="h-[100vh] flex items-center justify-center align-center bg-blue-500 text-white">
+    <div ref={heroRef} className="h-[100vh] w-100 flex justify-center align-center bg-blue-500 text-white">
       <h1 className="text-4xl font-bold">Welcome to My Portfolio</h1>
     </div>
   );
