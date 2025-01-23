@@ -1,3 +1,72 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  cursor: none;
+  background: black;
+  overflow-x: hidden;
+}
+
+.hover-target:hover ~ .custom-cursor {
+  transform: scale(2);
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@layer utilities {
+  .mask-image {
+    mask-image: linear-gradient(to bottom, black 0%, black 100%);
+  }
+  
+  .clip-path-slant {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 90%);
+  }
+}
+
+.smooth-scroll {
+  @apply scroll-smooth;
+}
+
+/* Add smooth scrolling to html */
+html {
+  @apply smooth-scroll;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 2s ease-in-out infinite;
+}
+
+/* Parallax classes */
+.parallax-wrapper {
+  height: 100vh;
+  overflow-x: hidden;
+  perspective: 10px;
+  transform-style: preserve-3d;
+}
+
+.parallax-content {
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+}
