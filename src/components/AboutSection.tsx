@@ -5,154 +5,92 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const AboutSection = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
-  const bioRef = useRef<HTMLDivElement>(null);
-  const detailsRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    const image = imageRef.current;
-    const bio = bioRef.current;
-    const details = detailsRef.current;
-
-    // Image reveal animation
-    gsap.from(image, {
+    // Create scroll trigger animations
+    gsap.from(imageRef.current, {
       scrollTrigger: {
-        trigger: image,
-        start: "top 80%",
-        end: "top 20%",
-        scrub: 1,
+        trigger: sectionRef.current,
+        start: "top center",
+        toggleActions: "play none none reverse"
       },
-      scale: 0.8,
+      x: -100,
       opacity: 0,
-      duration: 1.5,
+      duration: 1,
+      ease: "power3.out"
     });
 
-    // Bio text reveal animation
-    gsap.from(bio?.children || [], {
+    gsap.from(contentRef.current?.children || [], {
       scrollTrigger: {
-        trigger: bio,
-        start: "top 75%",
+        trigger: contentRef.current,
+        start: "top center+=100",
+        toggleActions: "play none none reverse"
       },
       y: 50,
       opacity: 0,
-      duration: 1,
-      stagger: 0.2,
-    });
-
-    // Details cards animation
-    gsap.from('.detail-card', {
-      scrollTrigger: {
-        trigger: details,
-        start: "top 70%",
-      },
-      y: 100,
-      opacity: 0,
       duration: 0.8,
-      stagger: 0.15,
+      stagger: 0.2,
+      ease: "power2.out"
     });
 
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
   }, []);
 
   return (
     <section
+      id="about"
       ref={sectionRef}
-      className="min-h-screen bg-gradient-to-b from-black to-indigo-950 py-20"
+      className="min-h-screen bg-black flex items-center py-20"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Image Column */}
+          {/* Image */}
           <div ref={imageRef} className="relative">
-            <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
+            <div className="relative rounded-lg overflow-hidden">
               <img
                 src="/your-image.jpg" // Replace with your image
-                alt="Your Name"
-                className="w-full h-full object-cover"
+                alt="Profile"
+                className="w-full h-[600px] object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/20 to-transparent" />
+              <div className="absolute inset-0 bg-purple-600/20 mix-blend-overlay" />
             </div>
-            
-            {/* Floating decoration */}
-            <div className="absolute -right-8 -bottom-8 w-64 h-64 bg-gradient-to-tr from-purple-600/20 to-transparent rounded-full blur-2xl -z-10" />
+            {/* Decorative element */}
+            <div className="absolute -bottom-6 -right-6 w-64 h-64 bg-purple-600/20 rounded-full blur-3xl" />
           </div>
 
-          {/* Content Column */}
-          <div className="space-y-12">
-            {/* Bio Section */}
-            <div ref={bioRef} className="space-y-6">
-              <h2 className="text-4xl font-bold text-white">
-                About Me
-              </h2>
-              <p className="text-lg text-gray-300 leading-relaxed">
-                Hello! I'm a passionate developer with a keen eye for design and a love for creating
-                seamless user experiences. My journey in web development started with a curiosity
-                for building things that live on the internet.
-              </p>
-              <p className="text-lg text-gray-300 leading-relaxed">
-                I specialize in building digital experiences that combine clean code with creative
-                design solutions. When I'm not coding, you can find me exploring new technologies
-                or working on personal projects.
-              </p>
-            </div>
+          {/* Content */}
+          <div ref={contentRef} className="space-y-8">
+            <h2 className="text-5xl font-bold text-white">
+              About Me
+            </h2>
+            
+            <p className="text-xl text-purple-200/80 leading-relaxed">
+              I'm a passionate frontend developer with a keen eye for design and
+              a love for creating seamless user experiences.
+            </p>
 
-            {/* Details Cards */}
-            <div ref={detailsRef} className="grid grid-cols-2 gap-6">
+            <div className="space-y-4">
               {[
-                {
-                  title: "Experience",
-                  value: "3+ Years",
-                  icon: "🚀"
-                },
-                {
-                  title: "Projects",
-                  value: "50+",
-                  icon: "💼"
-                },
-                {
-                  title: "Location",
-                  value: "Your Location",
-                  icon: "📍"
-                },
-                {
-                  title: "Education",
-                  value: "Your Degree",
-                  icon: "🎓"
-                }
-              ].map((detail, index) => (
+                { label: "Experience", value: "5+ Years" },
+                { label: "Projects", value: "50+" },
+                { label: "Clients", value: "30+" }
+              ].map((item, index) => (
                 <div
                   key={index}
-                  className="detail-card bg-white/5 backdrop-blur-sm rounded-lg p-6 
-                           transform hover:scale-105 transition-transform duration-300"
+                  className="flex items-center space-x-4 text-purple-200/80"
                 >
-                  <span className="text-3xl mb-4 block">{detail.icon}</span>
-                  <h3 className="text-white font-medium">{detail.title}</h3>
-                  <p className="text-purple-300 mt-2">{detail.value}</p>
+                  <span className="text-lg font-medium w-32">{item.label}</span>
+                  <span className="text-2xl font-bold text-white">{item.value}</span>
                 </div>
               ))}
             </div>
 
-            {/* Skills */}
-            <div className="space-y-4">
-              <h3 className="text-2xl font-semibold text-white">Skills</h3>
-              <div className="flex flex-wrap gap-3">
-                {[
-                  "JavaScript", "TypeScript", "React", "Node.js", 
-                  "Next.js", "TailwindCSS", "GSAP", "Git"
-                ].map((skill, index) => (
-                  <span
-                    key={index}
-                    className="px-4 py-2 bg-white/10 rounded-full text-sm text-white
-                             hover:bg-white/20 transition-colors duration-300"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
+            <button className="px-8 py-4 bg-purple-600 text-white rounded-lg
+                           hover:bg-purple-700 transition-colors duration-300">
+              View Portfolio
+            </button>
           </div>
         </div>
       </div>
