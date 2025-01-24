@@ -1,12 +1,15 @@
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { TextPlugin } from 'gsap/TextPlugin';
-import { SplitText } from 'gsap/SplitText';
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { TextPlugin } from "gsap/TextPlugin";
+import { SplitText } from "gsap/SplitText";
 
 // Register GSAP plugins
 gsap.registerPlugin(TextPlugin);
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  onExploreClick: () => void;
+}
+function HeroSection({ onExploreClick }: HeroSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
@@ -17,71 +20,85 @@ const HeroSection = () => {
     const tl = gsap.timeline();
 
     // Initial setup
-    gsap.set([nameRef.current, titleRef.current, detailsRef.current, ctaRef.current], {
-      opacity: 0,
-      y: 50
-    });
+    gsap.set(
+      [nameRef.current, titleRef.current, detailsRef.current, ctaRef.current],
+      {
+        opacity: 0,
+        y: 50,
+      }
+    );
 
     // Animation sequence
-    tl.to('.loader', {
-      height: '0%',
+    tl.to(".loader", {
+      height: "0%",
       duration: 1.5,
-      ease: 'power4.inOut'
+      ease: "power4.inOut",
     })
-    .from('.background-gradient', {
-      opacity: 0,
-      duration: 1,
-      ease: 'power2.inOut'
-    })
-    .to(nameRef.current, {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      ease: 'back.out(1.7)'
-    })
-    .to(nameRef.current, {
-      x: '-30vw',
-      scale: 0.8,
-      duration: 1,
-      ease: 'power2.inOut'
-    })
-    .to(titleRef.current, {
-      opacity: 1,
-      y: 0,
-      duration: 0.8,
-      ease: 'power2.out'
-    }, '-=0.5')
-    .to('.detail-item', {
-      opacity: 1,
-      y: 0,
-      duration: 0.5,
-      stagger: 0.2,
-      ease: 'power2.out'
-    })
-    .to(ctaRef.current, {
-      opacity: 1,
-      y: 0,
-      duration: 0.8,
-      ease: 'power2.out'
-    }, '-=0.5');
+      .from(".background-gradient", {
+        opacity: 0,
+        duration: 1,
+        ease: "power2.inOut",
+      })
+      .to(nameRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "back.out(1.7)",
+      })
+      .to(nameRef.current, {
+        x: "-30vw",
+        scale: 0.8,
+        duration: 1,
+        ease: "power2.inOut",
+      })
+      .to(
+        titleRef.current,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out",
+        },
+        "-=0.5"
+      )
+      .to(".detail-item", {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        stagger: 0.2,
+        ease: "power2.out",
+      })
+      .to(
+        ctaRef.current,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out",
+        },
+        "-=0.5"
+      );
 
     // Animate background particles
-    gsap.to('.particle', {
-      y: 'random(-20, 20)',
-      x: 'random(-20, 20)',
-      duration: 'random(2, 4)',
+    gsap.to(".particle", {
+      y: "random(-20, 20)",
+      x: "random(-20, 20)",
+      duration: "random(2, 4)",
       repeat: -1,
       yoyo: true,
-      ease: 'none',
+      ease: "none",
       stagger: {
         amount: 2,
-        from: 'random'
-      }
+        from: "random",
+      },
     });
   }, []);
 
   return (
-    <div ref={containerRef} className="relative min-h-screen overflow-hidden bg-black">
+    <div
+      ref={containerRef}
+      className="relative min-h-screen overflow-hidden bg-black"
+    >
       {/* Loading screen */}
       <div className="loader absolute inset-0 bg-purple-900 z-50" />
 
@@ -96,7 +113,7 @@ const HeroSection = () => {
             className="particle absolute w-1 h-1 bg-white rounded-full opacity-20"
             style={{
               left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`
+              top: `${Math.random() * 100}%`,
             }}
           />
         ))}
@@ -120,12 +137,15 @@ const HeroSection = () => {
           </div>
 
           {/* Details */}
-          <div ref={detailsRef} className="mt-12 flex flex-col items-end space-y-4">
+          <div
+            ref={detailsRef}
+            className="mt-12 flex flex-col items-end space-y-4"
+          >
             {[
               { text: "Frontend Development", icon: "🎨" },
               { text: "Interactive Experiences", icon: "✨" },
               { text: "Creative Coding", icon: "💻" },
-              { text: "Motion Design", icon: "🎬" }
+              { text: "Motion Design", icon: "🎬" },
             ].map((item, index) => (
               <div
                 key={index}
@@ -138,15 +158,14 @@ const HeroSection = () => {
           </div>
 
           {/* CTA */}
-          <div ref={ctaRef} className="mt-16 text-center">
-            <button className="group relative px-8 py-4 bg-transparent overflow-hidden">
-              <span className="relative z-10 text-white text-lg font-medium">
-                View My Work
-              </span>
-              <div className="absolute inset-0 bg-white/10 transform -skew-x-12 group-hover:skew-x-12 transition-transform duration-500" />
-              <div className="absolute inset-0 border border-white/20 transform hover:scale-105 transition-transform duration-500" />
-            </button>
-          </div>
+
+          {/* Your hero content */}
+          <button
+            onClick={onExploreClick}
+            className="px-6 py-3 bg-primary rounded-lg hover:bg-primary-dark transition-all"
+          >
+            Explore More
+          </button>
         </div>
       </div>
 
@@ -156,6 +175,6 @@ const HeroSection = () => {
       </div>
     </div>
   );
-};
+}
 
 export default HeroSection;

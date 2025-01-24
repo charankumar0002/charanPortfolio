@@ -4,40 +4,72 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const AboutSection = () => {
+interface AboutSectionProps {
+  id: string;
+}
+
+function AboutSection({ id }: AboutSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Create scroll trigger animations
-    gsap.from(imageRef.current, {
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top center",
-        toggleActions: "play none none reverse"
-      },
-      x: -100,
-      opacity: 0,
-      duration: 1,
-      ease: "power3.out"
+    // Clear any existing ScrollTriggers to prevent duplicates
+    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+
+    const ctx = gsap.context(() => {
+      // Image animation
+      gsap.fromTo(imageRef.current,
+        {
+          x: -100,
+          opacity: 0
+        },
+        {
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%", // Triggers earlier
+            end: "top 20%",
+            toggleActions: "play none none reverse",
+            markers: true, // Remove in production
+            scrub: false
+          },
+          x: 0,
+          opacity: 1,
+          duration: 1.2,
+          ease: "power3.out"
+        }
+      );
+
+      // Content animations
+      const contentElements = contentRef.current?.children || [];
+      gsap.fromTo(contentElements,
+        {
+          y: 50,
+          opacity: 0
+        },
+        {
+          scrollTrigger: {
+            trigger: contentRef.current,
+            start: "top 75%", // Triggers earlier
+            end: "top 25%",
+            toggleActions: "play none none reverse",
+            markers: true, // Remove in production
+            scrub: false
+          },
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.2,
+          ease: "power2.out"
+        }
+      );
     });
 
-    gsap.from(contentRef.current?.children || [], {
-      scrollTrigger: {
-        trigger: contentRef.current,
-        start: "top center+=100",
-        toggleActions: "play none none reverse"
-      },
-      y: 50,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.2,
-      ease: "power2.out"
-    });
-
+    // Cleanup function
+    return () => {
+      ctx.revert(); // This will clean up all GSAP animations
+    };
   }, []);
-
   return (
     <section
       id="about"
