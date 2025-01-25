@@ -30,7 +30,7 @@ function AboutSection({ id }: AboutSectionProps) {
             start: "top 80%", // Triggers earlier
             end: "top 20%",
             toggleActions: "play none none reverse",
-            markers: true, // Remove in production
+            markers: false, // Remove in production
             scrub: false
           },
           x: 0,
@@ -53,7 +53,7 @@ function AboutSection({ id }: AboutSectionProps) {
             start: "top 75%", // Triggers earlier
             end: "top 25%",
             toggleActions: "play none none reverse",
-            markers: true, // Remove in production
+            markers: false, // Remove in production
             scrub: false
           },
           y: 0,

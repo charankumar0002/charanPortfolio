@@ -1,18 +1,47 @@
-import { useEffect } from 'react';
-import AboutSection from "./components/AboutSection"
-import CustomCursor from "./components/CustomCursor"
-// import FirstPage from "./components/FirstPage"
-import HeroSection from "./components/HeroSection"
-import ScrollIndicator from "./components/ScrollIndicator"
-import ScrollProgress from "./components/ScrollProgress"
+import { useEffect } from "react";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import AboutSection from "./components/AboutSection";
+import CustomCursor from "./components/CustomCursor";
+import HeroSection from "./components/HeroSection";
+import ScrollProgress from "./components/ScrollProgress";
+import Skills from "./components/Skills";
+import WorkExperience from "./components/WorkExperience";
 
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger);
 
 function App() {
+  useEffect(() => {
+    // Set up smooth scrolling
+    gsap.config({
+      autoSleep: 60,
+      force3D: true,
+      nullTargetWarn: false,
+    });
+
+    // Initialize main timeline
+    const mainTl = gsap.timeline({
+      defaults: {
+        ease: "power2.out",
+      },
+    });
+
+    // Clean up function
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      mainTl.kill();
+    };
+  }, []);
+
   const scrollToAbout = () => {
-    const aboutSection = document.querySelector('#about');
-    aboutSection?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
+    gsap.to(window, {
+      duration: 1.5,
+      scrollTo: {
+        y: "#about",
+        offsetY: 0,
+      },
+      ease: "power4.inOut",
     });
   };
 
@@ -23,10 +52,11 @@ function App() {
         <CustomCursor />
         <HeroSection onExploreClick={scrollToAbout} />
         <AboutSection id="about" />
-        {/* Other sections */}
+        <WorkExperience />
+        <Skills />
       </div>
     </>
   );
 }
 
-export default App
+export default App;
