@@ -95,17 +95,16 @@ function AboutSection({ id }: AboutSectionProps) {
           {/* Content */}
           <div ref={contentRef} className="space-y-8">
             <h2 className="text-5xl font-bold text-white">
-              About Me
+              The Developer Behind the Code
             </h2>
             
             <p className="text-xl text-purple-200/80 leading-relaxed">
-              I'm a passionate frontend developer with a keen eye for design and
-              a love for creating seamless user experiences.
+            Hi! I'm Charan, a Front-End Developer with 2+ years of experience building scalable and dynamic web applications. I specialize in React.js, JavaScript, and Tailwind CSS, with a passion for creating engaging user interfaces for real-world products.
             </p>
 
             <div className="space-y-4">
               {[
-                { label: "Experience", value: "5+ Years" },
+                { label: "Experience", value: "2+ Years" },
                 { label: "Projects", value: "50+" },
                 { label: "Clients", value: "30+" }
               ].map((item, index) => (

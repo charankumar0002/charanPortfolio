@@ -23,7 +23,7 @@ const techStack = [
   { icon: "📱", name: "Next.js", level: "Advanced" },
   { icon: "🎨", name: "Tailwind", level: "Expert" },
   { icon: "🚀", name: "TypeScript", level: "Advanced" },
- 
+
 ];
 // Register GSAP plugins
 gsap.registerPlugin(TextPlugin);
@@ -39,7 +39,7 @@ function HeroSection({ onExploreClick }: HeroSectionProps) {
   const ctaRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
 
-  
+
   useEffect(() => {
     const mm = gsap.matchMedia();
 
@@ -410,17 +410,18 @@ function HeroSection({ onExploreClick }: HeroSectionProps) {
 
             {/* Tech Stack */}
             <div className="mt-8 md:mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-3xl mx-auto px-4">
-              {achievements.map((item, index) => (
+              {techStack.map((tech, index) => (
                 <div
                   key={index}
                   className="tech-stack-item relative bg-white/5 backdrop-blur-sm rounded-xl p-4 text-center hover:bg-white/10 transition-all transform hover:scale-105 duration-300"
                 >
-                  
-                  <div className="text-3xl md:text-4xl font-bold text-white mb-2">
-                    {item.number}
-                  </div>
-                  <div className="text-sm text-white/70">{item.label}</div>
-                  {/* <div className="absolute -bottom-2 left-0 w-full h-1 bg-white/10 rounded">
+                  <span className="text-2xl md:text-3xl mb-2 block">
+                    {tech.icon}
+                  </span>
+                  <h3 className="text-white font-medium text-sm md:text-base">
+                    {tech.name}
+                  </h3>
+                  <div className="absolute -bottom-2 left-0 w-full h-1 bg-white/10 rounded">
                     <div
                       className="h-full bg-primary rounded transition-all duration-300"
                       style={{
@@ -432,7 +433,7 @@ function HeroSection({ onExploreClick }: HeroSectionProps) {
                             : "60%",
                       }}
                     />
-                  </div> */}
+                  </div>
                 </div>
               ))}
             </div>
@@ -502,7 +503,7 @@ function HeroSection({ onExploreClick }: HeroSectionProps) {
               />
             ))}
           </div>
-         
+
 
           {/* Social Links */}
           <div className="fixed left-6 bottom-6 z-50">
@@ -524,7 +525,7 @@ function HeroSection({ onExploreClick }: HeroSectionProps) {
               <a
                 href="https://www.linkedin.com/in/charankumarreddypalukuru/"
                 className="text-white/50 hover:text-white transition-all"
-                 target="_blank"
+                target="_blank"
                 rel="noopener noreferrer"
               >
                 <svg
@@ -538,7 +539,7 @@ function HeroSection({ onExploreClick }: HeroSectionProps) {
               <a
                 href="https://twitter.com/yourusername"
                 className="text-white/50 hover:text-white transition-all"
-                 target="_blank"
+                target="_blank"
                 rel="noopener noreferrer"
               >
                 <svg

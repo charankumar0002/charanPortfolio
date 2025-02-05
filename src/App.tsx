@@ -51,7 +51,7 @@ function App() {
         <ScrollProgress />
         <CustomCursor />
         <HeroSection onExploreClick={scrollToAbout} />
-        <AboutSection id="about" />
+        <AboutSection id="about" onExploreClick={scrollToAbout} />
         <WorkExperience />
         <Skills />
       </div>
