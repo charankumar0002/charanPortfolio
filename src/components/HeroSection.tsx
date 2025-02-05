@@ -410,18 +410,17 @@ function HeroSection({ onExploreClick }: HeroSectionProps) {
 
             {/* Tech Stack */}
             <div className="mt-8 md:mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-3xl mx-auto px-4">
-              {techStack.map((tech, index) => (
+              {achievements.map((item, index) => (
                 <div
                   key={index}
                   className="tech-stack-item relative bg-white/5 backdrop-blur-sm rounded-xl p-4 text-center hover:bg-white/10 transition-all transform hover:scale-105 duration-300"
                 >
-                  <span className="text-2xl md:text-3xl mb-2 block">
-                    {tech.icon}
-                  </span>
-                  <h3 className="text-white font-medium text-sm md:text-base">
-                    {tech.name}
-                  </h3>
-                  <div className="absolute -bottom-2 left-0 w-full h-1 bg-white/10 rounded">
+                  
+                  <div className="text-3xl md:text-4xl font-bold text-white mb-2">
+                    {item.number}
+                  </div>
+                  <div className="text-sm text-white/70">{item.label}</div>
+                  {/* <div className="absolute -bottom-2 left-0 w-full h-1 bg-white/10 rounded">
                     <div
                       className="h-full bg-primary rounded transition-all duration-300"
                       style={{
@@ -433,7 +432,7 @@ function HeroSection({ onExploreClick }: HeroSectionProps) {
                             : "60%",
                       }}
                     />
-                  </div>
+                  </div> */}
                 </div>
               ))}
             </div>
@@ -457,7 +456,7 @@ function HeroSection({ onExploreClick }: HeroSectionProps) {
                 </div>
               ))}
             </div> */}
-            <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
+            {/* <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
               {achievements.map((item, index) => (
                 <div
                   key={index}
@@ -469,7 +468,7 @@ function HeroSection({ onExploreClick }: HeroSectionProps) {
                   <div className="text-sm text-white/70">{item.label}</div>
                 </div>
               ))}
-            </div>
+            </div> */}
 
             {/* CTA Section */}
             <div className="mt-12 md:mt-16 flex flex-col items-center gap-6">
@@ -503,18 +502,16 @@ function HeroSection({ onExploreClick }: HeroSectionProps) {
               />
             ))}
           </div>
-
-          {/* Custom Cursor */}
-          <div className="custom-cursor fixed w-8 h-8 pointer-events-none z-50 mix-blend-difference">
-            <div className="w-full h-full rounded-full border-2 border-white" />
-          </div>
+         
 
           {/* Social Links */}
           <div className="fixed left-6 bottom-6 z-50">
             <div className="flex flex-col gap-4">
               <a
-                href="https://github.com/yourusername"
+                href="https://github.com/charankumar0002"
                 className="text-white/50 hover:text-white transition-all"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <svg
                   className="w-6 h-6"
@@ -525,8 +522,10 @@ function HeroSection({ onExploreClick }: HeroSectionProps) {
                 </svg>
               </a>
               <a
-                href="https://linkedin.com/in/yourusername"
+                href="https://www.linkedin.com/in/charankumarreddypalukuru/"
                 className="text-white/50 hover:text-white transition-all"
+                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <svg
                   className="w-6 h-6"
@@ -539,6 +538,8 @@ function HeroSection({ onExploreClick }: HeroSectionProps) {
               <a
                 href="https://twitter.com/yourusername"
                 className="text-white/50 hover:text-white transition-all"
+                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <svg
                   className="w-6 h-6"
