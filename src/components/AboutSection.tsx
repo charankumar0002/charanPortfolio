@@ -76,15 +76,30 @@ function AboutSection({ id }: AboutSectionProps) {
       ref={sectionRef}
       className="min-h-screen bg-black flex items-center py-20"
     >
+      <div className="loader absolute inset-0 bg-purple-900 z-50" />
+      <div className="background-gradient absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-black opacity-50" />
+      {/* Particles */}
+      <div className="absolute inset-0">
+        {[...Array(50)].map((_, i) => (
+          <div
+            key={i}
+            className="particle absolute w-1 h-1 bg-white rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+          />
+        ))}
+      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Image */}
           <div ref={imageRef} className="relative">
             <div className="relative rounded-lg overflow-hidden">
               <img
-                src="/your-image.jpg" // Replace with your image
+                src="src/assets/CharanImage.jpg"
                 alt="Profile"
-                className="w-full h-[600px] object-cover"
+                className="w-full h-[500px] object-cover"
               />
               <div className="absolute inset-0 bg-purple-600/20 mix-blend-overlay" />
             </div>
@@ -97,9 +112,9 @@ function AboutSection({ id }: AboutSectionProps) {
             <h2 className="text-5xl font-bold text-white">
               The Developer Behind the Code
             </h2>
-            
+
             <p className="text-xl text-purple-200/80 leading-relaxed">
-            Hi! I'm Charan, a Front-End Developer with 2+ years of experience building scalable and dynamic web applications. I specialize in React.js, JavaScript, and Tailwind CSS, with a passion for creating engaging user interfaces for real-world products.
+              Hi! I'm Charan, a Front-End Developer with 2+ years of experience building scalable and dynamic web applications. I specialize in React.js, JavaScript, and Tailwind CSS, with a passion for creating engaging user interfaces for real-world products.
             </p>
 
             <div className="space-y-4">
@@ -118,12 +133,13 @@ function AboutSection({ id }: AboutSectionProps) {
               ))}
             </div>
 
-            <button className="px-8 py-4 bg-purple-600 text-white rounded-lg
+            {/* <button className="px-8 py-4 bg-purple-600 text-white rounded-lg
                            hover:bg-purple-700 transition-colors duration-300">
               View Portfolio
-            </button>
+            </button> */}
           </div>
         </div>
+
       </div>
     </section>
   );
