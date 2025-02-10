@@ -78,7 +78,7 @@ function Skills({ className }: SkillsProps) {
   ];
 
   return (
-    <div ref={containerRef} className={`py-20 bg-gradient-to-b from-indigo-950 to-black ${className}`}>
+    <div ref={containerRef} className={`py-20  ${className}`}>
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-white mb-4">Technical Skills</h2>

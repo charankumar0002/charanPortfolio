@@ -62,7 +62,7 @@ function WorkExperience({ className }: WorkExperienceProps) {
   ];
 
   return (
-    <div ref={containerRef} className={`py-20 bg-gradient-to-b from-black to-indigo-950 ${className}`}>
+    <div ref={containerRef} className={`py-20  ${className}`}>
       <div className="max-w-6xl mx-auto px-4">
         <h2 className="text-4xl font-bold text-white mb-12 text-center">
           Work Experience
