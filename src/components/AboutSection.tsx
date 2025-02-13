@@ -76,8 +76,8 @@ function AboutSection({ id }: AboutSectionProps) {
       ref={sectionRef}
       className="min-h-screen bg-black flex items-center py-20"
     >
-      <div className="loader absolute inset-0 bg-purple-900 z-50" />
-      <div className="background-gradient absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-black opacity-50" />
+      <div className="loader absolute inset-0  z-50" />
+      <div className="background-gradient absolute inset-0  opacity-50" />
       {/* Particles */}
       <div className="absolute inset-0">
         {[...Array(50)].map((_, i) => (

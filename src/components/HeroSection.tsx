@@ -314,7 +314,7 @@ function HeroSection({ onExploreClick }: HeroSectionProps) {
       end: "bottom top",
       scrub: 1,
     },
-    backgroundImage: "linear-gradient(to bottom right, #4a00e0, #8e2de2)",
+    backgroundImage: "linear-gradient(to bottom right, #121212, #000000);",
   });
 
   // 3. Mouse movement parallax effect
@@ -361,9 +361,9 @@ function HeroSection({ onExploreClick }: HeroSectionProps) {
         className="relative min-h-screen overflow-hidden bg-black"
       >
         {/* Loader */}
-        <div className="loader absolute inset-0 bg-purple-900 z-50" />
+        <div className="loader absolute inset-0  z-50" />
         {/* Background */}
-        <div className="background-gradient absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-black opacity-50" />
+        <div className="background-gradient absolute inset-0  opacity-50" />
         {/* Particles */} 
         <div className="absolute inset-0">
           {[...Array(50)].map((_, i) => (
