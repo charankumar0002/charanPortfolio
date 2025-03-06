@@ -35,6 +35,8 @@ body {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 90%);
   }
 }
+
+/* Keyframes for Animations */
 @keyframes slideIn {
   0% {
     transform: translateX(-100%) rotate(-30deg);
@@ -43,29 +45,7 @@ body {
     transform: translateX(100%) rotate(-30deg);
   }
 }
-/* Custom Classes */
-.smooth-scroll {
-  @apply scroll-smooth;
-}
 
-.hover-target:hover~.custom-cursor {
-  transform: scale(2);
-}
-
-/* Parallax Classes */
-.parallax-wrapper {
-  height: 100vh;
-  overflow-x: hidden;
-  perspective: 10px;
-  transform-style: preserve-3d;
-}
-
-.parallax-content {
-  transform-style: preserve-3d;
-  transform: translateZ(0);
-}
-
-/* Animations */
 @keyframes gradient {
   0% {
     background-position: 0% 50%;
@@ -99,9 +79,33 @@ body {
   }
 }
 
+/* Custom Classes */
+.smooth-scroll {
+  @apply scroll-smooth;
+}
+
+.hover-target:hover ~ .custom-cursor {
+  transform: scale(2);
+}
+
+/* Parallax Classes */
+.parallax-wrapper {
+  height: 100vh;
+  overflow-x: hidden;
+  perspective: 10px;
+  transform-style: preserve-3d;
+}
+
+.parallax-content {
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+}
+
+/* Animation Classes */
 .animate-scroll {
   animation: scroll 2s ease-in-out infinite;
 }
+
 .tech-stack-item {
   transition: all 0.3s ease;
 }

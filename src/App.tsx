@@ -24,7 +24,7 @@ function App() {
     // Initialize main timeline
     const mainTl = gsap.timeline({
       defaults: {
-        ease: "power2.out",
+        ease: "power2.out", // Consistent easing
       },
     });
 
@@ -53,8 +53,8 @@ function App() {
         <ScrollProgress />
         <CustomCursor />
         <HeroSection onExploreClick={scrollToAbout} />
-        <AboutSection id="about"  />
-        <WorkExperience />
+        <AboutSection id="about" />
+        <WorkExperience  />
         <Skills />
       </div>
     </>

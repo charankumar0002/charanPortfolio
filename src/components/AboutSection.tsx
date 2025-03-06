@@ -36,7 +36,7 @@ function AboutSection({ id }: AboutSectionProps) {
           x: 0,
           opacity: 1,
           duration: 1.2,
-          ease: "power3.out"
+          ease: "power2.out" // Consistent easing
         }
       );
 
@@ -60,7 +60,7 @@ function AboutSection({ id }: AboutSectionProps) {
           opacity: 1,
           duration: 1,
           stagger: 0.2,
-          ease: "power2.out"
+          ease: "power2.out" // Consistent easing
         }
       );
     });
@@ -70,14 +70,15 @@ function AboutSection({ id }: AboutSectionProps) {
       ctx.revert(); // This will clean up all GSAP animations
     };
   }, []);
+
   return (
     <section
-      id="about"
+      id={id}
       ref={sectionRef}
       className="min-h-screen bg-black flex items-center py-20"
     >
-      <div className="loader absolute inset-0  z-50" />
-      <div className="background-gradient absolute inset-0  opacity-50" />
+      <div className="loader absolute inset-0 z-50" />
+      <div className="background-gradient absolute inset-0 opacity-50" />
       {/* Particles */}
       <div className="absolute inset-0">
         {[...Array(50)].map((_, i) => (
@@ -132,17 +133,11 @@ function AboutSection({ id }: AboutSectionProps) {
                 </div>
               ))}
             </div>
-
-            {/* <button className="px-8 py-4 bg-purple-600 text-white rounded-lg
-                           hover:bg-purple-700 transition-colors duration-300">
-              View Portfolio
-            </button> */}
           </div>
         </div>
-
       </div>
     </section>
   );
-};
+}
 
 export default AboutSection;

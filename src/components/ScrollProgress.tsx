@@ -42,6 +42,7 @@ const ScrollProgress = () => {
     <div
       ref={progressRef}
       className="fixed top-0 left-0 w-full h-1 bg-white/10 z-50"
+      aria-label="Scroll progress"
     >
       <div
         ref={progressBarRef}
