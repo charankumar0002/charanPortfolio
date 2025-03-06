@@ -7,6 +7,7 @@ import HeroSection from "./components/HeroSection";
 import ScrollProgress from "./components/ScrollProgress";
 import Skills from "./components/Skills";
 import WorkExperience from "./components/WorkExperience";
+import Header from "./common/Header";
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -47,6 +48,7 @@ function App() {
 
   return (
     <>
+    <Header/>
       <div className="relative">
         <ScrollProgress />
         <CustomCursor />
