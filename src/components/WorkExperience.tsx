@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface WorkExperienceProps {
+interface ExperienceSectionProps {
   id: string;
 }
 
@@ -30,7 +30,7 @@ const experiences: Experience[] = [
   }
 ];
 
-function WorkExperience({ id }: WorkExperienceProps) {
+function ExperienceSection({ id }: ExperienceSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -52,9 +52,9 @@ function WorkExperience({ id }: WorkExperienceProps) {
             },
             y: 0,
             opacity: 1,
-            duration: 1,
-            stagger: 0.2,
-            ease: "power2.out"
+            duration: 1.2,
+            stagger: 0.1,
+            ease: "power4.inOut"
           }
         );
       });
@@ -96,4 +96,4 @@ function WorkExperience({ id }: WorkExperienceProps) {
   );
 }
 
-export default WorkExperience;
+export default ExperienceSection;

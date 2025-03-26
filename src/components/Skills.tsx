@@ -1,36 +1,46 @@
-// Skills.tsx
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface SkillsProps {
-  className?: string;
+  id: string;
 }
 
-function Skills({ className }: SkillsProps) {
+function Skills({ id }: SkillsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top center+=100",
-        end: "bottom center",
-      }
-    });
+    const container = containerRef.current;
 
-    tl.from(containerRef.current, {
-      y: 50,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.2,
-      ease: "power2.out"
-    }).to(containerRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        stagger: 0.2,
-        ease: "power2.out",
+    if (container) {
+      const ctx = gsap.context(() => {
+        gsap.fromTo(
+          ".skill-category",
+          { y: 50, opacity: 0 },
+          {
+            scrollTrigger: {
+              trigger: container,
+              start: "top 80%",
+              end: "top 20%",
+              toggleActions: "play none none reverse",
+              markers: false,
+              scrub: false
+            },
+            y: 0,
+            opacity: 1,
+            duration: 1.2,
+            stagger: 0.15,
+            ease: "power4.inOut"
+          }
+        );
       });
+
+      return () => {
+        ctx.revert();
+      };
+    }
   }, []);
 
   const skillCategories = [
@@ -78,7 +88,7 @@ function Skills({ className }: SkillsProps) {
   ];
 
   return (
-    <div ref={containerRef} className={`py-20  ${className}`}>
+    <div ref={containerRef} className={`py-20 ${className}`}>
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-white mb-4">Technical Skills</h2>
@@ -89,7 +99,7 @@ function Skills({ className }: SkillsProps) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {skillCategories.map((category, index) => (
-            <div 
+            <div
               key={index}
               className="skill-category bg-white/5 backdrop-blur-sm rounded-xl p-8 hover:bg-white/10 transition-all"
             >
@@ -108,9 +118,9 @@ function Skills({ className }: SkillsProps) {
                       <span className="text-primary">{skill.level}%</span>
                     </div>
                     <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                      <div 
+                      <div
                         className="h-full bg-primary rounded-full transition-all duration-1000"
-                        style={{ 
+                        style={{
                           width: `${skill.level}%`,
                           transform: 'translateX(-100%)',
                           animation: 'slideRight 1.5s forwards'

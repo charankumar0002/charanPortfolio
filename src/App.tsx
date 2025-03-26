@@ -8,7 +8,7 @@ import HeroSection from "./components/HeroSection";
 import ScrollProgress from "./components/ScrollProgress";
 import Skills from "./components/Skills";
 import Header from "./common/Header";
-import WorkExperience from "./components/WorkExperience";
+import ExperienceSection from "./components/WorkExperience";
 
 // ✅ Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin); // ✅ Add ScrollToPlugin
@@ -37,16 +37,11 @@ function App() {
   }, []);
 
   const scrollToAbout = () => {
-    const aboutSection = document.getElementById("about");
-    if (aboutSection) {
-      gsap.to(window, {
-        duration: 1.5,
-        scrollTo: aboutSection,
-        ease: "power4.inOut",
-      });
-    } else {
-      console.error("About section not found");
-    }
+    gsap.to(window, {
+      duration: 1.5,
+      scrollTo: "#about", // Ensure this ID matches the AboutSection's ID
+      ease: "power4.inOut",
+    });
   };
   
   return (
@@ -57,7 +52,7 @@ function App() {
         <CustomCursor />
         <HeroSection onExploreClick={scrollToAbout} />
         <AboutSection id="about" />
-        <WorkExperience />
+        <ExperienceSection id="experience" />
         <Skills />
       </div>
     </>
