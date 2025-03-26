@@ -14,61 +14,57 @@ function AboutSection({ id }: AboutSectionProps) {
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Clear any existing ScrollTriggers to prevent duplicates
-    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    const section = sectionRef.current;
+    const image = imageRef.current;
+    const content = contentRef.current;
 
-    const ctx = gsap.context(() => {
-      // Image animation
-      gsap.fromTo(imageRef.current,
-        {
-          x: -100,
-          opacity: 0
-        },
-        {
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%", // Triggers earlier
-            end: "top 20%",
-            toggleActions: "play none none reverse",
-            markers: false, // Remove in production
-            scrub: false
-          },
-          x: 0,
-          opacity: 1,
-          duration: 1.2,
-          ease: "power2.out" // Consistent easing
-        }
-      );
+    if (section && image && content) {
+      const ctx = gsap.context(() => {
+        // Image animation
+        gsap.fromTo(image,
+          { x: -100, opacity: 0 },
+          {
+            scrollTrigger: {
+              trigger: section,
+              start: "top 80%",
+              end: "top 20%",
+              toggleActions: "play none none reverse",
+              markers: false,
+              scrub: false
+            },
+            x: 0,
+            opacity: 1,
+            duration: 1.2,
+            ease: "power2.out"
+          }
+        );
 
-      // Content animations
-      const contentElements = contentRef.current?.children || [];
-      gsap.fromTo(contentElements,
-        {
-          y: 50,
-          opacity: 0
-        },
-        {
-          scrollTrigger: {
-            trigger: contentRef.current,
-            start: "top 75%", // Triggers earlier
-            end: "top 25%",
-            toggleActions: "play none none reverse",
-            markers: false, // Remove in production
-            scrub: false
-          },
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.2,
-          ease: "power2.out" // Consistent easing
-        }
-      );
-    });
+        // Content animations
+        const contentElements = content.children || [];
+        gsap.fromTo(contentElements,
+          { y: 50, opacity: 0 },
+          {
+            scrollTrigger: {
+              trigger: content,
+              start: "top 75%",
+              end: "top 25%",
+              toggleActions: "play none none reverse",
+              markers: false,
+              scrub: false
+            },
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power2.out"
+          }
+        );
+      });
 
-    // Cleanup function
-    return () => {
-      ctx.revert(); // This will clean up all GSAP animations
-    };
+      return () => {
+        ctx.revert();
+      };
+    }
   }, []);
 
   return (

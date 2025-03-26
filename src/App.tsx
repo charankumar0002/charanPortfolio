@@ -1,16 +1,17 @@
 import { useEffect } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin"; // ✅ Import ScrollToPlugin
 import AboutSection from "./components/AboutSection";
 import CustomCursor from "./components/CustomCursor";
 import HeroSection from "./components/HeroSection";
 import ScrollProgress from "./components/ScrollProgress";
 import Skills from "./components/Skills";
-import WorkExperience from "./components/WorkExperience";
 import Header from "./common/Header";
+import WorkExperience from "./components/WorkExperience";
 
-// Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger);
+// ✅ Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin); // ✅ Add ScrollToPlugin
 
 function App() {
   useEffect(() => {
@@ -36,25 +37,27 @@ function App() {
   }, []);
 
   const scrollToAbout = () => {
-    gsap.to(window, {
-      duration: 1.5,
-      scrollTo: {
-        y: "#about",
-        offsetY: 0,
-      },
-      ease: "power4.inOut",
-    });
+    const aboutSection = document.getElementById("about");
+    if (aboutSection) {
+      gsap.to(window, {
+        duration: 1.5,
+        scrollTo: aboutSection,
+        ease: "power4.inOut",
+      });
+    } else {
+      console.error("About section not found");
+    }
   };
-
+  
   return (
     <>
-    <Header/>
+      <Header />
       <div className="relative">
         <ScrollProgress />
         <CustomCursor />
         <HeroSection onExploreClick={scrollToAbout} />
         <AboutSection id="about" />
-        <WorkExperience  />
+        <WorkExperience />
         <Skills />
       </div>
     </>

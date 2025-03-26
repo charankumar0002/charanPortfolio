@@ -9,27 +9,29 @@ const CustomCursor = () => {
     const cursor = cursorRef.current;
     const follower = followerRef.current;
 
-    const moveCursor = (e: MouseEvent) => {
-      gsap.to(cursor, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0,
-      });
-      
-      gsap.to(follower, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.3,
-      });
-    };
+    if (cursor && follower) {
+      const moveCursor = (e: MouseEvent) => {
+        gsap.to(cursor, {
+          x: e.clientX,
+          y: e.clientY,
+          duration: 0,
+        });
 
-    document.addEventListener('mousemove', moveCursor);
+        gsap.to(follower, {
+          x: e.clientX,
+          y: e.clientY,
+          duration: 0.3,
+        });
+      };
 
-    return () => {
-      document.removeEventListener('mousemove', moveCursor);
-    };
+      document.addEventListener('mousemove', moveCursor);
+
+      return () => {
+        document.removeEventListener('mousemove', moveCursor);
+      };
+    }
   }, []);
-
+  
   return (
     <>
       <div

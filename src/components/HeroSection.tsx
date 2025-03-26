@@ -32,66 +32,64 @@ function HeroSection({ onExploreClick }) {
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
-    const mm = gsap.matchMedia();
-
-    gsap.set(
-      [
-        nameRef.current,
-        titleRef.current,
-        ".tech-stack-item",
-        ".cta-button",
-        ".social-link",
-        ".hero-subtitle",
-        ".hero-description",
-      ],
-      { opacity: 0, y: 50 }
-    );
-
-    gsap.set(".particle", { opacity: 0, scale: 0 });
-
-    const tl = gsap.timeline({
-      defaults: { ease: "power3.out", duration: 0.8 },
-    });
-
-    mm.add("(min-width: 768px)", () => {
-      tl.to(".loader", { height: "0%", duration: 1.5, ease: "power4.inOut" })
-        .from(".background-gradient", { opacity: 0, scale: 1.2, duration: 2, ease: "power2.inOut" }, "-=1")
-        .to(".particle", { opacity: 0.2, scale: 1, duration: 1, stagger: { amount: 1, grid: "random", from: "random" } }, "-=1.5")
-        .to(nameRef.current, { opacity: 1, y: 0, duration: 1.2, ease: "back.out(1.7)" }, "-=0.5")
-        .to(".hero-subtitle", { opacity: 1, y: 0, duration: 0.8, stagger: 0.1 }, "-=0.8")
-        .to(titleRef.current, { opacity: 1, y: 0, duration: 1 }, "-=0.6")
-        .to(".hero-description", { opacity: 1, y: 0, duration: 0.8 }, "-=0.6")
-        .to(".tech-stack-item", { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "back.out(1.2)" }, "-=0.4")
-        .to(".cta-button", { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "back.out(1.2)" }, "-=0.2")
-        .to(".social-link", { opacity: 1, y: 0, duration: 0.4, stagger: 0.1 }, "-=0.3");
-    });
-
-    mm.add("(max-width: 767px)", () => {
-      tl.to(".loader", { height: "0%", duration: 1.2, ease: "power4.inOut" })
-        .from(".background-gradient", { opacity: 0, duration: 1.5 }, "-=0.8")
-        .to(nameRef.current, { opacity: 1, y: 0, duration: 1 }, "-=0.5")
-        .to(".hero-subtitle", { opacity: 1, y: 0, duration: 0.6, stagger: 0.1 }, "-=0.6")
-        .to(titleRef.current, { opacity: 1, y: 0, duration: 0.8 }, "-=0.4")
-        .to(".hero-description", { opacity: 1, y: 0, duration: 0.6 }, "-=0.4")
-        .to(".tech-stack-item", { opacity: 1, y: 0, duration: 0.5, stagger: 0.1 }, "-=0.2")
-        .to(".cta-button", { opacity: 1, y: 0, duration: 0.5, stagger: 0.1 }, "-=0.2")
-        .to(".social-link", { opacity: 1, y: 0, duration: 0.3, stagger: 0.1 }, "-=0.2");
-    });
-
-    gsap.to(".particle", {
-      y: "random(-20, 20)",
-      x: "random(-20, 20)",
-      duration: "random(2, 4)",
-      repeat: -1,
-      yoyo: true,
-      ease: "none",
-      stagger: { amount: 2, from: "random" },
-    });
-
-    return () => {
-      tl.kill();
-      mm.revert();
-    };
+    const container = containerRef.current;
+    const name = nameRef.current;
+    const title = titleRef.current;
+  
+    if (container && name && title) {
+      const mm = gsap.matchMedia();
+  
+      gsap.set(
+        [name, title, ".tech-stack-item", ".cta-button", ".social-link", ".hero-subtitle", ".hero-description"],
+        { opacity: 0, y: 50 }
+      );
+  
+      gsap.set(".particle", { opacity: 0, scale: 0 });
+  
+      const tl = gsap.timeline({
+        defaults: { ease: "power3.out", duration: 0.8 },
+      });
+  
+      mm.add("(min-width: 768px)", () => {
+        tl.to(".loader", { height: "0%", duration: 1.5, ease: "power4.inOut" })
+          .from(".background-gradient", { opacity: 0, scale: 1.2, duration: 2, ease: "power2.inOut" }, "-=1")
+          .to(".particle", { opacity: 0.2, scale: 1, duration: 1, stagger: { amount: 1, grid: "random", from: "random" } }, "-=1.5")
+          .to(name, { opacity: 1, y: 0, duration: 1.2, ease: "back.out(1.7)" }, "-=0.5")
+          .to(".hero-subtitle", { opacity: 1, y: 0, duration: 0.8, stagger: 0.1 }, "-=0.8")
+          .to(title, { opacity: 1, y: 0, duration: 1 }, "-=0.6")
+          .to(".hero-description", { opacity: 1, y: 0, duration: 0.8 }, "-=0.6")
+          .to(".tech-stack-item", { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "back.out(1.2)" }, "-=0.4")
+          .to(".cta-button", { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "back.out(1.2)" }, "-=0.2")
+          .to(".social-link", { opacity: 1, y: 0, duration: 0.4, stagger: 0.1 }, "-=0.3");
+      });
+  
+      mm.add("(max-width: 767px)", () => {
+        tl.to(".loader", { height: "0%", duration: 1.2, ease: "power4.inOut" })
+          .from(".background-gradient", { opacity: 0, duration: 1.5 }, "-=0.8")
+          .to(name, { opacity: 1, y: 0, duration: 1 }, "-=0.5")
+          .to(".hero-subtitle", { opacity: 1, y: 0, duration: 0.6, stagger: 0.1 }, "-=0.6")
+          .to(title, { opacity: 1, y: 0, duration: 0.8 }, "-=0.4")
+          .to(".hero-description", { opacity: 1, y: 0, duration: 0.6 }, "-=0.4")
+          .to(".tech-stack-item", { opacity: 1, y: 0, duration: 0.5, stagger: 0.1 }, "-=0.2")
+          .to(".cta-button", { opacity: 1, y: 0, duration: 0.5, stagger: 0.1 }, "-=0.2")
+          .to(".social-link", { opacity: 1, y: 0, duration: 0.3, stagger: 0.1 }, "-=0.2");
+      });
+  
+      gsap.to(".particle", {
+        y: "random(-20, 20)",
+        x: "random(-20, 20)",
+        duration: "random(2, 4)",
+        repeat: -1,
+        yoyo: true,
+        ease: "none",
+        stagger: { amount: 2, from: "random" },
+      });
+  
+      return () => {
+        tl.kill();
+        mm.revert();
+      };
+    }
   }, []);
 
   useEffect(() => {

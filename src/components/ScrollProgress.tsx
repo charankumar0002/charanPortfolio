@@ -6,38 +6,40 @@ const ScrollProgress = () => {
   const progressBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Initial setup
-    gsap.set(progressBarRef.current, {
-      scaleX: 0,
-      transformOrigin: "left center"
-    });
-
-    // Progress animation
-    const progressAnim = gsap.to(progressBarRef.current, {
-      scaleX: 1,
-      ease: "none",
-      scrollTrigger: {
-        trigger: document.documentElement,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 0.3,
-      },
-    });
-
-    // Entrance animation
-    gsap.from(progressRef.current, {
-      y: -10,
-      opacity: 0,
-      duration: 0.8,
-      ease: "power2.out",
-      delay: 0.5
-    });
-
-    return () => {
-      progressAnim.kill();
-    };
+    if (progressRef.current && progressBarRef.current) {
+      // Initial setup
+      gsap.set(progressBarRef.current, {
+        scaleX: 0,
+        transformOrigin: "left center"
+      });
+  
+      // Progress animation
+      const progressAnim = gsap.to(progressBarRef.current, {
+        scaleX: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: document.documentElement,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 0.3,
+        },
+      });
+  
+      // Entrance animation
+      gsap.from(progressRef.current, {
+        y: -10,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.out",
+        delay: 0.5
+      });
+  
+      return () => {
+        progressAnim.kill();
+      };
+    }
   }, []);
-
+  
   return (
     <div
       ref={progressRef}
