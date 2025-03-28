@@ -12,21 +12,34 @@ interface Experience {
   company: string;
   role: string;
   duration: string;
-  description: string;
+  description: string[];
 }
 
 const experiences: Experience[] = [
   {
-    company: "Tech Innovators",
-    role: "Front-End Developer",
-    duration: "Jan 2022 - Present",
-    description: "Developed and maintained web applications using React.js and Tailwind CSS. Collaborated with the design team to implement responsive UI components."
+    company: "iQuadra Information Services (iQua.ai)",
+    role: "Software Developer (Frontend)",
+    duration: "April 2023 – Present",
+    description: [
+      "Reduced page load time by 25% using lazy loading, caching, and tree-shaking.",
+      "Developed 20+ reusable UI components, improving scalability and cutting development time by 30%.",
+      "Integrated Razorpay & Stripe, enhancing transaction security and reducing payment failures by 40%.",
+      "Built an internal admin dashboard for real-time user activity tracking, improving stakeholder decision-making.",
+      "Collaborated with UX/UI teams, boosting user engagement and accessibility by 15%.",
+      "Led frontend migrations, converting legacy JavaScript code to modern React + TypeScript.",
+      "Mentored junior developers, conducting 15+ code reviews per month to improve overall code quality.",
+      "Optimized REST API calls, reducing response time by 20% for better frontend-backend integration."
+    ]
   },
   {
-    company: "Web Solutions Ltd.",
-    role: "Junior Developer",
-    duration: "Jun 2021 - Dec 2021",
-    description: "Assisted in building and testing web applications. Contributed to code reviews and participated in agile development processes."
+    company: "iQuadra Information Services (iQua.ai)",
+    role: "Software Intern (Frontend)",
+    duration: "Feb 2023 – Mar 2023",
+    description: [
+      "Developed mobile-first UIs, improving responsiveness with React.js, Bootstrap, and SCSS.",
+      "Optimized UI performance, reducing load times by 30% through efficient state management.",
+      "Independently implemented minor features, gaining practical experience in frontend best practices."
+    ]
   }
 ];
 
@@ -40,21 +53,21 @@ function ExperienceSection({ id }: ExperienceSectionProps) {
       const ctx = gsap.context(() => {
         gsap.fromTo(
           ".experience-item",
-          { y: 50, opacity: 0 },
+          { opacity: 0, y: 50, scale: 0.9 },
           {
             scrollTrigger: {
               trigger: section,
               start: "top 80%",
               end: "top 20%",
               toggleActions: "play none none reverse",
-              markers: false,
               scrub: false
             },
-            y: 0,
             opacity: 1,
-            duration: 1.2,
-            stagger: 0.1,
-            ease: "power4.inOut"
+            y: 0,
+            scale: 1,
+            duration: 1.5,
+            stagger: 0.2,
+            ease: "expo.out"
           }
         );
       });
@@ -66,30 +79,26 @@ function ExperienceSection({ id }: ExperienceSectionProps) {
   }, []);
 
   return (
-    <section
-      id={id}
-      ref={sectionRef}
-      className="min-h-screen bg-black flex items-center py-20"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-5xl font-bold text-white text-center mb-12">
-          Professional Experience
+    <section id={id} ref={sectionRef} className="min-h-screen bg-black py-20 text-white">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <h2 className="text-5xl font-extrabold text-center text-primary mb-16 tracking-wide">
+          Experience
         </h2>
-        <div className="space-y-8">
-          {experiences.map((exp, index) => (
-            <div
-              key={index}
-              className="experience-item bg-white/10 p-6 rounded-lg shadow-lg hover:bg-white/20 transition-all"
-            >
-              <h3 className="text-2xl font-semibold text-white">
-                {exp.role} @ {exp.company}
-              </h3>
-              <p className="text-purple-200/80 mt-2">{exp.duration}</p>
-              <p className="text-white/70 mt-4 leading-relaxed">
-                {exp.description}
-              </p>
-            </div>
-          ))}
+        <div className="relative before:absolute before:left-4 before:top-0 before:w-1 before:h-full before:bg-primary before:rounded-full">
+          <div className="flex flex-col space-y-12 pl-10">
+            {experiences.map((exp, index) => (
+              <div key={index} className="experience-item relative bg-gray-900 p-8 rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 hover:shadow-2xl transition-transform duration-500">
+                <div className="absolute left-0 w-5 h-5 bg-primary rounded-full -translate-x-1/2 top-5"></div>
+                <h3 className="text-2xl font-bold text-white mb-2">{exp.role} @ {exp.company}</h3>
+                <p className="text-primary/80 text-lg mb-4">{exp.duration}</p>
+                <ul className="list-disc list-inside text-gray-300">
+                  {exp.description.map((point, i) => (
+                    <li key={i} className="mb-2">{point}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

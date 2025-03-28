@@ -8,6 +8,40 @@ interface SkillsProps {
   id: string;
 }
 
+interface SkillCategory {
+  title: string;
+  icon: string;
+  skills: string[];
+}
+
+const skillCategories: SkillCategory[] = [
+  {
+    title: "Programming Languages",
+    icon: "💻",
+    skills: ["JavaScript (ES6+)", "TypeScript", "Python"]
+  },
+  {
+    title: "Frontend Development",
+    icon: "🎨",
+    skills: ["React.js", "Next.js", "Redux", "Tailwind CSS", "Bootstrap"]
+  },
+  {
+    title: "Backend & APIs",
+    icon: "⚙️",
+    skills: ["Node.js (Basic)", "REST APIs"]
+  },
+  {
+    title: "Tools & Deployment",
+    icon: "🛠️",
+    skills: ["Webpack", "Babel", "Vite", "ESLint", "Git"]
+  },
+  {
+    title: "Cloud & DevOps",
+    icon: "☁️",
+    skills: ["CI/CD", "AWS (S3, Lambda)", "Docker (Basic)"]
+  }
+];
+
 function Skills({ id }: SkillsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -18,7 +52,7 @@ function Skills({ id }: SkillsProps) {
       const ctx = gsap.context(() => {
         gsap.fromTo(
           ".skill-category",
-          { y: 50, opacity: 0 },
+          { y: 50, opacity: 0, scale: 0.8 },
           {
             scrollTrigger: {
               trigger: container,
@@ -30,6 +64,7 @@ function Skills({ id }: SkillsProps) {
             },
             y: 0,
             opacity: 1,
+            scale: 1,
             duration: 1.2,
             stagger: 0.15,
             ease: "power4.inOut"
@@ -43,125 +78,35 @@ function Skills({ id }: SkillsProps) {
     }
   }, []);
 
-  const skillCategories = [
-    {
-      title: "Frontend Development",
-      icon: "💻",
-      skills: [
-        { name: "React.js", level: 90 },
-        { name: "Next.js", level: 85 },
-        { name: "TypeScript", level: 88 },
-        { name: "Tailwind CSS", level: 92 },
-        { name: "GSAP", level: 85 }
-      ]
-    },
-    {
-      title: "Backend Development",
-      icon: "⚙️",
-      skills: [
-        { name: "Node.js", level: 80 },
-        { name: "Express.js", level: 82 },
-        { name: "MongoDB", level: 75 },
-        { name: "PostgreSQL", level: 78 }
-      ]
-    },
-    {
-      title: "UI/UX & Design",
-      icon: "🎨",
-      skills: [
-        { name: "Figma", level: 85 },
-        { name: "Adobe XD", level: 80 },
-        { name: "Responsive Design", level: 90 },
-        { name: "UI Animation", level: 88 }
-      ]
-    },
-    {
-      title: "Tools & Others",
-      icon: "🛠️",
-      skills: [
-        { name: "Git & GitHub", level: 88 },
-        { name: "Docker", level: 75 },
-        { name: "AWS", level: 70 },
-        { name: "Jest & Testing", level: 82 }
-      ]
-    }
-  ];
-
   return (
-    <div ref={containerRef} className={`py-20 `}>
+    <div ref={containerRef} className="py-20 bg-gray-900 text-white">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white mb-4">Technical Skills</h2>
-          <p className="text-white/70 max-w-2xl mx-auto">
-            A comprehensive overview of my technical expertise and proficiency in various technologies and tools.
+          <h2 className="text-5xl font-bold text-primary mb-6 animate-pulse">Technical Skills</h2>
+          <p className="text-gray-300 max-w-2xl mx-auto">
+            A categorized breakdown of my technical expertise, covering frontend, backend, and cloud technologies.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {skillCategories.map((category, index) => (
             <div
               key={index}
-              className="skill-category bg-white/5 backdrop-blur-sm rounded-xl p-8 hover:bg-white/10 transition-all"
+              className="skill-category bg-gray-800 p-6 rounded-lg shadow-lg hover:bg-gray-700 transition-all transform hover:scale-105 hover:shadow-xl hover:rotate-1"
             >
-              <div className="flex items-center gap-3 mb-6">
-                <span className="text-3xl">{category.icon}</span>
-                <h3 className="text-2xl font-semibold text-white">
-                  {category.title}
-                </h3>
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-4xl animate-bounce">{category.icon}</span>
+                <h3 className="text-2xl font-semibold text-primary">{category.title}</h3>
               </div>
-
-              <div className="space-y-6">
+              <ul className="list-disc list-inside text-gray-300">
                 {category.skills.map((skill, skillIndex) => (
-                  <div key={skillIndex}>
-                    <div className="flex justify-between mb-2">
-                      <span className="text-white/80">{skill.name}</span>
-                      <span className="text-primary">{skill.level}%</span>
-                    </div>
-                    <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-primary rounded-full transition-all duration-1000"
-                        style={{
-                          width: `${skill.level}%`,
-                          transform: 'translateX(-100%)',
-                          animation: 'slideRight 1.5s forwards'
-                        }}
-                      />
-                    </div>
-                  </div>
+                  <li key={skillIndex} className="mb-2 text-lg hover:text-white transition-colors">{skill}</li>
                 ))}
-              </div>
+              </ul>
             </div>
           ))}
         </div>
-
-        {/* Additional Skills Overview */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 text-center">
-            <div className="text-4xl mb-2">⚡</div>
-            <div className="text-white font-medium">Quick Learner</div>
-          </div>
-          <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 text-center">
-            <div className="text-4xl mb-2">🤝</div>
-            <div className="text-white font-medium">Team Player</div>
-          </div>
-          <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 text-center">
-            <div className="text-4xl mb-2">🎯</div>
-            <div className="text-white font-medium">Problem Solver</div>
-          </div>
-          <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 text-center">
-            <div className="text-4xl mb-2">📚</div>
-            <div className="text-white font-medium">Continuous Learner</div>
-          </div>
-        </div>
       </div>
-
-      <style jsx>{`
-        @keyframes slideRight {
-          to {
-            transform: translateX(0);
-          }
-        }
-      `}</style>
     </div>
   );
 }
