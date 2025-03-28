@@ -53,7 +53,7 @@ function App() {
         <HeroSection onExploreClick={scrollToAbout} />
         <AboutSection id="about" />
         <ExperienceSection id="experience" />
-        <Skills />
+        <Skills id="skills" />
       </div>
     </>
   );
