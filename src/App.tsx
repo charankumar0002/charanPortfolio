@@ -42,7 +42,7 @@ function App() {
     gsap.to(window, {
       duration: 1.5,
       scrollTo: "#about", // Ensure this ID matches the AboutSection's ID
-      ease: "power4.inOut",
+      ease: "linear",
     });
   };
   

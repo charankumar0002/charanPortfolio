@@ -90,7 +90,7 @@ function AboutSection({ id }: AboutSectionProps) {
           <div ref={imageRef} className="relative">
             <div className="relative rounded-lg overflow-hidden">
               <img
-                src="src/assets/CharanImage.jpg"
+                src="/CharanImage.jpg"
                 alt="Profile"
                 className="w-full h-[500px] object-cover"
               />
@@ -113,7 +113,7 @@ function AboutSection({ id }: AboutSectionProps) {
             </p>
 
             <div className="space-y-4">
-              {[ 
+              {[
                 { label: "Experience", value: "2+ Years" },
                 { label: "Main Skills", value: "React.js, TypeScript, Next.js, Redux" },
                 { label: "Learning", value: "Node.js, Docker, Cloud" }

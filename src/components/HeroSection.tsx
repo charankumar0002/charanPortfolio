@@ -227,7 +227,7 @@ function HeroSection({ onExploreClick }: HeroSectionProps) {
               </svg>
             </a>
             <a
-              href="https://twitter.com/yourusername"
+              href="https://x.com/CharanK29063387"
               className="text-white/50 hover:text-white transition-all"
               target="_blank"
               rel="noopener noreferrer"
