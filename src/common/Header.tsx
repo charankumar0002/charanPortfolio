@@ -13,9 +13,12 @@ const Header: React.FC = () => {
 
   const scrollToSection = (id: string) => {
     gsap.to(window, {
-      duration: 1.5,
-      scrollTo: `#${id}`,
-      ease: "power4.inOut",
+      duration: 0.2,
+      scrollTo: {
+        y: `#${id}`,
+        offsetY: 50, // Adjust for fixed headers
+      },
+      ease: "linear", // More linear start, reducing lag
     });
     setIsOpen(false); // Close menu after clicking (for mobile)
   };

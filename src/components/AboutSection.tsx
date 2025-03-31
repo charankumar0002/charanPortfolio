@@ -20,7 +20,6 @@ function AboutSection({ id }: AboutSectionProps) {
 
     if (section && image && content) {
       const ctx = gsap.context(() => {
-        // Image animation
         gsap.fromTo(image,
           { x: -100, opacity: 0 },
           {
@@ -39,7 +38,6 @@ function AboutSection({ id }: AboutSectionProps) {
           }
         );
 
-        // Content animations
         const contentElements = content.children || [];
         gsap.fromTo(contentElements,
           { y: 50, opacity: 0 },
@@ -75,7 +73,6 @@ function AboutSection({ id }: AboutSectionProps) {
     >
       <div className="loader absolute inset-0 z-50" />
       <div className="background-gradient absolute inset-0 opacity-50" />
-      {/* Particles */}
       <div className="absolute inset-0">
         {[...Array(50)].map((_, i) => (
           <div
@@ -90,7 +87,6 @@ function AboutSection({ id }: AboutSectionProps) {
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Image */}
           <div ref={imageRef} className="relative">
             <div className="relative rounded-lg overflow-hidden">
               <img
@@ -100,25 +96,27 @@ function AboutSection({ id }: AboutSectionProps) {
               />
               <div className="absolute inset-0 bg-purple-600/20 mix-blend-overlay" />
             </div>
-            {/* Decorative element */}
             <div className="absolute -bottom-6 -right-6 w-64 h-64 bg-purple-600/20 rounded-full blur-3xl" />
           </div>
 
-          {/* Content */}
           <div ref={contentRef} className="space-y-8">
             <h2 className="text-5xl font-bold text-white">
-              The Developer Behind the Code
+              Crafting Scalable & Dynamic Products
             </h2>
 
             <p className="text-xl text-purple-200/80 leading-relaxed">
-              Hi! I'm Charan, a Front-End Developer with 2+ years of experience building scalable and dynamic web applications. I specialize in React.js, JavaScript, and Tailwind CSS, with a passion for creating engaging user interfaces for real-world products.
+              Hi! I'm Charan, a Front-End Developer working in a product-based company for over 2 years. I specialize in building scalable and high-performance web applications using React.js, TypeScript, Next.js, and Redux.
+            </p>
+
+            <p className="text-lg text-gray-300 italic">
+              "Passionate about crafting interactive and scalable applications, I thrive on solving complex problems and pushing the limits of front-end development."
             </p>
 
             <div className="space-y-4">
-              {[
+              {[ 
                 { label: "Experience", value: "2+ Years" },
-                { label: "Projects", value: "50+" },
-                { label: "Clients", value: "30+" }
+                { label: "Main Skills", value: "React.js, TypeScript, Next.js, Redux" },
+                { label: "Learning", value: "Node.js, Docker, Cloud" }
               ].map((item, index) => (
                 <div
                   key={index}
@@ -128,6 +126,15 @@ function AboutSection({ id }: AboutSectionProps) {
                   <span className="text-2xl font-bold text-white">{item.value}</span>
                 </div>
               ))}
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="text-3xl font-semibold text-white">Fun Facts & Interests</h3>
+              <ul className="list-disc list-inside text-purple-200/80">
+                <li>🚀 Love optimizing performance and enhancing user experience.</li>
+                <li>🎯 Interested in Open Source contributions.</li>
+                <li>🌍 Exploring Cloud and Backend to become a Full-Stack Developer.</li>
+              </ul>
             </div>
           </div>
         </div>

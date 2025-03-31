@@ -3,12 +3,14 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin"; // ✅ Import ScrollToPlugin
 import AboutSection from "./components/AboutSection";
-import CustomCursor from "./components/CustomCursor";
+import CustomCursor from "./common/CustomCursor";
 import HeroSection from "./components/HeroSection";
-import ScrollProgress from "./components/ScrollProgress";
+import ScrollProgress from "./common/ScrollProgress";
 import Skills from "./components/Skills";
 import Header from "./common/Header";
 import ExperienceSection from "./components/WorkExperience";
+import FooterSection from "./components/FooterSection";
+import ContactPage from "./components/contact";
 
 // ✅ Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin); // ✅ Add ScrollToPlugin
@@ -54,6 +56,8 @@ function App() {
         <AboutSection id="about" />
         <ExperienceSection id="experience" />
         <Skills id="skills" />
+        <ContactPage id="contact" />
+        <FooterSection id="footer"/>
       </div>
     </>
   );

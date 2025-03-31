@@ -79,7 +79,7 @@ function Skills({ id }: SkillsProps) {
   }, []);
 
   return (
-    <div ref={containerRef} className="py-20 bg-gray-900 text-white">
+    <div id={id} ref={containerRef} className="min-h-screen bg-black py-20 text-white">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-5xl font-bold text-primary mb-6 animate-pulse">Technical Skills</h2>
