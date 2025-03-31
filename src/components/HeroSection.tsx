@@ -1,20 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { TextPlugin } from "gsap/TextPlugin";
 
-const roles = [
-  "Front End Developer",
-  "React Specialist",
-  "UI/UX Enthusiast",
-  "Performance Optimizer",
-];
 
-const achievements = [
-  { number: "50+", label: "Projects Completed" },
-  { number: "3+", label: "Years Experience" },
-  { number: "20+", label: "Happy Clients" },
-  { number: "100%", label: "Client Satisfaction" },
-];
 
 const techStack = [
   { icon: "⚛️", name: "React", level: "Advanced" },
@@ -25,35 +13,47 @@ const techStack = [
 
 gsap.registerPlugin(TextPlugin);
 
-function HeroSection({ onExploreClick }) {
+interface HeroSectionProps {
+  onExploreClick: () => void;
+}
+
+function HeroSection({ onExploreClick }: HeroSectionProps) {
   const containerRef = useRef(null);
   const nameRef = useRef(null);
   const titleRef = useRef(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
+
 
   useEffect(() => {
     const container = containerRef.current;
     const name = nameRef.current;
     const title = titleRef.current;
-  
+
     if (container && name && title) {
       const mm = gsap.matchMedia();
-  
+
       gsap.set(
         [name, title, ".tech-stack-item", ".cta-button", ".social-link", ".hero-subtitle", ".hero-description"],
         { opacity: 0, y: 50 }
       );
-  
+
       gsap.set(".particle", { opacity: 0, scale: 0 });
-  
+
       const tl = gsap.timeline({
         defaults: { ease: "power3.out", duration: 0.8 },
       });
-  
+
       mm.add("(min-width: 768px)", () => {
         tl.to(".loader", { height: "0%", duration: 1.5, ease: "power4.inOut" })
           .from(".background-gradient", { opacity: 0, scale: 1.2, duration: 2, ease: "power2.inOut" }, "-=1")
-          .to(".particle", { opacity: 0.2, scale: 1, duration: 1, stagger: { amount: 1, grid: "random", from: "random" } }, "-=1.5")
+          .to(".particle", {
+            opacity: 0.2,
+            scale: 1,
+            duration: 1,
+            stagger: {
+              amount: 1,
+              from: "random"  // Keep this; "grid" is invalid
+            }
+          }, "-=1.5")
           .to(name, { opacity: 1, y: 0, duration: 1.2, ease: "back.out(1.7)" }, "-=0.5")
           .to(".hero-subtitle", { opacity: 1, y: 0, duration: 0.8, stagger: 0.1 }, "-=0.8")
           .to(title, { opacity: 1, y: 0, duration: 1 }, "-=0.6")
@@ -62,7 +62,7 @@ function HeroSection({ onExploreClick }) {
           .to(".cta-button", { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "back.out(1.2)" }, "-=0.2")
           .to(".social-link", { opacity: 1, y: 0, duration: 0.4, stagger: 0.1 }, "-=0.3");
       });
-  
+
       mm.add("(max-width: 767px)", () => {
         tl.to(".loader", { height: "0%", duration: 1.2, ease: "power4.inOut" })
           .from(".background-gradient", { opacity: 0, duration: 1.5 }, "-=0.8")
@@ -74,7 +74,7 @@ function HeroSection({ onExploreClick }) {
           .to(".cta-button", { opacity: 1, y: 0, duration: 0.5, stagger: 0.1 }, "-=0.2")
           .to(".social-link", { opacity: 1, y: 0, duration: 0.3, stagger: 0.1 }, "-=0.2");
       });
-  
+
       gsap.to(".particle", {
         y: "random(-20, 20)",
         x: "random(-20, 20)",
@@ -84,7 +84,7 @@ function HeroSection({ onExploreClick }) {
         ease: "none",
         stagger: { amount: 2, from: "random" },
       });
-  
+
       return () => {
         tl.kill();
         mm.revert();
@@ -92,17 +92,6 @@ function HeroSection({ onExploreClick }) {
     }
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPx = document.documentElement.scrollTop;
-      const winHeightPx = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = winHeightPx > 0 ? (scrollPx / winHeightPx) * 100 : 0;
-      setScrollProgress(scrolled);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   useEffect(() => {
     gsap.timeline({
@@ -126,7 +115,7 @@ function HeroSection({ onExploreClick }) {
   });
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e;
       const xPos = (clientX / window.innerWidth - 0.5) * 20;
       const yPos = (clientY / window.innerHeight - 0.5) * 20;
@@ -138,14 +127,6 @@ function HeroSection({ onExploreClick }) {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  const cursor = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-
-  const handleMouseMove = (e) => {
-    cursor.x = e.clientX;
-    cursor.y = e.clientY;
-
-    gsap.to(".custom-cursor", { x: cursor.x, y: cursor.y, duration: 0.2 });
-  };
 
   return (
     <div ref={containerRef} className="relative min-h-screen overflow-hidden bg-black">
