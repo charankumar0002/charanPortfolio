@@ -11,7 +11,7 @@ import Header from "./common/Header";
 import ExperienceSection from "./components/WorkExperience";
 import FooterSection from "./components/FooterSection";
 import ContactPage from "./components/contact";
-
+import { Analytics } from '@vercel/analytics/react';
 // ✅ Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin); // ✅ Add ScrollToPlugin
 
@@ -58,6 +58,7 @@ function App() {
         <Skills id="skills" />
         <ContactPage id="contact" />
         <FooterSection id="footer"/>
+        <Analytics />
       </div>
     </>
   );
