@@ -91,7 +91,7 @@ function AboutSection({ id }: AboutSectionProps) {
             <div className="relative rounded-lg overflow-hidden">
               <img
                 src="/CharanImage.jpg"
-                alt="Profile"
+                alt="Photo of Charan Kumar Reddy Palukuru"
                 className="w-full h-[500px] object-cover"
               />
               <div className="absolute inset-0 bg-purple-600/20 mix-blend-overlay" />
