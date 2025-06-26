@@ -27,7 +27,7 @@ const Header: React.FC = () => {
     <header className="bg-slate-900 text-white shadow-lg w-[60vw] mx-auto mt-2 rounded-xl">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
         <div className="text-2xl font-bold cursor-pointer" onClick={() => scrollToSection("hero")}>
-        <img src="/CharanLogo.png" alt="Charan's Logo" className="w-[120px] h-[40px]" />
+        <img src="/CharanLogo.png" alt="Logo of Palukuru Charan Kumar Reddy" className="w-[120px] h-[40px]" />
         </div>
         <nav className="hidden md:flex space-x-6">
           <button onClick={() => scrollToSection("about")} className="hover:text-blue-200">
