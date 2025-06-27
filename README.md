@@ -44,7 +44,23 @@ export default tseslint.config({
     // other rules...
     // Enable its recommended rules
     ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
+  ...react.configs['jsx-runtime'].rules,
   },
 })
 ```
+
+## Configuring GitHub Projects
+
+The **Projects** section displays your portfolio and EV dashboard alongside live repositories from your GitHub account. Create a `.env` file in the project root and specify your username:
+
+```
+VITE_GITHUB_USERNAME=<your-github-username>
+```
+
+To avoid API rate limits you can also provide a personal access token:
+
+```
+VITE_GITHUB_TOKEN=<your-github-token>
+```
+
+Restart the development server after changing these values.

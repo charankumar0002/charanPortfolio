@@ -7,6 +7,7 @@ import HeroSection from "./components/HeroSection";
 import ScrollProgress from "./components/ScrollProgress";
 import Skills from "./components/Skills";
 import WorkExperience from "./components/WorkExperience";
+import ProjectsSection from "./components/ProjectsSection";
 import Header from "./common/Header";
 
 // Register GSAP plugins
@@ -55,6 +56,7 @@ function App() {
         <HeroSection onExploreClick={scrollToAbout} />
         <AboutSection id="about"  />
         <WorkExperience />
+        <ProjectsSection />
         <Skills />
       </div>
     </>
