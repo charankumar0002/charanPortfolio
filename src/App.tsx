@@ -1,17 +1,21 @@
 import { useEffect } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin"; // ✅ Import ScrollToPlugin
 import AboutSection from "./components/AboutSection";
-import CustomCursor from "./components/CustomCursor";
+import CustomCursor from "./common/CustomCursor";
 import HeroSection from "./components/HeroSection";
-import ScrollProgress from "./components/ScrollProgress";
+import ScrollProgress from "./common/ScrollProgress";
 import Skills from "./components/Skills";
+
 import WorkExperience from "./components/WorkExperience";
 import ProjectsSection from "./components/ProjectsSection";
 import Header from "./common/Header";
-
-// Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger);
+import FooterSection from "./components/FooterSection";
+import ContactPage from "./components/contact";
+import { Analytics } from '@vercel/analytics/react';
+// ✅ Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin); // ✅ Add ScrollToPlugin
 
 function App() {
   useEffect(() => {
@@ -25,7 +29,7 @@ function App() {
     // Initialize main timeline
     const mainTl = gsap.timeline({
       defaults: {
-        ease: "power2.out",
+        ease: "power2.out", // Consistent easing
       },
     });
 
@@ -39,25 +43,25 @@ function App() {
   const scrollToAbout = () => {
     gsap.to(window, {
       duration: 1.5,
-      scrollTo: {
-        y: "#about",
-        offsetY: 0,
-      },
-      ease: "power4.inOut",
+      scrollTo: "#about", // Ensure this ID matches the AboutSection's ID
+      ease: "linear",
     });
   };
-
+  
   return (
     <>
-    <Header/>
+      <Header />
       <div className="relative">
         <ScrollProgress />
         <CustomCursor />
         <HeroSection onExploreClick={scrollToAbout} />
         <AboutSection id="about"  />
-        <WorkExperience />
+        <WorkExperience id="workExperience"/>
         <ProjectsSection />
-        <Skills />
+        <Skills id="skills" />
+        <ContactPage id="contact" />
+        <FooterSection id="footer"/>
+        <Analytics />
       </div>
     </>
   );

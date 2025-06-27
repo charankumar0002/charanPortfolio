@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://charan-portfolio.com/sitemap.xml
