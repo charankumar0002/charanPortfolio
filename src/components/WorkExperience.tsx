@@ -89,6 +89,22 @@ function ExperienceSection({ id }: ExperienceSectionProps) {
             }
           );
         }
+
+        const items = gsap.utils.toArray<HTMLElement>(".experience-item");
+        items.forEach((item) => {
+          const bullet = item.querySelector(
+            ".experience-bullet"
+          ) as HTMLElement | null;
+          if (bullet) {
+            ScrollTrigger.create({
+              trigger: item,
+              start: "top center",
+              end: "bottom center",
+              onEnter: () => bullet.classList.add("bg-primary"),
+              onLeaveBack: () => bullet.classList.remove("bg-primary")
+            });
+          }
+        });
       });
 
       return () => {
@@ -109,7 +125,7 @@ function ExperienceSection({ id }: ExperienceSectionProps) {
           <div className="flex flex-col space-y-12 pl-10">
             {experiences.map((exp, index) => (
               <div key={index} className="experience-item relative bg-gray-900 p-8 rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 hover:shadow-2xl transition-transform duration-500">
-                <div className="absolute left-0 w-5 h-5 bg-primary rounded-full -translate-x-1/2 top-5"></div>
+                <div className="experience-bullet absolute -left-6 top-5 w-5 h-5 bg-white/20 rounded-full -translate-x-1/2"></div>
                 <h3 className="text-2xl font-bold text-white mb-2">{exp.role} @ {exp.company}</h3>
                 <p className="text-primary/80 text-lg mb-4">{exp.duration}</p>
                 <ul className="list-disc list-inside text-gray-300">
