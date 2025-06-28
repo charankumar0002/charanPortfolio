@@ -45,9 +45,11 @@ const experiences: Experience[] = [
 
 function ExperienceSection({ id }: ExperienceSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
+    const progressBar = progressRef.current;
 
     if (section) {
       const ctx = gsap.context(() => {
@@ -70,6 +72,39 @@ function ExperienceSection({ id }: ExperienceSectionProps) {
             ease: "expo.out"
           }
         );
+
+        if (progressBar) {
+          gsap.fromTo(
+            progressBar,
+            { scaleY: 0 },
+            {
+              scaleY: 1,
+              ease: "none",
+              scrollTrigger: {
+                trigger: section,
+                start: "top top",
+                end: "bottom bottom",
+                scrub: true
+              }
+            }
+          );
+        }
+
+        const items = gsap.utils.toArray<HTMLElement>(".experience-item");
+        items.forEach((item) => {
+          const bullet = item.querySelector(
+            ".experience-bullet"
+          ) as HTMLElement | null;
+          if (bullet) {
+            ScrollTrigger.create({
+              trigger: item,
+              start: "top center",
+              end: "bottom center",
+              onEnter: () => bullet.classList.add("bg-primary"),
+              onLeaveBack: () => bullet.classList.remove("bg-primary")
+            });
+          }
+        });
       });
 
       return () => {
@@ -84,11 +119,13 @@ function ExperienceSection({ id }: ExperienceSectionProps) {
         <h2 className="text-5xl font-extrabold text-center text-primary mb-16 tracking-wide">
           Experience
         </h2>
-        <div className="relative before:absolute before:left-4 before:top-0 before:w-1 before:h-full before:bg-primary before:rounded-full">
+        <div className="relative">
+          <div className="absolute left-4 top-0 w-1 h-full bg-white/20 rounded-full" />
+          <div ref={progressRef} className="absolute left-4 top-0 w-1 h-full bg-primary rounded-full transform origin-top scale-y-0" />
           <div className="flex flex-col space-y-12 pl-10">
             {experiences.map((exp, index) => (
               <div key={index} className="experience-item relative bg-gray-900 p-8 rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 hover:shadow-2xl transition-transform duration-500">
-                <div className="absolute left-0 w-5 h-5 bg-primary rounded-full -translate-x-1/2 top-5"></div>
+                <div className="experience-bullet absolute -left-6 top-5 w-5 h-5 bg-white/20 rounded-full -translate-x-1/2"></div>
                 <h3 className="text-2xl font-bold text-white mb-2">{exp.role} @ {exp.company}</h3>
                 <p className="text-primary/80 text-lg mb-4">{exp.duration}</p>
                 <ul className="list-disc list-inside text-gray-300">
