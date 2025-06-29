@@ -15,14 +15,14 @@ const defaultProjects: Project[] = [
   {
     title: 'Portfolio',
     description: 'My personal portfolio built with React and Tailwind CSS.',
-    url: '#',
-    image: 'https://via.placeholder.com/600x400',
+    url: 'https://charankumarreddypalukuru.vercel.app/',
+    image: '',
   },
   {
     title: 'EV Dashboard',
     description: 'Dashboard to monitor and visualise electric vehicle data.',
-    url: '#',
-    image: 'https://via.placeholder.com/600x400',
+    url: 'https://ev-dashboard-blue.vercel.app/',
+    image: '',
   },
 ];
 
