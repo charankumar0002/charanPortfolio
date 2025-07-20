@@ -62,7 +62,7 @@ function App() {
         <CustomCursor />
         <HeroSection onExploreClick={scrollToAbout} />
         <AboutSection id="about"  />
-        <WorkExperience id="workExperience"/>
+        <WorkExperience id="experience"/>
         <ProjectsSection />
         <Skills id="skills" />
         <ContactPage id="contact" />

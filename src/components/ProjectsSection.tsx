@@ -14,15 +14,15 @@ interface ProjectsSectionProps {
 const defaultProjects: Project[] = [
   {
     title: 'Portfolio',
-    description: 'My personal portfolio built with React and Tailwind CSS.',
+    description: 'My personal portfolio built with React + Vite + Typescript and Tailwind CSS.',
     url: 'https://charankumarreddypalukuru.vercel.app/',
-    image: '',
+    image: '/CharanLogo.png', // Added logo image
   },
   {
     title: 'EV Dashboard',
     description: 'Dashboard to monitor and visualise electric vehicle data.',
     url: 'https://ev-dashboard-blue.vercel.app/',
-    image: '',
+    image: '/evDashboard.png', // Added dashboard image
   },
 ];
 
@@ -79,9 +79,10 @@ function ProjectsSection({ className }: ProjectsSectionProps) {
             >
               {project.image && (
                 <img
-                  src={project.image}
+                  src={project.image || '/vite.svg'}
                   alt={project.title}
-                  className="h-40 w-full object-cover"
+                  className="h-40 w-full object-cover transition-transform duration-300 hover:scale-105 hover:brightness-90"
+                  onError={(e) => (e.currentTarget.src = '/vite.svg')}
                 />
               )}
               <div className="p-6">
