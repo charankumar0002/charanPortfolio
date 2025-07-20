@@ -101,28 +101,28 @@ function AboutSection({ id }: AboutSectionProps) {
 
           <div ref={contentRef} className="space-y-8">
             <h2 className="text-5xl font-bold text-white">
-              Crafting Scalable & Dynamic Products
+              Front-End Developer | React & Next.js Specialist
             </h2>
 
             <p className="text-xl text-purple-200/80 leading-relaxed">
-              Hi! I'm Charan, a Front-End Developer working in a product-based company for over 2 years. I specialize in building scalable and high-performance web applications using React.js, TypeScript, Next.js, and Redux.
+              Front-End Developer with <span className="font-bold">2.6 years</span> of hands-on experience delivering performant React.js and Next.js applications. Proficient in TypeScript, Redux, Tailwind CSS, and responsive UI/UX best practices. Demonstrated success in reducing page load times by <span className="font-bold">25%</span> and building reusable component libraries. Familiar with REST API integration and currently gaining exposure to FastAPI and PostgreSQL fundamentals. Open to immediate product-focused front-end opportunities.
             </p>
 
             <p className="text-lg text-gray-300 italic">
-              "Passionate about crafting interactive and scalable applications, I thrive on solving complex problems and pushing the limits of front-end development."
+              "Driven by a passion for scalable, interactive products and continuous learning. I thrive on solving complex problems and pushing the boundaries of front-end development."
             </p>
 
             <div className="space-y-4">
               {[
-                { label: "Experience", value: "2+ Years" },
-                { label: "Main Skills", value: "React.js, TypeScript, Next.js, Redux" },
-                { label: "Learning", value: "Node.js, Docker, Cloud" }
+                { label: "Experience", value: "2.6 Years" },
+                { label: "Key Skills", value: "React.js, Next.js, TypeScript, Redux, Tailwind CSS" },
+                { label: "Currently Exploring", value: "FastAPI, PostgreSQL, Cloud" }
               ].map((item, index) => (
                 <div
                   key={index}
                   className="flex items-center space-x-4 text-purple-200/80"
                 >
-                  <span className="text-lg font-medium w-32">{item.label}</span>
+                  <span className="text-lg font-medium w-40">{item.label}</span>
                   <span className="text-2xl font-bold text-white">{item.value}</span>
                 </div>
               ))}
@@ -132,7 +132,7 @@ function AboutSection({ id }: AboutSectionProps) {
               <h3 className="text-3xl font-semibold text-white">Fun Facts & Interests</h3>
               <ul className="list-disc list-inside text-purple-200/80">
                 <li>🚀 Love optimizing performance and enhancing user experience.</li>
-                <li>🎯 Interested in Open Source contributions.</li>
+                <li>🎯 Interested in Open Source contributions and Agile teams.</li>
                 <li>🌍 Exploring Cloud and Backend to become a Full-Stack Developer.</li>
               </ul>
             </div>

@@ -7,8 +7,10 @@ import CustomCursor from "./common/CustomCursor";
 import HeroSection from "./components/HeroSection";
 import ScrollProgress from "./common/ScrollProgress";
 import Skills from "./components/Skills";
+
+import WorkExperience from "./components/WorkExperience";
+import ProjectsSection from "./components/ProjectsSection";
 import Header from "./common/Header";
-import ExperienceSection from "./components/WorkExperience";
 import FooterSection from "./components/FooterSection";
 import ContactPage from "./components/contact";
 import { Analytics } from '@vercel/analytics/react';
@@ -59,8 +61,9 @@ function App() {
         <ScrollProgress />
         <CustomCursor />
         <HeroSection onExploreClick={scrollToAbout} />
-        <AboutSection id="about" />
-        <ExperienceSection id="experience" />
+        <AboutSection id="about"  />
+        <WorkExperience id="experience"/>
+        <ProjectsSection />
         <Skills id="skills" />
         <ContactPage id="contact" />
         <FooterSection id="footer"/>

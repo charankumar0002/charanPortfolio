@@ -16,29 +16,44 @@ interface SkillCategory {
 
 const skillCategories: SkillCategory[] = [
   {
-    title: "Programming Languages",
-    icon: "💻",
-    skills: ["JavaScript (ES6+)", "TypeScript", "Python"]
+    title: "Frontend",
+    icon: "⚛️",
+    skills: ["React.js (18)", "Next.js 13", "TypeScript", "JavaScript (ES6+)", "Server-Side Rendering", "Dynamic Routing"],
   },
   {
-    title: "Frontend Development",
+    title: "State/Data",
+    icon: "🗄️",
+    skills: ["Redux Toolkit", "Zustand", "React Query (basic)", "Formik", "Yup"],
+  },
+  {
+    title: "Styling",
     icon: "🎨",
-    skills: ["React.js", "Next.js", "Redux", "Tailwind CSS", "Bootstrap"]
+    skills: ["Tailwind CSS", "Bootstrap", "Material-UI", "CSS Modules", "SCSS"],
   },
   {
-    title: "Backend & APIs",
-    icon: "⚙️",
-    skills: ["Node.js (Basic)", "REST APIs"]
-  },
-  {
-    title: "Tools & Deployment",
+    title: "Tooling & Build",
     icon: "🛠️",
-    skills: ["Webpack", "Babel", "Vite", "ESLint", "Git"]
+    skills: ["Vite", "Webpack", "ESLint", "Prettier", "Git", "GitHub Actions", "Jira"],
   },
   {
-    title: "Cloud & DevOps",
+    title: "Backend & Integration",
+    icon: "🔗",
+    skills: ["REST APIs", "Node.js (basic)", "FastAPI (learning)"]
+  },
+  {
+    title: "Databases",
+    icon: "🗃️",
+    skills: ["PostgreSQL (basic)", "MongoDB (basic)"]
+  },
+  {
+    title: "Testing",
+    icon: "🧪",
+    skills: ["Jest", "Vitest"]
+  },
+  {
+    title: "DevOps & Perf",
     icon: "☁️",
-    skills: ["CI/CD", "AWS (S3, Lambda)", "Docker (Basic)"]
+    skills: ["Vercel", "Docker (basic)", "Lighthouse", "SEO Audits"]
   }
 ];
 
