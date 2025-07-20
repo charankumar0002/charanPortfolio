@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { useTheme } from "../context/ThemeContext";
 
 gsap.registerPlugin(ScrollToPlugin);
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -43,6 +45,9 @@ const Header: React.FC = () => {
             Contact
           </button>
         </nav>
+        <button onClick={toggleTheme} className="hidden md:block ml-4">
+          {theme === 'dark' ? '🌙' : '☀️'}
+        </button>
         <button className="md:hidden" onClick={toggleMenu}>
           {isOpen ? "✖️" : "☰"}
         </button>
@@ -60,6 +65,9 @@ const Header: React.FC = () => {
           </button>
           <button onClick={() => scrollToSection("contact")} className="block w-full text-left py-2 hover:text-blue-200">
             Contact
+          </button>
+          <button onClick={toggleTheme} className="block w-full text-left py-2 hover:text-blue-200">
+            {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
           </button>
         </div>
       )}

@@ -12,6 +12,7 @@ import ExperienceSection from "./components/WorkExperience";
 import FooterSection from "./components/FooterSection";
 import ContactPage from "./components/contact";
 import { Analytics } from '@vercel/analytics/react';
+import SEO from "./common/SEO";
 // ✅ Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin); // ✅ Add ScrollToPlugin
 
@@ -48,6 +49,11 @@ function App() {
   
   return (
     <>
+      <SEO
+        title="Palukuru Charan Kumar Reddy | Portfolio"
+        description="Portfolio of Palukuru Charan Kumar Reddy, a front-end developer proficient in React.js, TypeScript and modern web technologies."
+        keywords="Charan, React, TypeScript, Front-End Developer, Portfolio"
+      />
       <Header />
       <div className="relative">
         <ScrollProgress />
