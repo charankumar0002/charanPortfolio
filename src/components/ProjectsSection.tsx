@@ -21,7 +21,7 @@ const defaultProjects: Project[] = [
   {
     title: 'EV Dashboard',
     description: 'Dashboard to monitor and visualise electric vehicle data.',
-    url: 'https://ev-dashboard-blue.vercel.app/',
+    url: 'https://ev-dashboard-and-analysis.vercel.app',
     image: '/evDashboard.png', // Added dashboard image
   },
 ];
