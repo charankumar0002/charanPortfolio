@@ -18,7 +18,7 @@ const skillCategories: SkillCategory[] = [
   {
     title: "Frontend",
     icon: "⚛️",
-    skills: ["React.js (18)", "Next.js 13", "TypeScript", "JavaScript (ES6+)", "Server-Side Rendering", "Dynamic Routing"],
+    skills: ["React.js (18)", "Next.js 14", "TypeScript", "JavaScript (ES6+)", "Server-Side Rendering", "Dynamic Routing"],
   },
   {
     title: "State/Data",
