@@ -1,66 +1,76 @@
-# React + TypeScript + Vite
+# Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive personal portfolio built with React, TypeScript, and Vite. Features a sleek design with smooth animations and dynamic GitHub integration.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[View Portfolio](https://charankumarreddypalukuru.vercel.app/)
 
-## Expanding the ESLint configuration
+## 🛠️ Technologies Used
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **React 18** - UI library
+- **TypeScript** - Type safety
+- **Vite** - Build tool and dev server
+- **Tailwind CSS** - Styling
+- **Framer Motion** - Animations
+- **GitHub API** - Dynamic project fetching
+- **Vercel** - Deployment
 
-- Configure the top-level `parserOptions` property like this:
+## ✨ Features
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- Responsive design for all devices
+- Smooth animations and transitions
+- Dynamic GitHub repository integration
+- Modern glassmorphism UI effects
+- Fast loading with Vite
+- Type-safe development with TypeScript
+
+## 🏃‍♂️ Quick Start
+
+1. Clone the repository:
+```bash
+git clone https://github.com/charankumarreddypalukuru/Portfolio.git
+cd Portfolio
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-  ...react.configs['jsx-runtime'].rules,
-  },
-})
+2. Install dependencies:
+```bash
+npm install
 ```
 
-## Configuring GitHub Projects
-
-The **Projects** section displays your portfolio and EV dashboard alongside live repositories from your GitHub account. Create a `.env` file in the project root and specify your username:
-
-```
-VITE_GITHUB_USERNAME=<your-github-username>
+3. Start development server:
+```bash
+npm run dev
 ```
 
-To avoid API rate limits you can also provide a personal access token:
+## ⚙️ Configuration
+
+### GitHub Integration
+
+To display your GitHub repositories in the Projects section, create a `.env` file:
+
+```env
+VITE_GITHUB_USERNAME=your-github-username
+VITE_GITHUB_TOKEN=your-github-token
+```
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+### Preview Production Build
+
+```bash
+npm run preview
+```
+
+## 📁 Project Structure
 
 ```
-VITE_GITHUB_TOKEN=<your-github-token>
+src/
+├── components/     # React components
+├── assets/        # Images and static files
+└── main.tsx       # Application entry point
 ```
-
-Restart the development server after changing these values.
