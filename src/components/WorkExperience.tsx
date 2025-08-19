@@ -21,30 +21,29 @@ interface Experience {
 const experiences: Experience[] = [
   {
     company: "iQuadra Information Services LLC",
-    role: "Frontend Engineer",
+    role: "Software Developer",
     duration: "Apr 2023 – Present",
     description: [
-      "Developed responsive interfaces with React.js and Next.js, serving 10k+ users monthly.",
-      "Engineered reusable TypeScript component library, improving delivery speed for new features by 30%.",
-      "Optimised page performance: implemented code-splitting, lazy loading, and memoisation, cutting LCP by 25%.",
-      "Integrated REST APIs and Firebase listeners for real-time updates and push notifications.",
-      "Implemented automated unit and component tests using Jest + Vitest, reducing regression defects by 20%.",
-      "Collaborated with designers to deliver WCAG-compliant UIs, raising Lighthouse accessibility score to 96+.",
-      "Configured GitHub Actions CI pipeline for lint, tests, and Vercel preview, shortening QA turnaround by 30%.",
-      "Actively contributed to Agile ceremonies—sprint planning, backlog grooming, and peer reviews."
+      "Spearheaded developing and maintaining responsive user interfaces using React.js, Next.js, and TypeScript.",
+      "Created a scalable component library to standardize UI development.",
+      "Implemented server-side rendering (SSR) and static site generation (SSG) in Next.js to improve SEO and performance.",
+      "Reduced LCP by 25% using performance optimization techniques like lazy loading, code-splitting, memoization.",
+      "Raised Lighthouse accessibility scores to 96+ by building fully accessible interfaces aligned with WCAG standards.",
+      "Integrated payments (Stripe, Razorpay) and back-end APIs; improved payment success by 15% on production flows.",
+      "Wrote and maintained unit/component tests using Jest and React Testing Library, reducing regression issues by 20%.",
+      "Actively participated in Agile ceremonies including sprint planning, backlog grooming, and peer code reviews."
     ],
     logo: '/CharanLogo.png',
     type: 'Full-time',
-    techStack: ['React.js', 'Next.js', 'TypeScript', 'Redux Toolkit', 'Jest', 'Vitest', 'Vite', 'Tailwind CSS', 'GitHub Actions', 'Firebase', 'REST APIs', 'Vercel', 'Lighthouse', 'WCAG', 'Agile']
+    techStack: ['React.js', 'Next.js', 'TypeScript', 'Redux Toolkit', 'Zustand', 'React Query', 'Jest', 'Vitest', 'React Testing Library', 'Tailwind CSS', 'Material-UI', 'GitHub Actions', 'REST APIs', 'Stripe', 'Razorpay', 'Vercel', 'Lighthouse', 'WCAG', 'Agile']
   },
   {
     company: "iQuadra Information Services LLC",
-    role: "Software Engineering Intern",
+    role: "Software Development Intern",
     duration: "Feb 2023 – Mar 2023",
     description: [
-      "Translated Figma wireframes into responsive pages using React.js and Bootstrap.",
-      "Implemented REST API consumption patterns for data rendering and synchronisation.",
-      "Participated in daily stand-ups and shipped bug-fixes with senior mentorship."
+      "Converted Figma wireframes to responsive React pages (Bootstrap) across devices and browsers.",
+      "Integrated REST APIs for efficient data rendering; fixed bugs and contributed to sprint goals."
     ],
     logo: '/CharanLogo.png',
     type: 'Intern',

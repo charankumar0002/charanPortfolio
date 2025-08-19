@@ -52,9 +52,9 @@ function App() {
   return (
     <>
       <SEO
-        title="Palukuru Charan Kumar Reddy | Portfolio"
-        description="Portfolio of Palukuru Charan Kumar Reddy, a front-end developer proficient in React.js, TypeScript and modern web technologies."
-        keywords="Charan, React, TypeScript, Front-End Developer, Portfolio"
+        title="Palukuru Charan Kumar Reddy | Software Developer"
+        description="Portfolio of Charan Kumar Reddy Palukuru, a Software Developer with ~2.7 years experience building user-friendly and responsive web applications using React, Next.js, and TypeScript."
+        keywords="Software Developer, React, Next.js, TypeScript, Performance Optimization, Bengaluru, Tailwind CSS, Redux Toolkit"
       />
       <Header />
       <div className="relative">
