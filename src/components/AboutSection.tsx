@@ -10,18 +10,15 @@ interface AboutSectionProps {
 
 function AboutSection({ id }: AboutSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
-    const image = imageRef.current;
     const content = contentRef.current;
-
-    if (section && image && content) {
+    if (section && content) {
       const ctx = gsap.context(() => {
-        gsap.fromTo(image,
-          { x: -100, opacity: 0 },
+        gsap.fromTo(content,
+          { y: 40, opacity: 0 },
           {
             scrollTrigger: {
               trigger: section,
@@ -31,37 +28,14 @@ function AboutSection({ id }: AboutSectionProps) {
               markers: false,
               scrub: false
             },
-            x: 0,
+            y: 0,
             opacity: 1,
             duration: 1.2,
             ease: "power2.out"
           }
         );
-
-        const contentElements = content.children || [];
-        gsap.fromTo(contentElements,
-          { y: 50, opacity: 0 },
-          {
-            scrollTrigger: {
-              trigger: content,
-              start: "top 75%",
-              end: "top 25%",
-              toggleActions: "play none none reverse",
-              markers: false,
-              scrub: false
-            },
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            stagger: 0.2,
-            ease: "power2.out"
-          }
-        );
       });
-
-      return () => {
-        ctx.revert();
-      };
+      return () => ctx.revert();
     }
   }, []);
 
@@ -69,85 +43,109 @@ function AboutSection({ id }: AboutSectionProps) {
     <section
       id={id}
       ref={sectionRef}
-      className="min-h-screen bg-black flex items-center py-20"
+      className="py-20 md:py-28 w-full border-t border-white/5 relative"
     >
-      <div className="loader absolute inset-0 z-50" />
-      <div className="background-gradient absolute inset-0 opacity-50" />
-      <div className="absolute inset-0">
-        {[...Array(50)].map((_, i) => (
-          <div
-            key={i}
-            className="particle absolute w-1 h-1 bg-white rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-          />
-        ))}
-      </div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div ref={imageRef} className="relative">
-            <div className="relative rounded-lg overflow-hidden">
-              <img
-                src="/CharanImage.jpg"
-                alt="Photo of Charan Kumar Reddy Palukuru"
-                className="w-full h-[500px] object-cover"
-              />
-              <div className="absolute inset-0 bg-purple-600/20 mix-blend-overlay" />
-            </div>
-            <div className="absolute -bottom-6 -right-6 w-64 h-64 bg-purple-600/20 rounded-full blur-3xl" />
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <h2 className="text-5xl md:text-6xl font-bold text-primary mb-16 text-center">
+          About
+        </h2>
+        
+        <div ref={contentRef} className="space-y-16">
+          {/* Hero Statement */}
+          <div className="text-center max-w-4xl mx-auto glass-effect rounded-2xl p-8 mb-8">
+            <h3 className="text-2xl md:text-4xl font-bold text-white mb-6 leading-tight">
+              I build modern web applications that users love
+            </h3>
+            <p className="text-lg md:text-xl text-white/70 leading-relaxed mb-8">
+              Frontend developer with <span className="text-primary font-semibold">2.7 years</span> of experience creating 
+              high-performance React applications. I focus on clean code, exceptional user experiences, and measurable results.
+            </p>
           </div>
 
-          <div ref={contentRef} className="space-y-8">
-            <h2 className="text-5xl font-bold text-white">
-              Software Developer | React & Next.js Specialist
-            </h2>
+          {/* Key Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+            <div className="text-center group glass-effect rounded-xl p-6 hover:glass-effect-strong transition-all duration-300 card-hover-lift glass-card-primary card-pattern-dots">
+              <div className="bg-primary/10 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center group-hover:bg-primary/20 transition-all duration-300 subtle-border">
+                <span className="text-2xl">⚡</span>
+              </div>
+              <div className="text-2xl md:text-3xl font-bold text-primary mb-1">25%</div>
+              <div className="text-sm text-white/60">Faster Load Times</div>
+            </div>
+            <div className="text-center group glass-effect rounded-xl p-6 hover:glass-effect-strong transition-all duration-300 card-hover-lift glass-card-secondary card-pattern-waves">
+              <div className="bg-primary/10 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center group-hover:bg-primary/20 transition-all duration-300 subtle-border">
+                <span className="text-2xl">♿</span>
+              </div>
+              <div className="text-2xl md:text-3xl font-bold text-primary mb-1">96+</div>
+              <div className="text-sm text-white/60">Accessibility Score</div>
+            </div>
+            <div className="text-center group glass-effect rounded-xl p-6 hover:glass-effect-strong transition-all duration-300 card-hover-lift glass-card-primary card-pattern-grid">
+              <div className="bg-primary/10 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center group-hover:bg-primary/20 transition-all duration-300 subtle-border">
+                <span className="text-2xl">💰</span>
+              </div>
+              <div className="text-2xl md:text-3xl font-bold text-primary mb-1">15%</div>
+              <div className="text-sm text-white/60">Revenue Increase</div>
+            </div>
+            <div className="text-center group glass-effect rounded-xl p-6 hover:glass-effect-strong transition-all duration-300 card-hover-lift glass-card-secondary card-pattern-dots">
+              <div className="bg-primary/10 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center group-hover:bg-primary/20 transition-all duration-300 subtle-border">
+                <span className="text-2xl">🧪</span>
+              </div>
+              <div className="text-2xl md:text-3xl font-bold text-primary mb-1">20%</div>
+              <div className="text-sm text-white/60">Fewer Bugs</div>
+            </div>
+          </div>
 
-            <p className="text-xl text-purple-200/80 leading-relaxed">
-              An enterprising professional with <span className="font-bold">~2.7 years</span> of experience in the tech industry, focusing on frontend development. Dedicated to delivering user-friendly and responsive web applications that enhance user interaction. Experienced in building SEO-optimized, SSR web applications using Next.js with measurable outcomes: Lighthouse accessibility <span className="font-bold">96+</span>, <span className="font-bold">~25%</span> LCP reduction, <span className="font-bold">~20%</span> regression reduction via unit/component tests, and <span className="font-bold">+15%</span> payment success rate.
-            </p>
-
-            <p className="text-lg text-gray-300 italic">
-              "Aiming to express potential and deliver results through challenging assignments as a Software Developer with an esteemed organization."
-            </p>
-
-            <div className="space-y-4">
+          {/* Skills Grid */}
+          <div className="max-w-5xl mx-auto">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 text-center">
+              Technologies I Work With
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               {[
-                { label: "Experience", value: "2.7 Years" },
-                { label: "Location", value: "Bengaluru, Karnataka" },
-                { label: "Education", value: "B.Tech, Electronics Communications Engineering" },
-                { label: "Key Skills", value: "React.js, Next.js, TypeScript, Redux Toolkit" }
-              ].map((item, index) => (
+                { name: "React", icon: "⚛️", proficiency: "Expert" },
+                { name: "TypeScript", icon: "📘", proficiency: "Advanced" },
+                { name: "Next.js", icon: "▲", proficiency: "Advanced" },
+                { name: "Tailwind", icon: "🎨", proficiency: "Expert" },
+                { name: "Node.js", icon: "🟢", proficiency: "Intermediate" },
+              ].map((tech, index) => (
                 <div
                   key={index}
-                  className="flex items-center space-x-4 text-purple-200/80"
+                  className="bg-white/5 backdrop-blur-sm rounded-xl p-4 text-center border border-white/10 hover:border-primary/30 hover:bg-white/10 transition-all duration-300 group"
                 >
-                  <span className="text-lg font-medium w-40">{item.label}</span>
-                  <span className="text-2xl font-bold text-white">{item.value}</span>
+                  <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">
+                    {tech.icon}
+                  </div>
+                  <div className="text-white font-medium mb-1">{tech.name}</div>
+                  <div className="text-xs text-white/50">{tech.proficiency}</div>
                 </div>
               ))}
             </div>
+          </div>
 
-            <div className="space-y-4">
-              <h3 className="text-3xl font-semibold text-white">Core Competencies</h3>
-              <ul className="list-disc list-inside text-purple-200/80 grid grid-cols-1 md:grid-cols-2 gap-2">
-                <li>🚀 Front-end/User Experience Design</li>
-                <li>⚡ Performance Optimization</li>
-                <li>🔄 Agile Methodologies</li>
-                <li>🧩 Component-Based Architecture</li>
-                <li>📱 Responsive Web Design</li>
-                <li>🌐 Cross-Browser Compatibility</li>
-                <li>♿ Accessibility Standards</li>
-                <li>🔌 API Integration</li>
-                <li>🔄 Continuous Integration/Deployment (CI/CD)</li>
-                <li>🔄 Software Development Lifecycle</li>
-              </ul>
+          {/* Personal Touch */}
+          <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 max-w-4xl mx-auto border border-white/10">
+            <div className="text-center">
+              <h3 className="text-xl md:text-2xl font-bold text-white mb-4">Based in Bengaluru</h3>
+              <p className="text-white/70 leading-relaxed mb-6">
+                B.Tech in Electronics & Communication Engineering. Passionate about creating digital experiences 
+                that make a difference. When I'm not coding, you'll find me exploring new technologies or 
+                contributing to open-source projects.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4 text-sm text-white/60">
+                <span className="flex items-center gap-2">
+                  <span className="w-2 h-2 bg-primary rounded-full"></span>
+                  Available for new opportunities
+                </span>
+                <span className="flex items-center gap-2">
+                  <span className="w-2 h-2 bg-green-400 rounded-full"></span>
+                  Open to remote work
+                </span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
+  // ...existing code...
   );
 }
 

@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react';
+import PortfolioImg from '../assets/Portfolio.png';
+import PokemonAppImg from '../assets/PokemonApp.png';
+import TaskPlannerImg from '../assets/TaskPlanner.png';
 
 export interface Project {
   title: string;
@@ -21,32 +24,30 @@ interface ProjectsSectionProps {
 
 const defaultProjects: Project[] = [
   {
-    title: 'Job Seeker & Recruiter Platform (iqua.ai)',
-    description: 'Built landing pages and dashboards using React.js, Redux Toolkit, and Tailwind CSS. Integrated Stripe and Razorpay in Next.js, boosting payment success by 15%.',
-    url: 'https://iqua.ai',
-    image: '/CharanLogo.png',
-    technologies: ['React.js', 'Redux Toolkit', 'Tailwind CSS', 'Next.js', 'Stripe', 'Razorpay']
+    title: 'Personal Portfolio',
+    description: 'Created a portfolio with React.js, TypeScript, Vite, and GSAP. Added dark mode and dynamic metadata for improved SEO.',
+    url: 'https://charankumarreddypalukuru.vercel.app/',
+  image: PortfolioImg,
+    technologies: ['React', 'TypeScript', 'GSAP', 'Tailwind CSS', 'Vite']
   },
   {
     title: 'Pokemon Discovery App',
     description: 'Modern React app with infinite scrolling, collection management, and drag & drop functionality. Built with React 19, TypeScript, Vite, TanStack Query, and Tailwind CSS.',
     url: 'https://pokemondiscoveryapp.vercel.app/',
-    image: '/PCKR.png',
+  image: PokemonAppImg,
     technologies: ['React 19', 'TypeScript', 'Vite', 'TanStack Query', 'Tailwind CSS', 'DND Kit']
   },
   {
-    title: 'Personal Portfolio',
-    description: 'Created a portfolio with React.js, TypeScript, Vite, and GSAP. Added dark mode and dynamic metadata for improved SEO.',
-    url: 'https://charankumarreddypalukuru.vercel.app/',
-    image: '/CharanLogo.png',
-    technologies: ['React', 'TypeScript', 'GSAP', 'Tailwind CSS', 'Vite']
-  },
-  {
-    title: 'EV Dashboard',
-    description: 'Dashboard to monitor and visualise electric vehicle data.',
-    url: 'https://ev-dashboard-and-analysis.vercel.app',
-    image: '/evDashboard.png', // Added dashboard image
-    technologies: ['React', 'ChartJS', 'CSS']
+    title: 'Month View Task Planner',
+    description: 'A simple and modern web application for planning and managing tasks in a monthly calendar view. Features include month view calendar, add/edit/delete tasks, filter by category or status, responsive UI, and modal for task details.',
+    url: 'https://month-view-task-planner-app.vercel.app/',
+  image: TaskPlannerImg,
+    technologies: [
+      'React',
+      'TypeScript',
+      'Vite',
+      'Tailwind CSS'
+    ]
   },
 ];
 
@@ -88,11 +89,11 @@ function ProjectsSection({ className }: ProjectsSectionProps) {
 
   return (
     <section className={`py-20 ${className}`} id="projects">
-      <div className="max-w-6xl mx-auto px-4">
+      <div className="max-w-6xl mx-auto px-4 relative z-10">
         <h2 className="text-5xl font-bold text-primary mb-4 text-center">
           Projects
         </h2>
-        <p className="text-white/70 text-center mb-12 max-w-2xl mx-auto">
+        <p className="text-white/70 text-center mb-12 max-w-2xl mx-auto text-lg">
           Showcasing my recent work with modern web technologies and best practices
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -102,7 +103,11 @@ function ProjectsSection({ className }: ProjectsSectionProps) {
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group block bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden hover:bg-white/10 transition-all border border-white/5 hover:border-white/20 shadow-lg hover:shadow-xl"
+              className={`group block glass-effect rounded-xl overflow-hidden hover:glass-effect-strong transition-all duration-300 subtle-border hover:shadow-subtle-glow card-hover-lift ${
+                index % 3 === 0 ? 'card-pattern-dots' : 
+                index % 3 === 1 ? 'card-pattern-waves' : 
+                'card-pattern-grid'
+              }`}
             >
               {project.image && (
                 <div className="relative overflow-hidden h-48">

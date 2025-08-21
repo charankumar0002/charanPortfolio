@@ -1,14 +1,15 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { TextPlugin } from "gsap/TextPlugin";
+import CharanImage2 from '../assets/CharanImage2.jpg';
 
 
 
 const techStack = [
-  { icon: "⚛️", name: "React 18", level: "Advanced" },
-  { icon: "📱", name: "Next.js 14", level: "Advanced" },
-  { icon: "🚀", name: "TypeScript", level: "Advanced" },
-  { icon: "🎨", name: "Tailwind CSS", level: "Expert" },
+  { icon: "⚛️", name: "React 18", level: "Advanced", percentage: 95 },
+  { icon: "📱", name: "Next.js 14", level: "Advanced", percentage: 88 },
+  { icon: "🚀", name: "TypeScript", level: "Advanced", percentage: 90 },
+  { icon: "🎨", name: "Tailwind CSS", level: "Expert", percentage: 95 },
 ];
 
 gsap.registerPlugin(TextPlugin);
@@ -61,6 +62,29 @@ function HeroSection({ onExploreClick }: HeroSectionProps) {
           .to(".tech-stack-item", { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "back.out(1.2)" }, "-=0.4")
           .to(".cta-button", { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "back.out(1.2)" }, "-=0.2")
           .to(".social-link", { opacity: 1, y: 0, duration: 0.4, stagger: 0.1 }, "-=0.3");
+
+        // Animate tech stack progress bars
+        gsap.fromTo(
+          ".tech-progress",
+          { width: "0%" },
+          {
+            width: (_, element) => element.getAttribute('data-width'),
+            duration: 1.5,
+            ease: "power2.out",
+            stagger: 0.1,
+            delay: 2.5, // After the main timeline
+          }
+        );
+
+        // Add floating animation to tech stack icons
+        gsap.to(".tech-stack-item .floating-icon", {
+          y: -5,
+          duration: 2,
+          ease: "power2.inOut",
+          repeat: -1,
+          yoyo: true,
+          stagger: 0.3
+        });
       });
 
       mm.add("(max-width: 767px)", () => {
@@ -73,6 +97,29 @@ function HeroSection({ onExploreClick }: HeroSectionProps) {
           .to(".tech-stack-item", { opacity: 1, y: 0, duration: 0.5, stagger: 0.1 }, "-=0.2")
           .to(".cta-button", { opacity: 1, y: 0, duration: 0.5, stagger: 0.1 }, "-=0.2")
           .to(".social-link", { opacity: 1, y: 0, duration: 0.3, stagger: 0.1 }, "-=0.2");
+
+        // Animate tech stack progress bars for mobile
+        gsap.fromTo(
+          ".tech-progress",
+          { width: "0%" },
+          {
+            width: (_, element) => element.getAttribute('data-width'),
+            duration: 1.2,
+            ease: "power2.out",
+            stagger: 0.1,
+            delay: 2, // After the main timeline
+          }
+        );
+
+        // Add floating animation to tech stack icons for mobile
+        gsap.to(".tech-stack-item .floating-icon", {
+          y: -5,
+          duration: 2,
+          ease: "power2.inOut",
+          repeat: -1,
+          yoyo: true,
+          stagger: 0.3
+        });
       });
 
       gsap.to(".particle", {
@@ -141,11 +188,27 @@ function HeroSection({ onExploreClick }: HeroSectionProps) {
           />
         ))}
       </div>
-      <div className="relative z-10 min-h-screen flex items-center justify-center px-4 py-12 md:py-0">
+      <div className="relative z-10 min-h-screen flex items-center justify-center px-8 md:px-16 lg:px-24 py-12 md:py-0">
         <div className="max-w-6xl mx-auto w-full">
+          {/* Image Row */}
+          <div className="flex justify-center mb-8">
+            <div className="relative flex-shrink-0">
+              <img
+                src={CharanImage2}
+                alt="Palukuru Charan Kumar Reddy"
+                className="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-purple-400 shadow-xl object-cover bg-black/40 hover:scale-105 transition-transform duration-300"
+                style={{ boxShadow: '0 8px 32px 0 rgba(128,0,128,0.25)' }}
+              />
+              <span className="absolute -bottom-2 -right-2 w-6 h-6 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full border-2 border-black"></span>
+            </div>
+          </div>
+          
+          {/* Name Row - Full Width */}
           <div ref={nameRef} className="text-center mb-8 md:mb-12">
-            <h1 className="text-4xl md:text-6xl font-bold text-white tracking-tighter mb-4 leading-tight">
-              Palukuru Charan Kumar Reddy
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white tracking-tight mb-4 leading-tight">
+              <span className="inline-block">Palukuru </span>
+              <span className="inline-block text-primary">Charan Kumar </span>
+              <span className="inline-block">Reddy</span>
             </h1>
             <div className="flex flex-wrap items-center justify-center gap-2 md:gap-4 text-white/80">
               <span className="hero-subtitle">📍 Bangalore, India</span>
@@ -165,16 +228,32 @@ function HeroSection({ onExploreClick }: HeroSectionProps) {
             {techStack.map((tech, index) => (
               <div
                 key={index}
-                className="tech-stack-item relative bg-white/5 backdrop-blur-sm rounded-xl p-4 text-center hover:bg-white/10 transition-all transform hover:scale-105 duration-300"
+                className="tech-stack-item relative bg-white/5 backdrop-blur-sm rounded-xl p-4 text-center hover:bg-white/10 transition-all transform hover:scale-105 duration-300 group"
               >
-                <span className="text-2xl md:text-3xl mb-2 block">{tech.icon}</span>
-                <h3 className="text-white font-medium text-sm md:text-base">{tech.name}</h3>
-                <div className="absolute -bottom-2 left-0 w-full h-1 bg-white/10 rounded">
-                  <div
-                    className="h-full bg-primary rounded transition-all duration-300"
-                    style={{ width: tech.level === "Expert" ? "90%" : tech.level === "Advanced" ? "75%" : "60%" }}
-                  />
+                <div className="floating-icon text-2xl md:text-3xl mb-2 block animate-gentle-bounce group-hover:animate-none group-hover:scale-110 transition-transform duration-300">
+                  {tech.icon}
                 </div>
+                <h3 className="text-white font-medium text-sm md:text-base mb-3 group-hover:text-primary transition-colors duration-300">
+                  {tech.name}
+                </h3>
+                
+                {/* Enhanced Progress Bar */}
+                <div className="mb-2">
+                  <div className="flex justify-between items-center mb-1">
+                    <span className="text-xs text-white/60">{tech.level}</span>
+                    <span className="text-xs text-primary font-semibold">{tech.percentage}%</span>
+                  </div>
+                  <div className="w-full bg-white/10 rounded-full h-1.5 overflow-hidden">
+                    <div
+                      className="tech-progress h-full bg-gradient-to-r from-primary to-purple-500 rounded-full transition-all duration-500 group-hover:shadow-blue-glow progress-shimmer"
+                      data-width={`${tech.percentage}%`}
+                      style={{ width: '0%' }}
+                    />
+                  </div>
+                </div>
+                
+                {/* Hover Glow Effect */}
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/20 to-purple-500/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur-sm"></div>
               </div>
             ))}
           </div>

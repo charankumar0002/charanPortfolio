@@ -80,7 +80,7 @@ function FooterSection({ id }: FooterProps) {
                 </svg>
               </a>
             </div>
-            <p className="mt-6 text-gray-400">&copy; {new Date().getFullYear()} Charan. All rights reserved.</p>
+            <p className="mt-6 text-gray-400">&copy; {new Date().getFullYear()} Palukuru Charan Kumar Reddy. All rights reserved.</p>
           </div>
         </div>
       </div>

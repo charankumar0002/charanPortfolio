@@ -122,36 +122,38 @@ function ExperienceSection({ id }: ExperienceSectionProps) {
   }, []);
 
   return (
-    <section id={id} ref={sectionRef} className="min-h-screen bg-black py-20 text-white">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section id={id} ref={sectionRef} className="min-h-screen py-20 text-white relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         <h2 className="text-5xl font-extrabold text-center text-primary mb-16 tracking-wide">
           Experience
         </h2>
         <div className="relative">
-          <div className="absolute left-4 top-0 w-1 h-full bg-white/20 rounded-full" />
-          <div ref={progressRef} className="absolute left-4 top-0 w-1 h-full bg-primary rounded-full transform origin-top scale-y-0" />
+          <div className="absolute left-4 top-0 w-1 h-full bg-white/5 rounded-full" />
+          <div ref={progressRef} className="absolute left-4 top-0 w-1 h-full bg-gradient-to-b from-primary to-primary rounded-full transform origin-top scale-y-0" />
           <div className="flex flex-col space-y-12 pl-10">
             {experiences.map((exp, index) => (
               <div
                 key={index}
-                className={`experience-item relative bg-gray-900 p-8 rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 hover:shadow-2xl transition-transform duration-500 flex flex-col md:flex-row ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}
+                className={`experience-item relative glass-effect p-8 rounded-xl subtle-border overflow-hidden hover:shadow-subtle-glow transition-all duration-500 flex flex-col md:flex-row card-hover-lift ${
+                  index % 2 === 0 ? 'glass-card-primary card-pattern-dots' : 'glass-card-secondary card-pattern-waves'
+                }`}
               >
                 <div className="flex-shrink-0 flex flex-col items-center justify-center md:w-48 md:mr-8 md:ml-0 mb-6 md:mb-0">
-                  <img src={exp.logo || '/vite.svg'} alt={exp.company} className="w-20 h-20 object-contain rounded-full border-2 border-primary bg-white mb-2" />
-                  <span className={`px-3 py-1 text-xs font-semibold rounded-full ${exp.type === 'Full-time' ? 'bg-green-600/80 text-white' : 'bg-blue-600/80 text-white'}`}>{exp.type}</span>
+                  <img src={exp.logo || '/vite.svg'} alt={exp.company} className="w-20 h-20 object-contain rounded-full border border-white/20 bg-white mb-2" />
+                  <span className={`px-3 py-1 text-xs font-semibold rounded-full ${exp.type === 'Full-time' ? 'bg-primary/20 text-primary border border-primary/30' : 'bg-primary/20 text-primary border border-primary/30'}`}>{exp.type}</span>
                 </div>
                 <div className="flex-1">
-                  <div className="experience-bullet absolute -left-6 top-5 w-5 h-5 bg-white/20 rounded-full -translate-x-1/2"></div>
+                  <div className="experience-bullet absolute -left-6 top-5 w-5 h-5 bg-white/10 rounded-full -translate-x-1/2 border border-white/20"></div>
                   <h3 className="text-2xl font-bold text-white mb-2">{exp.role} @ {exp.company}</h3>
-                  <p className="text-primary/80 text-lg mb-4">{exp.duration}</p>
+                  <p className="text-primary text-lg mb-4 font-medium">{exp.duration}</p>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {exp.techStack && exp.techStack.map((tech, i) => (
-                      <span key={i} className="bg-primary/20 text-primary px-2 py-1 rounded text-xs font-medium">{tech}</span>
+                      <span key={i} className="bg-primary/10 text-white/80 px-2 py-1 rounded text-xs font-medium subtle-border hover:bg-primary/20 transition-colors duration-200">{tech}</span>
                     ))}
                   </div>
-                  <ul className="list-disc list-inside text-gray-300">
+                  <ul className="list-disc list-inside text-white/70 space-y-2">
                     {exp.description.map((point, i) => (
-                      <li key={i} className="mb-2">{point}</li>
+                      <li key={i} className="leading-relaxed hover:text-white/90 transition-colors duration-200">{point}</li>
                     ))}
                   </ul>
                 </div>
