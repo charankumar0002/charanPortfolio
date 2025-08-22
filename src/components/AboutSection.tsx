@@ -3,7 +3,6 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import { AnimatedCounter } from './AnimatedCounter';
-import { ScrollProgress } from './SectionProgress';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -90,24 +89,31 @@ function AboutSection({ id }: AboutSectionProps) {
     <section
       id={id}
       ref={sectionRef}
-      className="min-h-screen flex items-center py-8 sm:py-12 md:py-16 relative overflow-hidden"
+      className="min-h-screen flex items-center py-8 sm:py-12 md:py-16 relative overflow-hidden bg-gradient-to-br from-gray-900/50 to-black/30"
     >
-      <ScrollProgress targetId={id} />
-      
-      {/* Animated background elements */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-primary/10 rounded-full blur-3xl animate-subtle-float"></div>
-        <div className="absolute bottom-20 right-10 w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl animate-gentle-pulse"></div>
-        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-purple-500/10 rounded-full blur-2xl animate-slow-rotation"></div>
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-20 left-10 w-32 h-32 bg-cyan-400/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-pink-500/20 rounded-full blur-2xl animate-pulse delay-500"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 relative z-10">
-        <h2 
-          ref={titleRef}
-          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-primary mb-6 sm:mb-8 md:mb-12 text-center"
-        >
-          About Me
-        </h2>
+        {/* Enhanced title with decorative elements */}
+        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+          <div className="relative inline-block">
+            <h2 
+              ref={titleRef}
+              className="text-4xl sm:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent mb-4 tracking-wide"
+            >
+              About Me
+            </h2>
+            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full"></div>
+          </div>
+          <p className="text-lg sm:text-xl text-gray-300 mt-6 max-w-2xl mx-auto leading-relaxed">
+            Frontend developer passionate about creating exceptional digital experiences
+          </p>
+        </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-1 gap-6 sm:gap-8 md:gap-12 items-center">
           {/* Content Section - Now takes full width */}
@@ -150,14 +156,17 @@ function AboutSection({ id }: AboutSectionProps) {
           </div>
         </div>
 
-        {/* Stats Section */}
+        {/* Stats Section with enhanced heading */}
         <div 
           ref={statsRef}
           className="mt-8 sm:mt-12 md:mt-16"
         >
-          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4 sm:mb-6 md:mb-8 text-center">
-            Impact & Results
-          </h3>
+          <div className="text-center mb-8 sm:mb-12">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent mb-4">
+              Impact & Results
+            </h3>
+            <div className="w-16 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-500 mx-auto rounded-full"></div>
+          </div>
           <div 
             ref={statsObserverRef}
             className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6"
@@ -189,11 +198,14 @@ function AboutSection({ id }: AboutSectionProps) {
           </div>
         </div>
 
-        {/* Skills Section */}
+        {/* Skills Section with enhanced heading */}
         <div ref={skillsRef} className="mt-8 sm:mt-12 md:mt-16">
-          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4 sm:mb-6 md:mb-8 text-center">
-            Technologies I Work With
-          </h3>
+          <div className="text-center mb-8 sm:mb-12">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent mb-4">
+              Technologies I Work With
+            </h3>
+            <div className="w-16 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-500 mx-auto rounded-full"></div>
+          </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3 md:gap-4">
             {[
               { name: "React", icon: "⚛️", proficiency: "Expert", color: "cyan" },
