@@ -122,41 +122,73 @@ function ExperienceSection({ id }: ExperienceSectionProps) {
   }, []);
 
   return (
-    <section id={id} ref={sectionRef} className="min-h-screen py-20 text-white relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        <h2 className="text-5xl font-extrabold text-center text-primary mb-16 tracking-wide">
+    <section id={id} ref={sectionRef} className="min-h-screen py-12 sm:py-16 lg:py-20 text-white relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-center text-primary mb-8 sm:mb-12 lg:mb-16 tracking-wide">
           Experience
         </h2>
         <div className="relative">
-          <div className="absolute left-4 top-0 w-1 h-full bg-white/5 rounded-full" />
-          <div ref={progressRef} className="absolute left-4 top-0 w-1 h-full bg-gradient-to-b from-primary to-primary rounded-full transform origin-top scale-y-0" />
-          <div className="flex flex-col space-y-12 pl-10">
+          {/* Timeline line - hidden on mobile */}
+          <div className="hidden sm:block absolute left-4 top-0 w-1 h-full bg-white/5 rounded-full" />
+          <div ref={progressRef} className="hidden sm:block absolute left-4 top-0 w-1 h-full bg-gradient-to-b from-primary to-primary rounded-full transform origin-top scale-y-0" />
+          
+          {/* Experience items container */}
+          <div className="flex flex-col space-y-6 sm:space-y-8 lg:space-y-12 sm:pl-10">
             {experiences.map((exp, index) => (
               <div
                 key={index}
-                className={`experience-item relative glass-effect p-8 rounded-xl subtle-border overflow-hidden hover:shadow-subtle-glow transition-all duration-500 flex flex-col md:flex-row card-hover-lift ${
-                  index % 2 === 0 ? 'glass-card-primary card-pattern-dots' : 'glass-card-secondary card-pattern-waves'
-                }`}
+                className="experience-item relative glass-effect p-4 sm:p-6 lg:p-8 rounded-xl subtle-border overflow-hidden transform hover:-translate-y-1 sm:hover:-translate-y-2 hover:shadow-subtle-glow transition-all duration-500 flex flex-col"
               >
-                <div className="flex-shrink-0 flex flex-col items-center justify-center md:w-48 md:mr-8 md:ml-0 mb-6 md:mb-0">
-                  <img src={exp.logo || '/vite.svg'} alt={exp.company} className="w-20 h-20 object-contain rounded-full border border-white/20 bg-white mb-2" />
-                  <span className={`px-3 py-1 text-xs font-semibold rounded-full ${exp.type === 'Full-time' ? 'bg-primary/20 text-primary border border-primary/30' : 'bg-primary/20 text-primary border border-primary/30'}`}>{exp.type}</span>
-                </div>
-                <div className="flex-1">
-                  <div className="experience-bullet absolute -left-6 top-5 w-5 h-5 bg-white/10 rounded-full -translate-x-1/2 border border-white/20"></div>
-                  <h3 className="text-2xl font-bold text-white mb-2">{exp.role} @ {exp.company}</h3>
-                  <p className="text-primary text-lg mb-4 font-medium">{exp.duration}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {exp.techStack && exp.techStack.map((tech, i) => (
-                      <span key={i} className="bg-primary/10 text-white/80 px-2 py-1 rounded text-xs font-medium subtle-border hover:bg-primary/20 transition-colors duration-200">{tech}</span>
-                    ))}
+                {/* Timeline bullet - only visible on larger screens */}
+                <div className="hidden sm:block experience-bullet absolute -left-6 top-8 w-5 h-5 bg-white/10 rounded-full -translate-x-1/2 border border-white/20"></div>
+                
+                {/* Company logo and type */}
+                <div className="flex items-center justify-between mb-4 sm:mb-6">
+                  <div className="flex items-center space-x-3">
+                    <img 
+                      src={exp.logo || '/vite.svg'} 
+                      alt={exp.company} 
+                      className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 object-contain rounded-full border border-white/20 bg-white flex-shrink-0" 
+                    />
+                    <div className="flex flex-col">
+                      <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white leading-tight">
+                        {exp.role}
+                      </h3>
+                      <p className="text-primary/90 text-sm sm:text-base lg:text-lg font-medium">
+                        @ {exp.company}
+                      </p>
+                    </div>
                   </div>
-                  <ul className="list-disc list-inside text-white/70 space-y-2">
-                    {exp.description.map((point, i) => (
-                      <li key={i} className="leading-relaxed hover:text-white/90 transition-colors duration-200">{point}</li>
-                    ))}
-                  </ul>
+                  <span className={`px-2 sm:px-3 py-1 text-xs font-semibold rounded-full bg-primary/20 text-primary border border-primary/30 flex-shrink-0`}>
+                    {exp.type}
+                  </span>
                 </div>
+
+                {/* Duration */}
+                <p className="text-primary text-sm sm:text-base lg:text-lg mb-4 font-medium">
+                  {exp.duration}
+                </p>
+
+                {/* Tech stack */}
+                <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-6">
+                  {exp.techStack && exp.techStack.map((tech, i) => (
+                    <span 
+                      key={i} 
+                      className="bg-primary/10 text-white/80 px-2 sm:px-3 py-1 rounded text-xs sm:text-sm font-medium subtle-border hover:bg-primary/20 transition-colors duration-200"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Description */}
+                <ul className="list-disc list-inside text-white/70 space-y-2 sm:space-y-3 text-sm sm:text-base leading-relaxed">
+                  {exp.description.map((point, i) => (
+                    <li key={i} className="hover:text-white/90 transition-colors duration-200">
+                      {point}
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>

@@ -54,7 +54,7 @@ function ContactPage({ id }: ContactProps) {
   };
 
   return (
-    <section id={id} ref={formRef} className="py-20 px-4 relative overflow-hidden">
+    <section id={id} ref={formRef} className="py-12 sm:py-16 lg:py-20 px-3 sm:px-4 md:px-6 lg:px-8 relative overflow-hidden">
       {/* Subtle dark background elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-gray-900/20 via-transparent to-gray-800/15" />
       
@@ -63,41 +63,41 @@ function ContactPage({ id }: ContactProps) {
       <div className="absolute bottom-16 right-16 w-48 h-48 bg-gradient-to-r from-blue-500/4 to-blue-600/2 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '2s' }} />
       
       <div className="max-w-4xl mx-auto relative z-10">
-        <h2 className="text-5xl font-bold text-primary mb-6 text-center">Get in Touch</h2>
-        <p className="text-white/80 mb-12 text-center text-lg glass-effect rounded-lg p-4 mx-auto max-w-2xl">Looking for a Software Developer who can express potential and deliver results through challenging assignments? Let's connect!</p>
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4 sm:mb-6 text-center">Get in Touch</h2>
+        <p className="text-white/80 mb-8 sm:mb-12 text-center text-sm sm:text-base lg:text-lg glass-effect rounded-lg p-3 sm:p-4 mx-auto max-w-2xl">Looking for a Software Developer who can express potential and deliver results through challenging assignments? Let's connect!</p>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div className="glass-effect p-8 rounded-lg subtle-border">
-            <h3 className="text-2xl font-bold mb-6 text-white">Contact Information</h3>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
+          <div className="glass-effect p-4 sm:p-6 lg:p-8 rounded-lg subtle-border">
+            <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-white">Contact Information</h3>
             
-            <div className="space-y-6">
-              <div className="flex items-start space-x-4 group">
-                <div className="text-primary text-2xl mt-1">📍</div>
+            <div className="space-y-4 sm:space-y-6">
+              <div className="flex items-start space-x-3 sm:space-x-4 group">
+                <div className="text-primary text-xl sm:text-2xl mt-1 flex-shrink-0">📍</div>
                 <div>
-                  <h4 className="font-semibold text-lg text-white group-hover:text-primary transition-colors duration-200">Location</h4>
-                  <p className="text-white/70">Bengaluru, Karnataka, India</p>
+                  <h4 className="font-semibold text-base sm:text-lg text-white group-hover:text-primary transition-colors duration-200">Location</h4>
+                  <p className="text-white/70 text-sm sm:text-base">Bengaluru, Karnataka, India</p>
                 </div>
               </div>
               
-              <div className="flex items-start space-x-4 group">
-                <div className="text-primary text-2xl mt-1">📱</div>
+              <div className="flex items-start space-x-3 sm:space-x-4 group">
+                <div className="text-primary text-xl sm:text-2xl mt-1 flex-shrink-0">📱</div>
                 <div>
-                  <h4 className="font-semibold text-lg text-white group-hover:text-primary transition-colors duration-200">Phone</h4>
-                                    <p className="text-white/70">+91 7893346088</p>
+                  <h4 className="font-semibold text-base sm:text-lg text-white group-hover:text-primary transition-colors duration-200">Phone</h4>
+                  <p className="text-white/70 text-sm sm:text-base">+91 7893346088</p>
                 </div>
               </div>
               
-              <div className="flex items-start space-x-4 group">
-                <div className="text-primary text-2xl mt-1">📧</div>
+              <div className="flex items-start space-x-3 sm:space-x-4 group">
+                <div className="text-primary text-xl sm:text-2xl mt-1 flex-shrink-0">📧</div>
                 <div>
-                  <h4 className="font-semibold text-lg text-white group-hover:text-primary transition-colors duration-200">Email</h4>
-                  <a href="mailto:charanpalukuru002@gmail.com" className="text-primary hover:text-primary-light transition-colors duration-200">charanpalukuru002@gmail.com</a>
+                  <h4 className="font-semibold text-base sm:text-lg text-white group-hover:text-primary transition-colors duration-200">Email</h4>
+                  <a href="mailto:charanpalukuru002@gmail.com" className="text-primary hover:text-primary-light transition-colors duration-200 text-sm sm:text-base break-all">charanpalukuru002@gmail.com</a>
                 </div>
               </div>
               
-              <div className="pt-4">
-                <h4 className="font-semibold text-lg mb-3 text-white">Social Profiles</h4>
-                <div className="flex space-x-4">
+              <div className="pt-3 sm:pt-4">
+                <h4 className="font-semibold text-base sm:text-lg mb-2 sm:mb-3 text-white">Social Profiles</h4>
+                <div className="flex space-x-3 sm:space-x-4">
                   <a href="https://www.linkedin.com/in/charankumarreddypalukuru/" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 shadow-blue-glow">
                     <span className="sr-only">LinkedIn</span>
                     <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -115,7 +115,7 @@ function ContactPage({ id }: ContactProps) {
             </div>
           </div>
           
-          <form onSubmit={handleSubmit} className="glass-effect p-8 rounded-lg subtle-border card-hover-lift card-pattern-dots hover:shadow-blue-glow">
+          <form onSubmit={handleSubmit} className="glass-effect p-8 rounded-lg subtle-border">
             <h3 className="text-2xl font-bold mb-6">Send a Message</h3>
             <div className="mb-4">
               <input

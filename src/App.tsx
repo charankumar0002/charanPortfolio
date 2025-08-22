@@ -63,7 +63,7 @@ function App() {
       <ParticleSystem />
       <InteractiveShapes />
       <Header />
-      <div className="relative">
+      <div className="relative overflow-x-hidden">
         <ScrollProgress />
         <CustomCursor />
         <EnhancedHeroSection onExploreClick={scrollToAbout} />
