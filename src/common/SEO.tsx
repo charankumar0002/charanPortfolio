@@ -8,7 +8,13 @@ interface SEOProps {
   url?: string;
 }
 
-export default function SEO({ title, description, keywords, image = '/CharanImage.jpg', url = 'https://charan-portfolio.com' }: SEOProps) {
+export default function SEO({ 
+  title, 
+  description, 
+  keywords, 
+  image = '/CharanImage.jpg', 
+  url = 'https://charankumarreddypalukuru.vercel.app' 
+}: SEOProps) {
   return (
     <Helmet>
       <title>{title}</title>

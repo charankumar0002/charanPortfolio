@@ -1,14 +1,15 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { TextPlugin } from "gsap/TextPlugin";
+import CharanImage2 from '../assets/CharanImage2.jpg';
 
 
 
 const techStack = [
-  { icon: "⚛️", name: "React", level: "Advanced" },
-  { icon: "📱", name: "Next.js", level: "Advanced" },
-  { icon: "🎨", name: "Tailwind", level: "Expert" },
+  { icon: "⚛️", name: "React 18", level: "Advanced" },
+  { icon: "📱", name: "Next.js 14", level: "Advanced" },
   { icon: "🚀", name: "TypeScript", level: "Advanced" },
+  { icon: "🎨", name: "Tailwind CSS", level: "Expert" },
 ];
 
 gsap.registerPlugin(TextPlugin);
@@ -141,24 +142,40 @@ function HeroSection({ onExploreClick }: HeroSectionProps) {
           />
         ))}
       </div>
-      <div className="relative z-10 min-h-screen flex items-center justify-center px-4 py-12 md:py-0">
+      <div className="relative z-10 min-h-screen flex items-center justify-center px-8 md:px-16 lg:px-24 py-12 md:py-0">
         <div className="max-w-6xl mx-auto w-full">
+          {/* Image Row */}
+          <div className="flex justify-center mb-8">
+            <div className="relative flex-shrink-0">
+              <img
+                src={CharanImage2}
+                alt="Palukuru Charan Kumar Reddy"
+                className="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-purple-400 shadow-xl object-cover bg-black/40 hover:scale-105 transition-transform duration-300"
+                style={{ boxShadow: '0 8px 32px 0 rgba(128,0,128,0.25)' }}
+              />
+              <span className="absolute -bottom-2 -right-2 w-6 h-6 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full border-2 border-black"></span>
+            </div>
+          </div>
+          
+          {/* Name Row - Full Width */}
           <div ref={nameRef} className="text-center mb-8 md:mb-12">
-            <h1 className="text-4xl md:text-6xl font-bold text-white tracking-tighter mb-4 leading-tight">
-              Palukuru Charan Kumar Reddy
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white tracking-tight mb-4 leading-tight">
+              <span className="inline-block">Palukuru </span>
+              <span className="inline-block text-primary">Charan Kumar </span>
+              <span className="inline-block">Reddy</span>
             </h1>
             <div className="flex flex-wrap items-center justify-center gap-2 md:gap-4 text-white/80">
               <span className="hero-subtitle">📍 Bangalore, India</span>
               <span className="hero-subtitle hidden md:inline">•</span>
-              <span className="hero-subtitle">Front End Developer</span>
+              <span className="hero-subtitle">Software Developer</span>
             </div>
           </div>
           <div ref={titleRef} className="text-center mt-6 md:mt-8 max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-light text-white/90 mb-4 md:mb-6">
-              Front End Developer
+              Software Developer
             </h2>
             <p className="hero-description text-base md:text-lg text-white/70 leading-relaxed px-4">
-              Transforming ideas into elegant digital experiences through code and creativity. Specialized in building responsive, interactive web applications.
+              An enterprising professional aiming to express potential and deliver results through challenging assignments in Software Development. Specialized in React.js and Next.js for creating user-friendly and responsive web applications.
             </p>
           </div>
           <div className="mt-8 md:mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-3xl mx-auto px-4">

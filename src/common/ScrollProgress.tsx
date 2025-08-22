@@ -13,17 +13,23 @@ const ScrollProgress = () => {
         transformOrigin: "left center"
       });
   
-      // Progress animation
-      const progressAnim = gsap.to(progressBarRef.current, {
-        scaleX: 1,
-        ease: "none",
-        scrollTrigger: {
-          trigger: document.documentElement,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 0.3,
-        },
-      });
+      // More accurate progress calculation
+      const updateProgress = () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = scrollTop / docHeight;
+        
+        gsap.set(progressBarRef.current, {
+          scaleX: Math.min(Math.max(scrollPercent, 0), 1)
+        });
+      };
+
+      // Initial call
+      updateProgress();
+
+      // Add scroll listener for more accurate updates
+      window.addEventListener('scroll', updateProgress);
+      window.addEventListener('resize', updateProgress);
   
       // Entrance animation
       gsap.from(progressRef.current, {
@@ -35,7 +41,8 @@ const ScrollProgress = () => {
       });
   
       return () => {
-        progressAnim.kill();
+        window.removeEventListener('scroll', updateProgress);
+        window.removeEventListener('resize', updateProgress);
       };
     }
   }, []);
@@ -43,13 +50,19 @@ const ScrollProgress = () => {
   return (
     <div
       ref={progressRef}
-      className="fixed top-0 left-0 w-full h-1 bg-white/10 z-50"
+      className="fixed top-0 left-0 w-full h-2 bg-gray-900/50 backdrop-blur-sm z-50 border-b border-purple-500/20"
       aria-label="Scroll progress"
     >
       <div
         ref={progressBarRef}
-        className="h-full bg-gradient-to-r from-purple-500 to-indigo-500"
-      />
+        className="h-full bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 relative"
+        style={{
+          boxShadow: '0 2px 15px rgba(168, 85, 247, 0.6), 0 0 30px rgba(6, 182, 212, 0.3)'
+        }}
+      >
+        {/* Add a subtle animated glow effect */}
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 opacity-50 blur-sm"></div>
+      </div>
     </div>
   );
 };

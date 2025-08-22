@@ -4,7 +4,10 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin"; // ✅ Import ScrollToPlugin
 import AboutSection from "./components/AboutSection";
 import CustomCursor from "./common/CustomCursor";
-import HeroSection from "./components/HeroSection";
+import EnhancedHeroSection from "./components/EnhancedHeroSection";
+import AnimatedBackground from "./components/AnimatedBackground";
+import ParticleSystem from "./components/ParticleSystem";
+import InteractiveShapes from "./components/InteractiveShapes";
 import ScrollProgress from "./common/ScrollProgress";
 import Skills from "./components/Skills";
 
@@ -52,15 +55,18 @@ function App() {
   return (
     <>
       <SEO
-        title="Palukuru Charan Kumar Reddy | Portfolio"
-        description="Portfolio of Palukuru Charan Kumar Reddy, a front-end developer proficient in React.js, TypeScript and modern web technologies."
-        keywords="Charan, React, TypeScript, Front-End Developer, Portfolio"
+        title="Palukuru Charan Kumar Reddy | Software Developer"
+        description="Portfolio of Palukuru Charan Kumar Reddy, a Software Developer with ~2.7 years experience building user-friendly and responsive web applications using React, Next.js, and TypeScript."
+        keywords="Software Developer, React, Next.js, TypeScript, Performance Optimization, Bengaluru, Tailwind CSS, Redux Toolkit"
       />
+      <AnimatedBackground />
+      <ParticleSystem />
+      <InteractiveShapes />
       <Header />
-      <div className="relative">
+      <div className="relative overflow-x-hidden">
         <ScrollProgress />
         <CustomCursor />
-        <HeroSection onExploreClick={scrollToAbout} />
+        <EnhancedHeroSection onExploreClick={scrollToAbout} />
         <AboutSection id="about"  />
         <WorkExperience id="experience"/>
         <ProjectsSection />
