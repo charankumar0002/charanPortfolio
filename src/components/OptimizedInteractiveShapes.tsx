@@ -87,8 +87,8 @@ const OptimizedInteractiveShapes = () => {
     });
 
     // Optimized mouse move handler with throttling
-    let throttleTimer: NodeJS.Timeout | null = null;
-    let interactionTimer: NodeJS.Timeout | null = null;
+    let throttleTimer: ReturnType<typeof setTimeout> | null = null;
+    let interactionTimer: ReturnType<typeof setTimeout> | null = null;
 
     const handleMouseMove = (e: MouseEvent) => {
       mouseRef.current = { x: e.clientX, y: e.clientY };

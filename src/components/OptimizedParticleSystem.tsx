@@ -1,5 +1,4 @@
 import { useEffect, useRef, useCallback } from 'react';
-import gsap from 'gsap';
 
 interface Particle {
   x: number;
@@ -111,7 +110,7 @@ const OptimizedParticleSystem = () => {
     animationRef.current = requestAnimationFrame(animate);
 
     // Throttled mouse move listener
-    let throttleTimer: NodeJS.Timeout;
+    let throttleTimer: ReturnType<typeof setTimeout> | null = null;
     const handleMouseMove = (e: MouseEvent) => {
       if (throttleTimer) return;
       throttleTimer = setTimeout(() => {
