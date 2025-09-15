@@ -5,10 +5,10 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin"; // ✅ Import ScrollToPlug
 import AboutSection from "./components/AboutSection";
 import CustomCursor from "./common/CustomCursor";
 import EnhancedHeroSection from "./components/EnhancedHeroSection";
-import AnimatedBackground from "./components/AnimatedBackground";
-import ParticleSystem from "./components/ParticleSystem";
-import InteractiveShapes from "./components/InteractiveShapes";
-import ScrollProgress from "./common/ScrollProgress";
+import OptimizedAnimatedBackground from "./components/OptimizedAnimatedBackground";
+import OptimizedParticleSystem from "./components/OptimizedParticleSystem";
+import OptimizedInteractiveShapes from "./components/OptimizedInteractiveShapes";
+import OptimizedScrollProgress from "./common/OptimizedScrollProgress";
 import Skills from "./components/Skills";
 
 import WorkExperience from "./components/WorkExperience";
@@ -23,24 +23,57 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin); // ✅ Add ScrollToPlugin
 
 function App() {
   useEffect(() => {
-    // Set up smooth scrolling
+    // Enhanced GSAP performance configuration
     gsap.config({
-      autoSleep: 60,
-      force3D: true,
+      autoSleep: 30, // Reduced from 60 for faster cleanup
+      force3D: true, // Hardware acceleration
       nullTargetWarn: false,
     });
 
-    // Initialize main timeline
+    // Mobile-specific performance optimizations
+    const isMobile = window.innerWidth < 768;
+    
+    if (isMobile) {
+      // Reduce animation complexity for mobile
+      gsap.config({
+        autoSleep: 20,
+        force3D: true,
+        nullTargetWarn: false,
+      });
+      
+      // Shorter durations for mobile
+      gsap.defaults({
+        ease: "power2.out",
+        duration: 0.6,
+        overwrite: "auto",
+      });
+    } else {
+      // Set global defaults for better performance on desktop
+      gsap.defaults({
+        ease: "power2.out",
+        duration: 0.8,
+        overwrite: "auto", // Prevent conflicting animations
+      });
+    }
+
+    // Initialize main timeline with performance optimizations
     const mainTl = gsap.timeline({
       defaults: {
-        ease: "power2.out", // Consistent easing
+        ease: "power2.out",
       },
     });
 
-    // Clean up function
+    // Enhanced scroll trigger configuration for performance
+    ScrollTrigger.config({
+      limitCallbacks: true, // Limit callback frequency
+      syncInterval: isMobile ? 150 : 120, // Higher sync interval for mobile
+    });
+
+    // Clean up function with proper cleanup
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
       mainTl.kill();
+      gsap.killTweensOf("*"); // Kill all remaining tweens
     };
   }, []);
 
@@ -59,12 +92,12 @@ function App() {
         description="Portfolio of Palukuru Charan Kumar Reddy, a Software Developer with ~2.7 years experience building user-friendly and responsive web applications using React, Next.js, and TypeScript."
         keywords="Software Developer, React, Next.js, TypeScript, Performance Optimization, Bengaluru, Tailwind CSS, Redux Toolkit"
       />
-      <AnimatedBackground />
-      <ParticleSystem />
-      <InteractiveShapes />
+      <OptimizedAnimatedBackground />
+      <OptimizedParticleSystem />
+      <OptimizedInteractiveShapes />
       <Header />
       <div className="relative overflow-x-hidden">
-        <ScrollProgress />
+        <OptimizedScrollProgress />
         <CustomCursor />
         <EnhancedHeroSection onExploreClick={scrollToAbout} />
         <AboutSection id="about"  />

@@ -89,37 +89,37 @@ function AboutSection({ id }: AboutSectionProps) {
     <section
       id={id}
       ref={sectionRef}
-      className="min-h-screen flex items-center py-8 sm:py-12 md:py-16 relative overflow-hidden bg-gradient-to-br from-gray-900/50 to-black/30"
+      className="min-h-screen flex items-center py-6 sm:py-8 md:py-12 lg:py-16 relative overflow-hidden bg-gradient-to-br from-gray-900/50 to-black/30"
     >
       {/* Background decorative elements */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-cyan-400/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-pink-500/20 rounded-full blur-2xl animate-pulse delay-500"></div>
+        <div className="absolute top-10 sm:top-20 left-5 sm:left-10 w-24 h-24 sm:w-32 sm:h-32 bg-cyan-400/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-10 sm:bottom-20 right-5 sm:right-10 w-28 h-28 sm:w-40 sm:h-40 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/4 w-20 h-20 sm:w-24 sm:h-24 bg-pink-500/20 rounded-full blur-2xl animate-pulse delay-500"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 relative z-10">
         {/* Enhanced title with decorative elements */}
-        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+        <div className="text-center mb-8 sm:mb-12 md:mb-16 lg:mb-20">
           <div className="relative inline-block">
             <h2 
               ref={titleRef}
-              className="text-4xl sm:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent mb-4 tracking-wide"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent mb-4 tracking-wide"
             >
               About Me
             </h2>
-            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full"></div>
+            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-20 sm:w-24 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full"></div>
           </div>
-          <p className="text-lg sm:text-xl text-gray-300 mt-6 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-gray-300 mt-4 sm:mt-6 max-w-2xl mx-auto leading-relaxed px-4">
             Frontend developer passionate about creating exceptional digital experiences
           </p>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-1 gap-6 sm:gap-8 md:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-1 gap-4 sm:gap-6 md:gap-8 lg:gap-12 items-center">
           {/* Content Section - Now takes full width */}
           <div ref={contentRef} className="space-y-4 sm:space-y-6 md:space-y-8 max-w-5xl mx-auto">
             {/* Hero Statement */}
-            <div className="glass-effect rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 text-center">
+            <div className="glass-effect rounded-lg sm:rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-8 text-center">
               <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-white mb-3 sm:mb-4 leading-tight">
                 I build modern web applications that users love
               </h3>
@@ -148,7 +148,7 @@ function AboutSection({ id }: AboutSectionProps) {
             </div>
 
             {/* Quote */}
-            <div className="glass-effect rounded-xl p-3 sm:p-4 md:p-6 border-l-4 border-primary text-center max-w-3xl mx-auto">
+            <div className="glass-effect rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 border-l-4 border-primary text-center max-w-3xl mx-auto">
               <p className="text-white/90 italic text-sm sm:text-base md:text-lg leading-relaxed">
                 "Aiming to express potential and deliver results through challenging assignments as a Software Developer."
               </p>
@@ -159,13 +159,13 @@ function AboutSection({ id }: AboutSectionProps) {
         {/* Stats Section with enhanced heading */}
         <div 
           ref={statsRef}
-          className="mt-8 sm:mt-12 md:mt-16"
+          className="mt-6 sm:mt-8 md:mt-12 lg:mt-16"
         >
-          <div className="text-center mb-8 sm:mb-12">
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent mb-4">
+          <div className="text-center mb-6 sm:mb-8 md:mb-12">
+            <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent mb-4">
               Impact & Results
             </h3>
-            <div className="w-16 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-500 mx-auto rounded-full"></div>
+            <div className="w-12 sm:w-16 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-500 mx-auto rounded-full"></div>
           </div>
           <div 
             ref={statsObserverRef}
@@ -179,12 +179,12 @@ function AboutSection({ id }: AboutSectionProps) {
             ].map((stat, index) => (
               <div
                 key={index}
-                className="text-center group glass-effect rounded-xl p-3 sm:p-4 md:p-6 hover:glass-effect-strong transition-all duration-300 hover:scale-105 hover:animate-glow-pulse"
+                className="text-center group glass-effect rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 hover:glass-effect-strong transition-all duration-300 hover:scale-105 hover:animate-glow-pulse"
               >
-                <div className="bg-primary/10 rounded-full w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 mx-auto mb-2 sm:mb-3 md:mb-4 flex items-center justify-center group-hover:bg-primary/20 transition-all duration-300 subtle-border">
-                  <span className="text-lg sm:text-xl md:text-2xl group-hover:scale-110 transition-transform duration-300">{stat.icon}</span>
+                <div className="bg-primary/10 rounded-full w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-16 lg:h-16 mx-auto mb-2 sm:mb-3 md:mb-4 flex items-center justify-center group-hover:bg-primary/20 transition-all duration-300 subtle-border">
+                  <span className="text-base sm:text-lg md:text-xl lg:text-2xl group-hover:scale-110 transition-transform duration-300">{stat.icon}</span>
                 </div>
-                <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary mb-1">
+                <div className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold text-primary mb-1">
                   <AnimatedCounter 
                     end={stat.value} 
                     suffix={stat.suffix} 

@@ -1,4 +1,5 @@
 /* Tailwind Directives */
+@import './styles/performance.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -25,6 +26,10 @@ body {
   margin: 0;
   padding: 0;
   font-size: 16px;
+  /* Enhanced mobile optimization */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* Mobile-first responsive font scaling */
@@ -43,6 +48,52 @@ body {
 @media (min-width: 769px) {
   body {
     font-size: 16px;
+  }
+}
+
+/* Enhanced mobile touch targets */
+@media (max-width: 768px) {
+  button, a, [role="button"] {
+    min-height: 44px; /* iOS accessibility guidelines */
+    min-width: 44px;
+  }
+  
+  /* Improve touch scrolling */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Prevent zoom on input focus */
+  input, select, textarea {
+    font-size: 16px;
+  }
+  
+  /* Disable hover effects on mobile */
+  .no-mobile-hover:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  
+  /* Optimize animations for mobile */
+  * {
+    animation-duration: 0.5s !important;
+    transition-duration: 0.3s !important;
+  }
+  
+  /* Reduce blur effects for better performance */
+  .backdrop-blur-lg {
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+  }
+  
+  .backdrop-blur-md {
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+  }
+  
+  /* Optimize gradient animations */
+  .animate-pulse {
+    animation-duration: 3s !important;
   }
 }
 
@@ -247,6 +298,65 @@ section {
 
   .content-spacing {
     margin-top: clamp(1rem, 4vw, 3rem);
+  }
+
+  /* Mobile-specific enhancements */
+  .mobile-tap-highlight {
+    -webkit-tap-highlight-color: rgba(0, 170, 255, 0.2);
+  }
+
+  .mobile-no-tap-highlight {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Line clamping for better mobile text handling */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Better mobile button styles */
+  .mobile-button {
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  /* Mobile-friendly grid */
+  .mobile-grid-auto {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  @media (max-width: 640px) {
+    .mobile-grid-auto {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Enhanced glass effects for mobile */
+  .glass-mobile {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Safe area padding for mobile devices with notches */
+  .safe-area-padding {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
   }
 }
 

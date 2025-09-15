@@ -1,0 +1,150 @@
+/* Performance optimizations for animations and scrolling */
+
+/* Enable hardware acceleration for common transform properties */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+.will-change-auto {
+  will-change: auto;
+}
+
+/* Optimize animations with contain property */
+.contain-layout {
+  contain: layout;
+}
+
+.contain-paint {
+  contain: paint;
+}
+
+.contain-style-layout {
+  contain: style layout;
+}
+
+/* Smooth scrolling optimization */
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  /* Disable transform animations for reduced motion */
+  .animate-gradient-shift,
+  .animate-pulse {
+    animation: none !important;
+  }
+}
+
+/* Custom cursor optimizations */
+.custom-cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.custom-cursor-main {
+  position: fixed;
+  width: 16px;
+  height: 16px;
+  background-color: white;
+  border-radius: 50%;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 9999;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.custom-cursor-follower {
+  position: fixed;
+  width: 32px;
+  height: 32px;
+  border: 1px solid white;
+  border-radius: 50%;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 9998;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Optimize particle and shape containers */
+.particle-container,
+.shape-container,
+.background-container {
+  contain: style layout paint;
+  will-change: transform;
+  transform: translateZ(0); /* Force hardware acceleration */
+}
+
+/* Optimize scroll indicators */
+.scroll-progress {
+  contain: strict;
+  will-change: transform;
+}
+
+/* Improve performance for fixed positioned elements */
+.fixed-performance {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* GPU acceleration for gradients */
+.gpu-gradient {
+  transform: translateZ(0);
+  will-change: background-position, transform;
+}
+
+/* Optimize blur effects */
+.optimized-blur {
+  filter: blur(var(--blur-amount, 3px));
+  will-change: filter;
+}
+
+/* Reduce composite layers */
+.composite-layer {
+  isolation: isolate;
+}
+
+/* Performance-optimized shadows */
+.perf-shadow {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  will-change: box-shadow;
+}
+
+/* Optimize for mobile devices */
+@media (max-width: 768px) {
+  /* Reduce animation complexity on mobile */
+  .morph-shape,
+  .geometric-shape {
+    animation-duration: 8s !important;
+  }
+  
+  /* Simplify particle effects on mobile */
+  .particle-container {
+    display: none;
+  }
+  
+  /* Reduce blur effects on mobile for better performance */
+  .optimized-blur {
+    filter: blur(1px);
+  }
+}
