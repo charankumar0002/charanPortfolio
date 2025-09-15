@@ -280,23 +280,23 @@ function EnhancedHeroSection({ onExploreClick }: HeroSectionProps) {
       {/* Clean dark background */}
       <div className="hero-bg absolute inset-0 bg-gradient-dark" />
 
-      {/* Subtle blue accent floating elements */}
-      <div className="floating-element absolute top-20 left-20 w-4 h-4 bg-blue-400/40 rounded-full" />
-      <div className="floating-element absolute top-40 right-40 w-6 h-6 border border-blue-400/30 rotate-45" />
-      <div className="floating-element absolute bottom-40 left-40 w-8 h-8 bg-gradient-to-r from-blue-400/20 to-blue-500/15 rounded-lg" />
-      <div className="floating-element absolute bottom-20 right-20 w-3 h-3 bg-blue-400/50 rounded-full" />
-      <div className="floating-element absolute top-1/3 left-1/4 w-5 h-5 border border-blue-400/25 rounded-full" />
-      <div className="floating-element absolute top-2/3 right-1/3 w-7 h-7 bg-gradient-to-r from-blue-400/15 to-blue-500/10 triangle" />
+      {/* Subtle blue accent floating elements - reduced for mobile */}
+      <div className="floating-element absolute top-10 sm:top-20 left-10 sm:left-20 w-3 h-3 sm:w-4 sm:h-4 bg-blue-400/40 rounded-full" />
+      <div className="floating-element absolute top-20 sm:top-40 right-20 sm:right-40 w-4 h-4 sm:w-6 sm:h-6 border border-blue-400/30 rotate-45" />
+      <div className="floating-element absolute bottom-20 sm:bottom-40 left-20 sm:left-40 w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-blue-400/20 to-blue-500/15 rounded-lg" />
+      <div className="floating-element absolute bottom-10 sm:bottom-20 right-10 sm:right-20 w-2 h-2 sm:w-3 sm:h-3 bg-blue-400/50 rounded-full" />
+      <div className="floating-element absolute top-1/3 left-1/4 w-4 h-4 sm:w-5 sm:h-5 border border-blue-400/25 rounded-full" />
+      <div className="floating-element absolute top-2/3 right-1/3 w-5 h-5 sm:w-7 sm:h-7 bg-gradient-to-r from-blue-400/15 to-blue-500/10 triangle" />
 
       {/* Very subtle ambient lighting */}
-      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-blue-500/3 to-blue-600/2 rounded-full blur-3xl animate-pulse" />
+      <div className="absolute top-1/4 right-1/4 w-60 h-60 sm:w-80 sm:h-80 lg:w-96 lg:h-96 bg-gradient-to-r from-blue-500/3 to-blue-600/2 rounded-full blur-3xl animate-pulse" />
       <div
-        className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-gradient-to-r from-blue-400/3 to-blue-500/2 rounded-full blur-3xl animate-pulse"
+        className="absolute bottom-1/4 left-1/4 w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 bg-gradient-to-r from-blue-400/3 to-blue-500/2 rounded-full blur-3xl animate-pulse"
         style={{ animationDelay: "2s" }}
       />
 
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 items-center min-h-screen max-w-7xl mx-auto">
+      <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-16 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 items-center min-h-screen max-w-7xl mx-auto pt-20 sm:pt-24 md:pt-16 lg:pt-0">
           {/* Left Side - Image (Hidden on mobile, shown on large screens) */}
           <div className="hidden lg:flex justify-center lg:justify-start order-2 lg:order-1">
             <div className="relative">
@@ -318,12 +318,12 @@ function EnhancedHeroSection({ onExploreClick }: HeroSectionProps) {
           </div>
 
           {/* Center - Name and Content Section (Takes 2 columns on large screens) */}
-          <div className="lg:col-span-2 text-center lg:text-left space-y-6 sm:space-y-8 w-full order-1 lg:order-2">
-            {/* Main Name with letter animation - Single Line */}
-            <div className="space-y-3 sm:space-y-4">
+          <div className="lg:col-span-2 text-center lg:text-left space-y-4 sm:space-y-6 md:space-y-8 w-full order-1 lg:order-2">
+            {/* Main Name with letter animation - Responsive for mobile */}
+            <div className="space-y-2 sm:space-y-3 md:space-y-4">
               <h1
                 ref={nameRef}
-                className="text-xl sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-white tracking-tight leading-tight whitespace-nowrap overflow-hidden"
+                className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-white tracking-tight leading-tight overflow-hidden"
                 style={{
                   fontFamily: "Inter, sans-serif",
                   letterSpacing: "0.01em",
@@ -334,14 +334,32 @@ function EnhancedHeroSection({ onExploreClick }: HeroSectionProps) {
               {/* Animated title */}
               <h2
                 ref={titleRef}
-                className="text-base sm:text-lg md:text-xl lg:text-xl xl:text-2xl font-light text-gray-300 tracking-wide"
+                className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-light text-gray-300 tracking-wide"
                 style={{ letterSpacing: "0.05em" }}
               />
             </div>
 
+            {/* Mobile profile image - shown only on mobile */}
+            <div className="flex lg:hidden justify-center mb-4 sm:mb-6">
+              <div className="relative">
+                <div className="hero-image relative w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden border-3 border-gradient-to-r from-cyan-400 to-purple-400 p-1">
+                  <div className="w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-purple-900/50 to-cyan-900/50">
+                    <img
+                      src={CharanImage2}
+                      alt="Palukuru Charan Kumar Reddy"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+                {/* Smaller floating orbs for mobile */}
+                <div className="floating-element absolute -top-2 -right-2 w-4 h-4 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full opacity-70" />
+                <div className="floating-element absolute -bottom-2 -left-2 w-3 h-3 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full opacity-70" />
+              </div>
+            </div>
+
             {/* Subtitle with gradient and typing animation */}
             <div className="hero-subtitle space-y-2">
-              <p className="text-sm sm:text-base md:text-lg text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary-light to-primary font-medium">
+              <p className="text-xs sm:text-sm md:text-base lg:text-lg text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary-light to-primary font-medium">
                 <TypingAnimation
                   texts={[
                     "Creating Digital Experiences That Matter",
@@ -349,7 +367,7 @@ function EnhancedHeroSection({ onExploreClick }: HeroSectionProps) {
                     "Crafting Beautiful User Interfaces",
                     "Developing Scalable Solutions",
                   ]}
-                  className="text-sm sm:text-base md:text-lg text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary-light to-primary font-medium"
+                  className="text-xs sm:text-sm md:text-base lg:text-lg text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary-light to-primary font-medium"
                 />
               </p>
             </div>
@@ -363,7 +381,7 @@ function EnhancedHeroSection({ onExploreClick }: HeroSectionProps) {
 
             {/* Tech Stack */}
             <div className="space-y-3 sm:space-y-4">
-              <h3 className="text-white font-semibold text-base sm:text-lg">
+              <h3 className="text-white font-semibold text-sm sm:text-base md:text-lg">
                 Tech Stack
               </h3>
               <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 md:gap-4 max-w-3xl mx-auto lg:mx-0">
@@ -372,7 +390,7 @@ function EnhancedHeroSection({ onExploreClick }: HeroSectionProps) {
                     key={tech.name}
                     className="tech-stack-item group glass-effect rounded-lg border border-gray-600/30 hover:border-primary/40 transition-all duration-300 cursor-pointer hover:shadow-blue-glow p-2 sm:p-3 lg:p-4 transform hover:-translate-y-1"
                   >
-                    <div className="text-lg sm:text-xl lg:text-2xl mb-1 sm:mb-2 group-hover:scale-110 transition-transform">
+                    <div className="text-base sm:text-lg md:text-xl lg:text-2xl mb-1 sm:mb-2 group-hover:scale-110 transition-transform">
                       {tech.icon}
                     </div>
                     <div className="text-white font-medium text-xs sm:text-sm">
@@ -388,7 +406,7 @@ function EnhancedHeroSection({ onExploreClick }: HeroSectionProps) {
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
               <button
                 onClick={onExploreClick}
-                className="cta-button group relative px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-primary to-primary-dark rounded-lg font-semibold text-white hover:scale-105 transition-all duration-300 overflow-hidden shadow-blue-glow hover:shadow-blue-glow-strong text-sm sm:text-base"
+                className="cta-button group relative px-4 sm:px-6 md:px-8 py-3 sm:py-4 bg-gradient-to-r from-primary to-primary-dark rounded-lg font-semibold text-white hover:scale-105 transition-all duration-300 overflow-hidden shadow-blue-glow hover:shadow-blue-glow-strong text-sm sm:text-base"
               >
                 <span className="relative z-10">Explore My Work</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-primary-dark to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -396,7 +414,7 @@ function EnhancedHeroSection({ onExploreClick }: HeroSectionProps) {
 
               <a
                 href="#contact"
-                className="cta-button px-6 sm:px-8 py-3 sm:py-4 border border-white/20 rounded-lg hover:bg-white/10 transition-all text-white font-medium hover:scale-105 duration-300 text-sm sm:text-base"
+                className="cta-button px-4 sm:px-6 md:px-8 py-3 sm:py-4 border border-white/20 rounded-lg hover:bg-white/10 transition-all text-white font-medium hover:scale-105 duration-300 text-sm sm:text-base"
               >
                 Get In Touch
               </a>
@@ -405,17 +423,17 @@ function EnhancedHeroSection({ onExploreClick }: HeroSectionProps) {
         </div>
       </div>
 
-      {/* Social Links */}
-      <div className="fixed left-2 sm:left-4 lg:left-6 bottom-4 sm:bottom-6 z-50">
-        <div className="flex flex-col gap-2 sm:gap-3 lg:gap-4">
+      {/* Social Links - Optimized for mobile */}
+      <div className="fixed left-1 sm:left-2 md:left-4 lg:left-6 bottom-16 sm:bottom-4 md:bottom-6 z-50">
+        <div className="flex flex-col gap-1 sm:gap-2 md:gap-3 lg:gap-4">
           <a
             href="https://github.com/charankumar0002"
-            className="social-link text-white/50 hover:text-cyan-400 transition-all duration-300 hover:scale-110 p-2 sm:p-0"
+            className="social-link text-white/50 hover:text-cyan-400 transition-all duration-300 hover:scale-110 p-1 sm:p-2 rounded-lg hover:bg-white/5"
             target="_blank"
             rel="noopener noreferrer"
           >
             <svg
-              className="w-5 h-5 sm:w-6 sm:h-6"
+              className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6"
               fill="currentColor"
               viewBox="0 0 24 24"
             >
@@ -425,12 +443,12 @@ function EnhancedHeroSection({ onExploreClick }: HeroSectionProps) {
 
           <a
             href="https://www.linkedin.com/in/charankumarreddypalukuru/"
-            className="social-link text-white/50 hover:text-cyan-400 transition-all duration-300 hover:scale-110 p-2 sm:p-0"
+            className="social-link text-white/50 hover:text-cyan-400 transition-all duration-300 hover:scale-110 p-1 sm:p-2 rounded-lg hover:bg-white/5"
             target="_blank"
             rel="noopener noreferrer"
           >
             <svg
-              className="w-5 h-5 sm:w-6 sm:h-6"
+              className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6"
               fill="currentColor"
               viewBox="0 0 24 24"
             >
@@ -440,12 +458,12 @@ function EnhancedHeroSection({ onExploreClick }: HeroSectionProps) {
 
           <a
             href="https://x.com/CharanK29063387"
-            className="social-link text-white/50 hover:text-cyan-400 transition-all duration-300 hover:scale-110 p-2 sm:p-0"
+            className="social-link text-white/50 hover:text-cyan-400 transition-all duration-300 hover:scale-110 p-1 sm:p-2 rounded-lg hover:bg-white/5"
             target="_blank"
             rel="noopener noreferrer"
           >
             <svg
-              className="w-5 h-5 sm:w-6 sm:h-6"
+              className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6"
               fill="currentColor"
               viewBox="0 0 24 24"
             >

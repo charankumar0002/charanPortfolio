@@ -122,42 +122,42 @@ function ExperienceSection({ id }: ExperienceSectionProps) {
   }, []);
 
   return (
-    <section id={id} ref={sectionRef} className="min-h-screen py-12 sm:py-16 lg:py-20 text-white relative overflow-hidden bg-gradient-to-br from-gray-900/50 to-black/30">
+    <section id={id} ref={sectionRef} className="min-h-screen py-8 sm:py-12 md:py-16 lg:py-20 text-white relative overflow-hidden bg-gradient-to-br from-gray-900/50 to-black/30">
       {/* Background decorative elements */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-cyan-400/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-pink-500/20 rounded-full blur-2xl animate-pulse delay-500"></div>
+        <div className="absolute top-10 sm:top-20 left-5 sm:left-10 w-24 h-24 sm:w-32 sm:h-32 bg-cyan-400/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-10 sm:bottom-20 right-5 sm:right-10 w-28 h-28 sm:w-40 sm:h-40 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/4 w-20 h-20 sm:w-24 sm:h-24 bg-pink-500/20 rounded-full blur-2xl animate-pulse delay-500"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 relative z-10">
         {/* Enhanced title with decorative elements */}
-        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+        <div className="text-center mb-8 sm:mb-12 md:mb-16 lg:mb-20">
           <div className="relative inline-block">
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent mb-4 tracking-wide">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent mb-4 tracking-wide">
               Experience
             </h2>
-            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full"></div>
+            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-20 sm:w-24 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full"></div>
           </div>
-          <p className="text-lg sm:text-xl text-gray-300 mt-6 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-gray-300 mt-4 sm:mt-6 max-w-2xl mx-auto leading-relaxed px-4">
             Building innovative solutions and creating impactful digital experiences
           </p>
         </div>
 
         <div className="relative">
-          {/* Enhanced timeline line */}
+          {/* Enhanced timeline line - hidden on mobile */}
           <div className="hidden sm:block absolute left-6 top-0 w-0.5 h-full bg-gradient-to-b from-cyan-400/30 via-purple-500/30 to-pink-500/30 rounded-full" />
           <div ref={progressRef} className="hidden sm:block absolute left-6 top-0 w-0.5 h-full bg-gradient-to-b from-cyan-400 via-purple-500 to-pink-500 rounded-full transform origin-top scale-y-0 shadow-lg shadow-purple-500/50" />
           
           {/* Experience items container */}
-          <div className="flex flex-col space-y-8 sm:space-y-12 lg:space-y-16 sm:pl-16">
+          <div className="flex flex-col space-y-6 sm:space-y-8 md:space-y-12 lg:space-y-16 sm:pl-16">
             {experiences.map((exp, index) => (
               <div
                 key={index}
                 className="experience-item relative group"
               >
-                {/* Enhanced timeline bullet */}
-                <div className="hidden sm:block experience-bullet absolute -left-12 top-8 w-3 h-3 bg-gray-600 rounded-full border-4 border-gray-800 transition-all duration-300 group-hover:bg-purple-500 group-hover:border-purple-400 group-hover:shadow-lg group-hover:shadow-purple-500/50"></div>
+                {/* Enhanced timeline bullet - hidden on mobile */}
+                <div className="hidden sm:block experience-bullet absolute -left-12 top-6 sm:top-8 w-3 h-3 bg-gray-600 rounded-full border-4 border-gray-800 transition-all duration-300 group-hover:bg-purple-500 group-hover:border-purple-400 group-hover:shadow-lg group-hover:shadow-purple-500/50"></div>
                 
                 {/* Enhanced card design */}
                 <div className="relative bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm p-6 sm:p-8 lg:p-10 rounded-2xl border border-gray-700/50 hover:border-purple-500/50 overflow-hidden transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-500 group">
