@@ -74,3 +74,19 @@ src/
 ├── assets/        # Images and static files
 └── main.tsx       # Application entry point
 ```
+
+## Folder structure (2025-09 refresh)
+
+- `src/components/` – Feature components
+	- `common/` – Shared UI used across pages (Header, SEO, CustomCursor, OptimizedScrollProgress)
+	- Other sections: AboutSection, EnhancedHeroSection, WorkExperience, ProjectsSection, Skills, ContactSection, etc.
+- `src/context/` – React context providers (ThemeContext)
+- `src/hooks/` – Reusable hooks (e.g., useIntersectionObserver)
+- `src/utils/` – Utilities and small helpers (e.g., prefs)
+- `src/styles/` – Global CSS (imported via `index.css`)
+- `src/_archive/` – Old/unused components and utilities kept for reference. This folder is excluded from TypeScript build.
+
+Conventions:
+- Prefer colocating shared UI in `components/common`.
+- Keep only one version of a component (optimized variants replace legacy ones).
+- New sections should export a single default component and accept `{ id?: string }` when they need anchor IDs.

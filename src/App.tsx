@@ -1,27 +1,33 @@
-import { useEffect } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin"; // ✅ Import ScrollToPlugin
 import AboutSection from "./components/AboutSection";
-import CustomCursor from "./common/CustomCursor";
+import CustomCursor from "./components/common/CustomCursor";
 import EnhancedHeroSection from "./components/EnhancedHeroSection";
-import OptimizedAnimatedBackground from "./components/OptimizedAnimatedBackground";
-import OptimizedParticleSystem from "./components/OptimizedParticleSystem";
-import OptimizedInteractiveShapes from "./components/OptimizedInteractiveShapes";
-import OptimizedScrollProgress from "./common/OptimizedScrollProgress";
+import OptimizedScrollProgress from "./components/common/OptimizedScrollProgress";
 import Skills from "./components/Skills";
 
 import WorkExperience from "./components/WorkExperience";
 import ProjectsSection from "./components/ProjectsSection";
-import Header from "./common/Header";
+import Header from "./components/common/Header";
 import FooterSection from "./components/FooterSection";
-import ContactPage from "./components/contact";
+import ContactSection from "./components/ContactSection.tsx";
 import { Analytics } from '@vercel/analytics/react';
-import SEO from "./common/SEO";
+import SEO from "./components/common/SEO";
+import PerformanceMonitor from "./components/PerformanceMonitor";
+import { shouldDisableHeavyEffects, hasFinePointer } from "./utils/prefs";
+import Highlights from "./components/Highlights";
+
+// Lazy-load heavy background visuals
+const OptimizedAnimatedBackground = lazy(() => import("./components/OptimizedAnimatedBackground"));
+const OptimizedParticleSystem = lazy(() => import("./components/OptimizedParticleSystem"));
+const OptimizedInteractiveShapes = lazy(() => import("./components/OptimizedInteractiveShapes"));
 // ✅ Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin); // ✅ Add ScrollToPlugin
 
 function App() {
+  const [showPerf, setShowPerf] = useState(false);
   useEffect(() => {
     // Enhanced GSAP performance configuration
     gsap.config({
@@ -92,24 +98,52 @@ function App() {
         description="Portfolio of Palukuru Charan Kumar Reddy, a Software Developer with ~2.7 years experience building user-friendly and responsive web applications using React, Next.js, and TypeScript."
         keywords="Software Developer, React, Next.js, TypeScript, Performance Optimization, Bengaluru, Tailwind CSS, Redux Toolkit"
       />
-      <OptimizedAnimatedBackground />
-      <OptimizedParticleSystem />
-      <OptimizedInteractiveShapes />
+      <Suspense fallback={null}>
+        {!shouldDisableHeavyEffects() && <OptimizedAnimatedBackground />}
+        {!shouldDisableHeavyEffects() && <OptimizedParticleSystem />}
+        {!shouldDisableHeavyEffects() && <OptimizedInteractiveShapes />}
+      </Suspense>
       <Header />
-      <div className="relative overflow-x-hidden">
+      <main className="relative overflow-x-hidden" id="hero" role="main">
         <OptimizedScrollProgress />
-        <CustomCursor />
+        {hasFinePointer() && <CustomCursor />}
         <EnhancedHeroSection onExploreClick={scrollToAbout} />
         <AboutSection id="about"  />
+  <Highlights id="highlights" />
         <WorkExperience id="experience"/>
         <ProjectsSection />
         <Skills id="skills" />
-        <ContactPage id="contact" />
+  <ContactSection id="contact" />
         <FooterSection id="footer"/>
         <Analytics />
-      </div>
+        {showPerf && <PerformanceMonitor enabled />}
+        {/* Quick toggle for perf HUD (press `)` key) */}
+        <TogglePerf onToggle={() => setShowPerf((s)=>!s)} active={showPerf} />
+      </main>
     </>
   );
 }
 
 export default App;
+
+// Inline lightweight toggle to avoid extra file
+function TogglePerf({ onToggle, active }: { onToggle: () => void; active: boolean }) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === ')' || e.key === '0') onToggle();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [onToggle]);
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      aria-pressed={active}
+      title="Toggle performance HUD (press 0)"
+      className="fixed bottom-4 right-4 z-50 text-xs px-2 py-1 rounded bg-black/60 border border-white/10 text-white hover:bg-black/80"
+    >
+      Perf: {active ? 'On' : 'Off'}
+    </button>
+  );
+}

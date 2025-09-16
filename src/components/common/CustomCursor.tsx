@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { hasFinePointer, isReducedMotion } from '../../utils/prefs';
 
 const CustomCursor = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
@@ -9,7 +10,12 @@ const CustomCursor = () => {
     const cursor = cursorRef.current;
     const follower = followerRef.current;
 
-    // Hide default cursor
+    // Respect pointer type and reduced motion
+    if (!hasFinePointer() || isReducedMotion()) {
+      return;
+    }
+
+    // Hide default cursor for fine pointers
     document.body.style.cursor = 'none';
 
     if (cursor && follower) {
@@ -54,7 +60,7 @@ const CustomCursor = () => {
         });
       };
 
-      document.addEventListener('mousemove', moveCursor);
+      document.addEventListener('mousemove', moveCursor, { passive: true });
       document.addEventListener('mouseenter', handleMouseEnter);
       document.addEventListener('mouseleave', handleMouseLeave);
 
@@ -72,12 +78,14 @@ const CustomCursor = () => {
       <div
         ref={cursorRef}
         className="custom-cursor-main"
-        style={{ top: 0, left: 0 }}
+        aria-hidden
+        style={{ top: 0, left: 0, width: 16, height: 16 }}
       />
       <div
         ref={followerRef}
         className="custom-cursor-follower"
-        style={{ top: 0, left: 0 }}
+        aria-hidden
+        style={{ top: 0, left: 0, width: 32, height: 32 }}
       />
     </>
   );

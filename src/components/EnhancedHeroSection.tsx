@@ -304,8 +304,12 @@ function EnhancedHeroSection({ onExploreClick }: HeroSectionProps) {
                 <div className="w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-purple-900/50 to-cyan-900/50">
                   <img
                     src={CharanImage2}
-                    alt="Palukuru Charan Kumar Reddy"
+                    alt="Portrait of Palukuru Charan Kumar Reddy"
                     className="w-full h-full object-cover"
+                    loading="eager"
+                    decoding="async"
+                    width={320}
+                    height={320}
                   />
                 </div>
               </div>
@@ -346,8 +350,12 @@ function EnhancedHeroSection({ onExploreClick }: HeroSectionProps) {
                   <div className="w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-purple-900/50 to-cyan-900/50">
                     <img
                       src={CharanImage2}
-                      alt="Palukuru Charan Kumar Reddy"
+                      alt="Portrait of Palukuru Charan Kumar Reddy"
                       className="w-full h-full object-cover"
+                      loading="lazy"
+                      decoding="async"
+                      width={256}
+                      height={256}
                     />
                   </div>
                 </div>

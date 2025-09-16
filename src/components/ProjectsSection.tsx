@@ -128,6 +128,10 @@ function ProjectsSection({ className }: ProjectsSectionProps) {
                     alt={project.title}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                     onError={(e) => (e.currentTarget.src = '/vite.svg')}
+                    loading="lazy"
+                    decoding="async"
+                    width={640}
+                    height={320}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   {/* Mobile touch indicator */}
@@ -147,7 +151,7 @@ function ProjectsSection({ className }: ProjectsSectionProps) {
                 </p>
                 {project.technologies && (
                   <div className="flex flex-wrap gap-1.5 sm:gap-2 mt-3 sm:mt-4">
-                    {project.technologies.slice(0, 4).map((tech, techIndex) => (
+                    {project.technologies?.slice(0, 4).map((tech, techIndex) => (
                       <span 
                         key={techIndex}
                         className="bg-gradient-to-r from-gray-700 to-gray-800 text-white px-2 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg text-xs sm:text-sm font-medium border border-gray-600 hover:border-cyan-400 hover:bg-gradient-to-r hover:from-cyan-900/50 hover:to-purple-900/50 hover:text-cyan-300 transition-all duration-300 transform hover:scale-105"
@@ -155,9 +159,9 @@ function ProjectsSection({ className }: ProjectsSectionProps) {
                         {tech}
                       </span>
                     ))}
-                    {project.technologies.length > 4 && (
+                    {project.technologies && project.technologies.length > 4 && (
                       <span className="bg-gradient-to-r from-gray-700 to-gray-800 text-white px-2 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg text-xs sm:text-sm font-medium border border-gray-600">
-                        +{project.technologies.length - 4}
+                        +{(project.technologies?.length || 0) - 4}
                       </span>
                     )}
                   </div>

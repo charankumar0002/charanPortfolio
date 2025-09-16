@@ -8,7 +8,7 @@ interface ContactProps {
   id: string;
 }
 
-function ContactPage({ id }: ContactProps) {
+function ContactSection({ id }: ContactProps) {
   const formRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
 
@@ -187,4 +187,4 @@ function ContactPage({ id }: ContactProps) {
   );
 }
 
-export default ContactPage;
+export default ContactSection;
