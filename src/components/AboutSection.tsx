@@ -111,7 +111,7 @@ function AboutSection({ id }: AboutSectionProps) {
             <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-20 sm:w-24 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full"></div>
           </div>
           <p className="text-base sm:text-lg md:text-xl text-gray-300 mt-4 sm:mt-6 max-w-2xl mx-auto leading-relaxed px-4">
-            Frontend developer passionate about creating exceptional digital experiences
+            Full-stack developer building real-time, high-performance web platforms
           </p>
         </div>
         
@@ -121,11 +121,13 @@ function AboutSection({ id }: AboutSectionProps) {
             {/* Hero Statement */}
             <div className="glass-effect rounded-lg sm:rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-8 text-center">
               <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-white mb-3 sm:mb-4 leading-tight">
-                I build modern web applications that users love
+                I build web platforms end to end, from the UI to the cloud
               </h3>
               <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/80 leading-relaxed">
-                Frontend developer with <span className="text-primary font-semibold">2.7 years</span> of experience creating 
-                high-performance React applications. I focus on clean code, exceptional user experiences, and measurable results.
+                Full-stack developer with <span className="text-primary font-semibold">3+ years</span> of experience, working
+                across React/Next.js on the front end and Node.js + Azure on the back. At Arkain Games I build a real-time
+                telemetry platform for electronic gaming machines: a React + Node.js dashboard that reads live machine data
+                over MQTT, sends control commands back, and runs analytics on high-volume streams.
               </p>
             </div>
 
@@ -134,8 +136,8 @@ function AboutSection({ id }: AboutSectionProps) {
               {[
                 { label: "📍 Location", value: "Bengaluru, Karnataka" },
                 { label: "🎓 Education", value: "B.Tech, Electronics & Communication" },
-                { label: "💼 Experience", value: "2.7 Years in Frontend Development" },
-                { label: "🚀 Specialization", value: "React.js, Next.js, TypeScript" }
+                { label: "💼 Experience", value: "3+ Years in Full-Stack Development" },
+                { label: "🚀 Specialization", value: "React, Node.js, Azure, Real-Time Systems" }
               ].map((item, index) => (
                 <div
                   key={index}
@@ -150,7 +152,7 @@ function AboutSection({ id }: AboutSectionProps) {
             {/* Quote */}
             <div className="glass-effect rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 border-l-4 border-primary text-center max-w-3xl mx-auto">
               <p className="text-white/90 italic text-sm sm:text-base md:text-lg leading-relaxed">
-                "Aiming to express potential and deliver results through challenging assignments as a Software Developer."
+                "Containerized with Docker, deployed to Azure, shipped through CI/CD. I own features from the interface to the APIs and data behind them."
               </p>
             </div>
           </div>
@@ -172,10 +174,10 @@ function AboutSection({ id }: AboutSectionProps) {
             className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6"
           >
             {[
-              { icon: "⚡", value: 25, suffix: "%", label: "Faster Load Times" },
-              { icon: "♿", value: 96, suffix: "+", label: "Accessibility Score" },
-              { icon: "💰", value: 15, suffix: "%", label: "Revenue Increase" },
-              { icon: "🧪", value: 20, suffix: "%", label: "Fewer Bugs" }
+              { icon: "🚀", value: 30, suffix: "%", label: "Faster Feature Delivery" },
+              { icon: "⚡", value: 25, suffix: "%", label: "Faster LCP" },
+              { icon: "♿", value: 96, suffix: "+", label: "Lighthouse Score" },
+              { icon: "💳", value: 15, suffix: "%", label: "Higher Payment Success" }
             ].map((stat, index) => (
               <div
                 key={index}
@@ -208,11 +210,11 @@ function AboutSection({ id }: AboutSectionProps) {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3 md:gap-4">
             {[
-              { name: "React", icon: "⚛️", proficiency: "Expert", color: "cyan" },
-              { name: "TypeScript", icon: "📘", proficiency: "Advanced", color: "blue" },
-              { name: "Next.js", icon: "▲", proficiency: "Advanced", color: "gray" },
-              { name: "Tailwind", icon: "🎨", proficiency: "Expert", color: "teal" },
-              { name: "Node.js", icon: "🟢", proficiency: "Intermediate", color: "green" }
+              { name: "React / Next.js", icon: "⚛️", proficiency: "Expert", color: "cyan" },
+              { name: "TypeScript", icon: "📘", proficiency: "Expert", color: "blue" },
+              { name: "Node.js", icon: "🟢", proficiency: "Advanced", color: "green" },
+              { name: "Azure", icon: "☁️", proficiency: "Advanced", color: "blue" },
+              { name: "Docker", icon: "🐳", proficiency: "Advanced", color: "teal" }
             ].map((tech, index) => (
               <div
                 key={index}
@@ -255,14 +257,14 @@ function AboutSection({ id }: AboutSectionProps) {
               </h3>
               <div className="grid grid-cols-1 gap-2 sm:gap-3">
                 {[
-                  "🚀 Front-end/User Experience Design",
-                  "⚡ Performance Optimization", 
-                  "🔄 Agile Methodologies",
-                  "🧩 Component-Based Architecture",
-                  "📱 Responsive Web Design",
-                  "🌐 Cross-Browser Compatibility",
-                  "♿ Accessibility Standards",
-                  "🔌 API Integration"
+                  "🧩 End-to-End Feature Delivery",
+                  "📡 Real-Time Systems (MQTT)",
+                  "🔌 REST API Design (Node.js, FastAPI)",
+                  "☁️ Cloud Deployment (Azure, AWS)",
+                  "🐳 Docker & CI/CD (GitHub Actions)",
+                  "⚡ Performance Optimization",
+                  "♿ Accessibility (WCAG)",
+                  "🤝 Mentoring & Agile/Scrum"
                 ].map((competency, index) => (
                   <div 
                     key={index}
@@ -286,14 +288,14 @@ function AboutSection({ id }: AboutSectionProps) {
                 Every line of code should serve a purpose, every interaction should feel natural, and every user should feel empowered."
               </blockquote>
               <p className="text-white/70 leading-relaxed text-xs sm:text-sm md:text-base">
-                When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, 
-                or experimenting with the latest web development trends. I'm always eager to learn and grow.
+                I enjoy mentoring junior developers and working closely with design, product and QA. Right now I'm
+                going deep on Azure and distributed system design, and I write about what I learn.
               </p>
               
               {/* Fun fact */}
               <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-primary/10 rounded-lg border-l-4 border-primary">
                 <p className="text-primary font-medium text-xs sm:text-sm">
-                  💡 Fun Fact: I've optimized load times by an average of 25% across all projects I've worked on!
+                  💡 From recruitment platforms on AWS to live gaming-machine telemetry on Azure, I've shipped both sides of the stack.
                 </p>
               </div>
             </div>

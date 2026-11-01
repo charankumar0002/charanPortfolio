@@ -20,30 +20,49 @@ interface Experience {
 
 const experiences: Experience[] = [
   {
-    company: "iQuadra Information Services LLC",
-    role: "Software Developer",
-    duration: "Apr 2023 – Present",
+    company: "Arkain Games",
+    role: "Full Stack Engineer",
+    duration: "Dec 2025 – Present",
     description: [
-      "Spearheaded developing and maintaining responsive user interfaces using React.js, Next.js, and TypeScript.",
-      "Created a scalable component library to standardize UI development.",
-      "Implemented server-side rendering (SSR) and static site generation (SSG) in Next.js to improve SEO and performance.",
-      "Reduced LCP by 25% using performance optimization techniques like lazy loading, code-splitting, memoization.",
-      "Raised Lighthouse accessibility scores to 96+ by building fully accessible interfaces aligned with WCAG standards.",
-      "Integrated payments (Stripe, Razorpay) and back-end APIs; improved payment success by 15% on production flows.",
-      "Wrote and maintained unit/component tests using Jest and React Testing Library, reducing regression issues by 20%.",
-      "Actively participated in Agile ceremonies including sprint planning, backlog grooming, and peer code reviews."
+      "Built a real-time EGM telemetry dashboard in React + Node.js that reads live telemetry from gaming machines and sends control commands back to them.",
+      "Handle high-volume bidirectional data streams over MQTT, with analytics computed on live machine data.",
+      "Design and ship Node.js REST APIs backed by MSSQL, plus Azure App Service and Functions workloads.",
+      "Containerized services with Docker and deployed them to hardened Azure Virtual Machines.",
+      "Automated delivery through a GitHub Actions CI/CD pipeline that builds images to Azure Container Registry and deploys to the VM.",
+      "Apply the same performance and accessibility standards from front-end work to a data-heavy, real-time UI."
     ],
     logo: '/CharanLogo.png',
     type: 'Full-time',
-    techStack: ['React.js', 'Next.js', 'TypeScript', 'Redux Toolkit', 'Zustand', 'React Query', 'Jest', 'Vitest', 'React Testing Library', 'Tailwind CSS', 'Material-UI', 'GitHub Actions', 'REST APIs', 'Stripe', 'Razorpay', 'Vercel', 'Lighthouse', 'WCAG', 'Agile']
+    techStack: ['React.js', 'Next.js', 'TypeScript', 'Node.js', 'MQTT', 'MSSQL', 'Azure App Service', 'Azure Functions', 'Azure VMs', 'Azure Container Registry', 'Docker', 'GitHub Actions', 'REST APIs']
+  },
+  {
+    company: "iQuadra Information Services LLC",
+    role: "Software Developer (Full Stack)",
+    duration: "Apr 2023 – Nov 2025",
+    description: [
+      "Full-stack engineer on iQuadra's recruitment platform, delivering features end to end across the jobseeker and recruiter experiences — from the interface through to the APIs and data behind them.",
+      "Built the resume filtering feature, letting recruiters shortlist against role criteria instead of reviewing every profile by hand.",
+      "Designed batched pagination for candidate search so large result sets stayed fast to load and navigate.",
+      "Developed backend services and REST APIs in FastAPI over PostgreSQL, covering candidate data, search and platform workflows.",
+      "Built the platform's transactional email service on AWS SES, including reusable templates for candidate and recruiter notifications.",
+      "Ran the application on AWS — Lambda and S3 for delivery, with Amplify preview environments for dev and QA; set up GitHub Actions pipelines to ship on merge.",
+      "Established a modular TypeScript component library adopted across teams, accelerating feature delivery by 30%.",
+      "Improved Largest Contentful Paint by 25% (lazy loading, code splitting, memoization) and reached Lighthouse scores of 96+ meeting WCAG standards.",
+      "Integrated Stripe and Razorpay checkout, lifting payment success rates by 15%, and cut regressions by 20% with Jest and Vitest coverage.",
+      "Mentored junior developers and partnered with product, design and QA through Agile/Scrum delivery."
+    ],
+    logo: '/CharanLogo.png',
+    type: 'Full-time',
+    techStack: ['React.js', 'Vite', 'TypeScript', 'FastAPI', 'Python', 'PostgreSQL', 'AWS Lambda', 'AWS S3', 'AWS SES', 'AWS Amplify', 'GitHub Actions', 'Stripe', 'Razorpay', 'Jest', 'Vitest', 'Tailwind CSS', 'Agile/Scrum']
   },
   {
     company: "iQuadra Information Services LLC",
     role: "Software Development Intern",
     duration: "Feb 2023 – Mar 2023",
     description: [
-      "Converted Figma wireframes to responsive React pages (Bootstrap) across devices and browsers.",
-      "Integrated REST APIs for efficient data rendering; fixed bugs and contributed to sprint goals."
+      "Translated Figma designs into responsive, pixel-perfect interfaces.",
+      "Integrated REST APIs for dynamic content rendering.",
+      "Participated in daily stand-ups, contributing to bug fixes and feature enhancements."
     ],
     logo: '/CharanLogo.png',
     type: 'Intern',
@@ -140,7 +159,7 @@ function ExperienceSection({ id }: ExperienceSectionProps) {
             <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-20 sm:w-24 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full"></div>
           </div>
           <p className="text-base sm:text-lg md:text-xl text-gray-300 mt-4 sm:mt-6 max-w-2xl mx-auto leading-relaxed px-4">
-            Building innovative solutions and creating impactful digital experiences
+            Shipping full-stack products, from real-time dashboards to the APIs and cloud behind them
           </p>
         </div>
 

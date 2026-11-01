@@ -5,10 +5,10 @@ import CharanImage2 from "../assets/CharanImage2.jpg";
 import TypingAnimation from "./TypingAnimation";
 
 const techStack = [
-  { icon: "⚛️", name: "React 18", level: "Advanced" },
-  { icon: "📱", name: "Next.js 14", level: "Advanced" },
-  { icon: "🚀", name: "TypeScript", level: "Advanced" },
-  { icon: "🎨", name: "Tailwind CSS", level: "Expert" },
+  { icon: "⚛️", name: "React / Next.js", level: "Frontend" },
+  { icon: "🟢", name: "Node.js / FastAPI", level: "Backend" },
+  { icon: "☁️", name: "Azure / AWS", level: "Cloud" },
+  { icon: "🐳", name: "Docker / CI/CD", level: "DevOps" },
 ];
 
 gsap.registerPlugin(TextPlugin);
@@ -30,7 +30,7 @@ function EnhancedHeroSection({ onExploreClick }: HeroSectionProps) {
     if (container && name && title) {
       // Create letter-by-letter animation for name - keep in single line
       const nameText = "PALUKURU CHARAN KUMAR REDDY";
-      const titleText = "SOFTWARE DEVELOPER";
+      const titleText = "FULL STACK DEVELOPER";
 
       // Create single line name with highlighted middle names
       const nameHTML = nameText
@@ -362,9 +362,9 @@ function EnhancedHeroSection({ onExploreClick }: HeroSectionProps) {
               <p className="text-xs sm:text-sm md:text-base lg:text-lg text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary-light to-primary font-medium">
                 <TypingAnimation
                   texts={[
-                    "Creating Digital Experiences That Matter",
-                    "Building Modern Web Applications",
-                    "Crafting Beautiful User Interfaces",
+                    "Building Real-Time Telemetry Platforms",
+                    "Shipping Features End to End",
+                    "React on the Front, Node.js & Azure on the Back",
                     "Developing Scalable Solutions",
                   ]}
                   className="text-xs sm:text-sm md:text-base lg:text-lg text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary-light to-primary font-medium"
@@ -374,9 +374,9 @@ function EnhancedHeroSection({ onExploreClick }: HeroSectionProps) {
 
             {/* Description */}
             <p className="hero-description text-white/80 text-xs sm:text-sm md:text-base leading-relaxed max-w-2xl glass-effect rounded-lg p-3 sm:p-4 mx-auto lg:mx-0">
-              Passionate full-stack developer with 2.7+ years of experience
-              crafting responsive, user-centric web applications using modern
-              technologies.
+              Full Stack Engineer at Arkain Games with 3+ years of experience
+              building high-performance web applications: React and Next.js on
+              the front end, Node.js, FastAPI and Azure on the back.
             </p>
 
             {/* Tech Stack */}

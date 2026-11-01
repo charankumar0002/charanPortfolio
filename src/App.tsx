@@ -88,9 +88,9 @@ function App() {
   return (
     <>
       <SEO
-        title="Palukuru Charan Kumar Reddy | Software Developer"
-        description="Portfolio of Palukuru Charan Kumar Reddy, a Software Developer with ~2.7 years experience building user-friendly and responsive web applications using React, Next.js, and TypeScript."
-        keywords="Software Developer, React, Next.js, TypeScript, Performance Optimization, Bengaluru, Tailwind CSS, Redux Toolkit"
+        title="Palukuru Charan Kumar Reddy | Full Stack Developer"
+        description="Portfolio of Palukuru Charan Kumar Reddy, a Full Stack Developer with 3+ years of experience building high-performance web applications with React, Next.js, TypeScript, Node.js, FastAPI, Azure and Docker."
+        keywords="Full Stack Developer, React, Next.js, TypeScript, Node.js, FastAPI, Azure, AWS, Docker, MQTT, PostgreSQL, MSSQL, CI/CD, Bengaluru"
       />
       <OptimizedAnimatedBackground />
       <OptimizedParticleSystem />

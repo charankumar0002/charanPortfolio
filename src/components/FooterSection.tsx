@@ -52,7 +52,7 @@ function FooterSection({ id }: FooterProps) {
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-center">
           <div className="text-center md:text-left">
             <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">Palukuru Charan Kumar Reddy</h3>
-            <p className="text-gray-300 text-sm sm:text-base">Software Developer</p>
+            <p className="text-gray-300 text-sm sm:text-base">Full Stack Developer</p>
             <p className="text-gray-400 mt-1 sm:mt-2 text-sm sm:text-base">Bengaluru, Karnataka, India</p>
           </div>
           

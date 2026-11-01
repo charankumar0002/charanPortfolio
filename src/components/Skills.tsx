@@ -18,47 +18,47 @@ const skillCategories: SkillCategory[] = [
   {
     title: "Frontend",
     icon: "⚛️",
-    skills: ["React.js (18)", "Next.js 14", "TypeScript", "JavaScript (ES6+)", "Server-Side Rendering", "Dynamic Routing"],
-  },
-  {
-    title: "State/Data Management",
-    icon: "🗄️",
-    skills: ["Redux Toolkit", "Zustand", "Yup", "React Query (Basic)", "Formik"],
-  },
-  {
-    title: "Styling",
-    icon: "🎨",
-    skills: ["Tailwind CSS", "Bootstrap", "Material-UI", "CSS Modules", "SCSS"],
-  },
-  {
-    title: "Tooling & Build",
-    icon: "🛠️",
-    skills: ["Vite", "Webpack", "ESLint", "Prettier", "Git", "GitHub Actions", "Jira"],
+    skills: ["React.js", "Next.js", "TypeScript", "JavaScript (ES6+)", "Vite", "SSR / SSG"],
   },
   {
     title: "Backend",
     icon: "🔌",
-    skills: ["REST APIs", "Node.js (Basic)", "FastAPI (Learning)", "Python"]
+    skills: ["Node.js", "FastAPI", "Python", "REST APIs", "Transactional Email (AWS SES)"]
+  },
+  {
+    title: "Real-Time Systems",
+    icon: "📡",
+    skills: ["MQTT", "Bidirectional Data Streams", "Live Telemetry Dashboards", "Streaming Analytics"]
   },
   {
     title: "Databases",
     icon: "🗃️",
-    skills: ["PostgreSQL (Basic)", "MongoDB (Basic)"]
+    skills: ["Microsoft SQL Server", "PostgreSQL"]
   },
   {
-    title: "Testing",
-    icon: "🧪",
-    skills: ["Jest", "Vitest"]
-  },
-  {
-    title: "DevOps & Performance",
+    title: "Cloud",
     icon: "☁️",
-    skills: ["Vercel", "Docker (Basic)", "Lighthouse", "SEO Audits"]
+    skills: ["Azure App Service", "Azure Functions", "Azure VMs", "Azure Container Registry", "AWS Lambda / S3 / SES", "AWS Amplify"]
   },
   {
-    title: "Core Competencies",
+    title: "DevOps & CI/CD",
+    icon: "🛠️",
+    skills: ["Docker", "GitHub Actions", "CI/CD Pipelines", "Git", "Vercel"]
+  },
+  {
+    title: "State & Styling",
+    icon: "🎨",
+    skills: ["Redux Toolkit", "Zustand", "React Query", "Tailwind CSS", "Material-UI"],
+  },
+  {
+    title: "Testing & Quality",
+    icon: "🧪",
+    skills: ["Jest", "Vitest", "Lighthouse", "WCAG Accessibility", "Performance Optimization"]
+  },
+  {
+    title: "Ways of Working",
     icon: "📋",
-    skills: ["Performance Optimization", "Agile Methodologies", "Component-Based Architecture", "Responsive Web Design", "Cross-Browser Compatibility", "Accessibility Standards"]
+    skills: ["Agile/Scrum", "Mentoring", "Code Reviews", "Cross-team Collaboration (Product, Design, QA)"]
   }
 ];
 
@@ -117,7 +117,7 @@ function Skills({ id }: SkillsProps) {
             <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-20 sm:w-24 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full"></div>
           </div>
           <p className="text-base sm:text-lg md:text-xl text-gray-300 mt-4 sm:mt-6 max-w-2xl mx-auto leading-relaxed px-4">
-            Specialized in frontend development with modern web technologies
+            Full-stack: React and Next.js on the front end, Node.js, FastAPI and the cloud on the back
           </p>
         </div>
 
