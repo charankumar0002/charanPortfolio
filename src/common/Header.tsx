@@ -1,105 +1,149 @@
-import React, { useEffect, useState } from "react";
-import gsap from "gsap";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import { useTheme } from "../context/ThemeContext";
+import { useEffect, useRef, useState } from "react";
 
-gsap.registerPlugin(ScrollToPlugin);
+const navItems = [
+  { id: "about", label: "About" },
+  { id: "experience", label: "Experience" },
+  { id: "projects", label: "Projects" },
+  { id: "skills", label: "Skills" },
+  { id: "contact", label: "Contact" },
+];
 
-const sectionIds = ["hero", "about", "experience", "skills", "contact"];
-
-const Header: React.FC = () => {
+function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme();
-  const [activeSection, setActiveSection] = useState<string>("hero");
+  const [active, setActive] = useState("home");
+  const [scrolled, setScrolled] = useState(false);
+  const progressRef = useRef<HTMLDivElement>(null);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const scrollToSection = (id: string) => {
-    gsap.to(window, {
-      duration: 0.2,
-      scrollTo: {
-        y: `#${id}`,
-        offsetY: 50, // Adjust for fixed headers
-      },
-      ease: "linear",
-    });
-    setIsOpen(false);
-  };
-
-  // Scrollspy effect
+  // Scroll progress + header background, batched to one update per frame
   useEffect(() => {
-    const handleScroll = () => {
-      let current = "hero";
-      for (const id of sectionIds) {
-        const el = document.getElementById(id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 80 && rect.bottom > 80) {
-            current = id;
-            break;
-          }
-        }
-      }
-      setActiveSection(current);
+    let ticking = false;
+    const update = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = max > 0 ? window.scrollY / max : 0;
+      if (progressRef.current) progressRef.current.style.transform = `scaleX(${pct})`;
+      setScrolled(window.scrollY > 20);
+      ticking = false;
     };
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
+  // Highlight the section in view without measuring on every scroll
+  useEffect(() => {
+    const ids = ["home", ...navItems.map((n) => n.id)];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActive(e.target.id);
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px" }
+    );
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  const linkClass = (id: string) =>
+    `rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+      active === id ? "bg-white/[0.06] text-cyan-300" : "text-slate-300 hover:text-white"
+    }`;
+
   return (
-    <header className="bg-slate-900/95 backdrop-blur-lg text-white shadow-xl w-[98vw] sm:w-[95vw] md:w-[85vw] lg:w-[60vw] mx-auto mt-1 sm:mt-2 rounded-lg sm:rounded-xl sticky top-1 sm:top-2 z-50 transition-all border border-white/10">
-      <div className="max-w-7xl mx-auto px-2 sm:px-3 md:px-4 py-2 sm:py-3 md:py-4 flex justify-between items-center">
-        <div className="text-lg sm:text-xl md:text-2xl font-bold cursor-pointer" onClick={() => scrollToSection("hero")}> 
-          <img src="/CharanLogo.png" alt="Logo of Palukuru Charan Kumar Reddy" className="w-[70px] h-[22px] sm:w-[80px] sm:h-[26px] md:w-[100px] md:h-[32px] lg:w-[120px] lg:h-[40px]" />
-        </div>
-        <nav className="hidden md:flex space-x-3 lg:space-x-6" aria-label="Main navigation">
-          <button onClick={() => scrollToSection("about")} className={activeSection === "about" ? "text-cyan-400 font-bold px-3 py-2 rounded-lg bg-cyan-400/10 border border-cyan-400/30" : "hover:text-cyan-300 transition-all duration-300 px-3 py-2 rounded-lg hover:bg-white/5"} aria-current={activeSection === "about" ? "page" : undefined}>
-            About
-          </button>
-          <button onClick={() => scrollToSection("experience")} className={activeSection === "experience" ? "text-cyan-400 font-bold px-3 py-2 rounded-lg bg-cyan-400/10 border border-cyan-400/30" : "hover:text-cyan-300 transition-all duration-300 px-3 py-2 rounded-lg hover:bg-white/5"} aria-current={activeSection === "experience" ? "page" : undefined}>
-            Experience
-          </button>
-          <button onClick={() => scrollToSection("skills")} className={activeSection === "skills" ? "text-cyan-400 font-bold px-3 py-2 rounded-lg bg-cyan-400/10 border border-cyan-400/30" : "hover:text-cyan-300 transition-all duration-300 px-3 py-2 rounded-lg hover:bg-white/5"} aria-current={activeSection === "skills" ? "page" : undefined}>
-            Skills
-          </button>
-          <button onClick={() => scrollToSection("contact")} className={activeSection === "contact" ? "text-cyan-400 font-bold px-3 py-2 rounded-lg bg-cyan-400/10 border border-cyan-400/30" : "hover:text-cyan-300 transition-all duration-300 px-3 py-2 rounded-lg hover:bg-white/5"} aria-current={activeSection === "contact" ? "page" : undefined}>
-            Contact
-          </button>
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+        scrolled || isOpen
+          ? "border-b border-white/[0.06] bg-[#05070d]/85 backdrop-blur-md"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="container-x flex h-16 items-center justify-between">
+        <a href="#home" onClick={() => setIsOpen(false)} aria-label="Back to top">
+          <img
+            src="/CharanLogo.png"
+            alt="Palukuru Charan Kumar Reddy"
+            className="h-7 w-auto sm:h-8"
+          />
+        </a>
+
+        <nav className="hidden items-center gap-1 md:flex" aria-label="Main navigation">
+          {navItems.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className={linkClass(item.id)}
+              aria-current={active === item.id ? "true" : undefined}
+            >
+              {item.label}
+            </a>
+          ))}
         </nav>
-        <button onClick={toggleTheme} className="hidden md:block ml-3 lg:ml-4 p-2 rounded-lg hover:bg-white/10 transition-colors border border-white/10 hover:border-white/20" aria-label="Toggle theme">
-          <span className="text-lg">{theme === 'dark' ? '🌙' : '☀️'}</span>
-        </button>
-        <button className="md:hidden p-2 rounded-lg hover:bg-white/10 transition-colors border border-white/10 hover:border-white/20" onClick={toggleMenu} aria-label="Toggle menu" aria-expanded={isOpen} aria-controls="mobile-menu">
-          <span className="text-xl">{isOpen ? "✖️" : "☰"}</span>
+
+        <a href="#contact" className="btn-primary hidden !px-4 !py-2 !text-sm md:inline-flex">
+          Hire me
+        </a>
+
+        <button
+          className="rounded-lg p-2 text-slate-200 hover:bg-white/10 md:hidden"
+          onClick={() => setIsOpen((v) => !v)}
+          aria-label="Toggle menu"
+          aria-expanded={isOpen}
+          aria-controls="mobile-menu"
+        >
+          <svg className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+            {isOpen ? (
+              <path strokeLinecap="round" d="M6 6l12 12M18 6L6 18" />
+            ) : (
+              <path strokeLinecap="round" d="M4 7h16M4 12h16M4 17h16" />
+            )}
+          </svg>
         </button>
       </div>
-      <div id="mobile-menu" className={`md:hidden px-2 sm:px-3 md:px-4 transition-all duration-300 ease-in-out overflow-hidden ${isOpen ? 'max-h-96 opacity-100 pb-3 sm:pb-4' : 'max-h-0 opacity-0 pointer-events-none'}`} aria-hidden={!isOpen}>
-        <div className="space-y-1 border-t border-white/10 pt-2 sm:pt-3">
-          <button onClick={() => scrollToSection("about")} className={activeSection === "about" ? "block w-full text-left py-3 px-3 text-cyan-400 font-bold rounded-lg bg-cyan-400/10 border border-cyan-400/30" : "block w-full text-left py-3 px-3 hover:text-cyan-300 hover:bg-white/5 transition-all duration-300 rounded-lg border border-transparent hover:border-white/10"} aria-current={activeSection === "about" ? "page" : undefined}>
-            About
-          </button>
-          <button onClick={() => scrollToSection("experience")} className={activeSection === "experience" ? "block w-full text-left py-3 px-3 text-cyan-400 font-bold rounded-lg bg-cyan-400/10 border border-cyan-400/30" : "block w-full text-left py-3 px-3 hover:text-cyan-300 hover:bg-white/5 transition-all duration-300 rounded-lg border border-transparent hover:border-white/10"} aria-current={activeSection === "experience" ? "page" : undefined}>
-            Experience
-          </button>
-          <button onClick={() => scrollToSection("skills")} className={activeSection === "skills" ? "block w-full text-left py-3 px-3 text-cyan-400 font-bold rounded-lg bg-cyan-400/10 border border-cyan-400/30" : "block w-full text-left py-3 px-3 hover:text-cyan-300 hover:bg-white/5 transition-all duration-300 rounded-lg border border-transparent hover:border-white/10"} aria-current={activeSection === "skills" ? "page" : undefined}>
-            Skills
-          </button>
-          <button onClick={() => scrollToSection("contact")} className={activeSection === "contact" ? "block w-full text-left py-3 px-3 text-cyan-400 font-bold rounded-lg bg-cyan-400/10 border border-cyan-400/30" : "block w-full text-left py-3 px-3 hover:text-cyan-300 hover:bg-white/5 transition-all duration-300 rounded-lg border border-transparent hover:border-white/10"} aria-current={activeSection === "contact" ? "page" : undefined}>
-            Contact
-          </button>
-          <button onClick={toggleTheme} className="block w-full text-left py-3 px-3 hover:text-cyan-300 hover:bg-white/5 transition-all duration-300 rounded-lg border border-transparent hover:border-white/10" aria-label="Toggle theme">
-            <span className="inline-flex items-center gap-2">
-              <span>{theme === 'dark' ? '🌙' : '☀️'}</span>
-              <span>Toggle Theme</span>
-            </span>
-          </button>
-        </div>
+
+      <div
+        id="mobile-menu"
+        className={`container-x overflow-hidden transition-[max-height] duration-300 md:hidden ${
+          isOpen ? "max-h-96" : "max-h-0"
+        }`}
+        hidden={!isOpen}
+      >
+        <nav className="flex flex-col gap-1 pb-4" aria-label="Mobile navigation">
+          {navItems.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              onClick={() => setIsOpen(false)}
+              className={`${linkClass(item.id)} py-3 text-base`}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+
+      {/* Scroll progress */}
+      <div className="absolute inset-x-0 bottom-0 h-0.5 overflow-hidden">
+        <div
+          ref={progressRef}
+          className="h-full origin-left bg-gradient-to-r from-cyan-400 to-violet-500"
+          style={{ transform: "scaleX(0)" }}
+        />
       </div>
     </header>
   );
-};
+}
 
 export default Header;

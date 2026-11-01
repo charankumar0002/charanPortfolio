@@ -1,74 +1,52 @@
-import { useEffect, useRef, useState } from 'react';
-import gsap from 'gsap';
+import { useEffect, useState } from "react";
 
 interface TypingAnimationProps {
   texts: string[];
   className?: string;
   typeSpeed?: number;
   deleteSpeed?: number;
-  delayBetweenTexts?: number;
+  pause?: number;
 }
 
-const TypingAnimation: React.FC<TypingAnimationProps> = ({
+function TypingAnimation({
   texts,
-  className = '',
-  typeSpeed = 100,
-  deleteSpeed = 50,
-  delayBetweenTexts = 2000
-}) => {
-  const textRef = useRef<HTMLSpanElement>(null);
-  const cursorRef = useRef<HTMLSpanElement>(null);
-  const [currentTextIndex, setCurrentTextIndex] = useState(0);
-  const [currentText, setCurrentText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
+  className = "",
+  typeSpeed = 70,
+  deleteSpeed = 35,
+  pause = 1800,
+}: TypingAnimationProps) {
+  const [index, setIndex] = useState(0);
+  const [text, setText] = useState("");
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
-    const fullText = texts[currentTextIndex];
-    
-    const timeout = setTimeout(() => {
-      if (!isDeleting) {
-        if (currentText !== fullText) {
-          setCurrentText(fullText.substring(0, currentText.length + 1));
-        } else {
-          setTimeout(() => setIsDeleting(true), delayBetweenTexts);
-        }
+    const full = texts[index];
+    let delay = deleting ? deleteSpeed : typeSpeed;
+
+    if (!deleting && text === full) delay = pause;
+
+    const timer = setTimeout(() => {
+      if (!deleting && text === full) {
+        setDeleting(true);
+      } else if (deleting && text === "") {
+        setDeleting(false);
+        setIndex((i) => (i + 1) % texts.length);
       } else {
-        if (currentText !== '') {
-          setCurrentText(fullText.substring(0, currentText.length - 1));
-        } else {
-          setIsDeleting(false);
-          setCurrentTextIndex((prevIndex) => (prevIndex + 1) % texts.length);
-        }
+        setText(full.slice(0, text.length + (deleting ? -1 : 1)));
       }
-    }, isDeleting ? deleteSpeed : typeSpeed);
+    }, delay);
 
-    return () => clearTimeout(timeout);
-  }, [currentText, currentTextIndex, isDeleting, texts, typeSpeed, deleteSpeed, delayBetweenTexts]);
-
-  useEffect(() => {
-    // Animate cursor blinking
-    if (cursorRef.current) {
-      gsap.to(cursorRef.current, {
-        opacity: 0,
-        duration: 0.5,
-        repeat: -1,
-        yoyo: true,
-        ease: "power2.inOut"
-      });
-    }
-  }, []);
+    return () => clearTimeout(timer);
+  }, [text, deleting, index, texts, typeSpeed, deleteSpeed, pause]);
 
   return (
-    <span className={className}>
-      <span ref={textRef}>{currentText}</span>
-      <span 
-        ref={cursorRef}
-        className="ml-1 text-cyan-400 font-bold text-xl"
-      >
+    <span className={className} aria-label={texts[index]}>
+      <span aria-hidden="true">{text}</span>
+      <span aria-hidden="true" className="caret ml-0.5 text-cyan-400">
         |
       </span>
     </span>
   );
-};
+}
 
 export default TypingAnimation;

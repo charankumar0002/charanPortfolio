@@ -1,319 +1,91 @@
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
-import { AnimatedCounter } from './AnimatedCounter';
-
-gsap.registerPlugin(ScrollTrigger);
+import Reveal from "../common/Reveal";
+import SectionHeading from "../common/SectionHeading";
+import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
+import { AnimatedCounter } from "./AnimatedCounter";
 
 interface AboutSectionProps {
   id: string;
 }
 
+const quickInfo = [
+  { label: "Location", value: "Bengaluru, India" },
+  { label: "Experience", value: "3+ years, full stack" },
+  { label: "Currently", value: "Full Stack Engineer, Arkain Games" },
+  { label: "Education", value: "B.Tech, Electronics & Communication" },
+];
+
+const stats = [
+  { value: 30, suffix: "%", label: "Faster feature delivery" },
+  { value: 25, suffix: "%", label: "Faster LCP" },
+  { value: 96, suffix: "+", label: "Lighthouse score" },
+  { value: 15, suffix: "%", label: "Higher payment success" },
+];
+
 function AboutSection({ id }: AboutSectionProps) {
-  const sectionRef = useRef<HTMLElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const statsRef = useRef<HTMLDivElement>(null);
-  const skillsRef = useRef<HTMLDivElement>(null);
-  const personalRef = useRef<HTMLDivElement>(null);
-
-  // Use intersection observer for stats animation
-  const { ref: statsObserverRef, hasIntersected: statsVisible } = useIntersectionObserver({
-    threshold: 0.3,
-    rootMargin: '0px'
-  });
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    const content = contentRef.current;
-    const title = titleRef.current;
-    const stats = statsRef.current;
-    const skills = skillsRef.current;
-    const personal = personalRef.current;
-
-    if (section && content && title && stats && skills && personal) {
-      const ctx = gsap.context(() => {
-        // Create master timeline
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: section,
-            start: "top 85%",
-            end: "bottom 15%",
-            toggleActions: "play none none reverse",
-            markers: false,
-          }
-        });
-
-        // Animate title first
-        tl.fromTo(title, 
-          { y: 50, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" }
-        );
-
-        // Animate main content with better spacing
-        tl.fromTo(content.children,
-          { y: 40, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8, stagger: 0.2, ease: "power2.out" },
-          "-=0.4"
-        );
-
-        // Animate stats with bounce
-        tl.fromTo(stats.children,
-          { y: 30, opacity: 0, scale: 0.8 },
-          { y: 0, opacity: 1, scale: 1, duration: 0.6, stagger: 0.1, ease: "back.out(1.7)" },
-          "-=0.4"
-        );
-
-        // Animate skills grid
-        tl.fromTo(skills.children,
-          { y: 20, opacity: 0, rotateY: 15 },
-          { y: 0, opacity: 1, rotateY: 0, duration: 0.5, stagger: 0.08, ease: "power2.out" },
-          "-=0.3"
-        );
-
-        // Animate personal section last
-        tl.fromTo(personal.children,
-          { y: 30, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: "power2.out" },
-          "-=0.2"
-        );
-
-      });
-
-      return () => ctx.revert();
-    }
-  }, []);
+  const { ref: statsRef, hasIntersected } = useIntersectionObserver({ threshold: 0.3 });
 
   return (
-    <section
-      id={id}
-      ref={sectionRef}
-      className="min-h-screen flex items-center py-6 sm:py-8 md:py-12 lg:py-16 relative overflow-hidden bg-gradient-to-br from-gray-900/50 to-black/30"
-    >
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-10 sm:top-20 left-5 sm:left-10 w-24 h-24 sm:w-32 sm:h-32 bg-cyan-400/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-10 sm:bottom-20 right-5 sm:right-10 w-28 h-28 sm:w-40 sm:h-40 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/4 w-20 h-20 sm:w-24 sm:h-24 bg-pink-500/20 rounded-full blur-2xl animate-pulse delay-500"></div>
-      </div>
+    <section id={id} className="section">
+      <div className="container-x">
+        <SectionHeading
+          eyebrow="About"
+          title="I build web platforms end to end"
+          subtitle="From the UI to the APIs, data and cloud behind it."
+        />
 
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 relative z-10">
-        {/* Enhanced title with decorative elements */}
-        <div className="text-center mb-8 sm:mb-12 md:mb-16 lg:mb-20">
-          <div className="relative inline-block">
-            <h2 
-              ref={titleRef}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent mb-4 tracking-wide"
-            >
-              About Me
-            </h2>
-            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-20 sm:w-24 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full"></div>
-          </div>
-          <p className="text-base sm:text-lg md:text-xl text-gray-300 mt-4 sm:mt-6 max-w-2xl mx-auto leading-relaxed px-4">
-            Full-stack developer building real-time, high-performance web platforms
-          </p>
-        </div>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-1 gap-4 sm:gap-6 md:gap-8 lg:gap-12 items-center">
-          {/* Content Section - Now takes full width */}
-          <div ref={contentRef} className="space-y-4 sm:space-y-6 md:space-y-8 max-w-5xl mx-auto">
-            {/* Hero Statement */}
-            <div className="glass-effect rounded-lg sm:rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-8 text-center">
-              <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-white mb-3 sm:mb-4 leading-tight">
-                I build web platforms end to end, from the UI to the cloud
-              </h3>
-              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/80 leading-relaxed">
-                Full-stack developer with <span className="text-primary font-semibold">3+ years</span> of experience, working
-                across React/Next.js on the front end and Node.js + Azure on the back. At Arkain Games I build a real-time
-                telemetry platform for electronic gaming machines: a React + Node.js dashboard that reads live machine data
-                over MQTT, sends control commands back, and runs analytics on high-volume streams.
+        <div className="grid gap-6 lg:grid-cols-5">
+          <Reveal className="card p-6 sm:p-8 lg:col-span-3">
+            <div className="space-y-4 text-base leading-relaxed text-slate-300 sm:text-lg">
+              <p>
+                I'm a full-stack developer with <span className="font-semibold text-white">3+ years</span> of
+                experience, working across React/Next.js on the front end and Node.js + Azure on the back.
+              </p>
+              <p>
+                At <span className="font-semibold text-white">Arkain Games</span> I build a real-time telemetry
+                platform for electronic gaming machines: a React + Node.js dashboard that reads live machine data
+                over MQTT, sends control commands back, and runs analytics on high-volume streams. It's
+                containerized with Docker and shipped to Azure through GitHub Actions.
+              </p>
+              <p>
+                Before that, at <span className="font-semibold text-white">iQuadra</span>, I worked across a
+                recruitment platform's React front end and FastAPI + PostgreSQL back end on AWS.
+              </p>
+              <p className="text-slate-400">
+                I enjoy mentoring junior developers and working closely with design, product and QA. Right now I'm
+                going deep on Azure and distributed system design.
               </p>
             </div>
+          </Reveal>
 
-            {/* Quick Info */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-              {[
-                { label: "📍 Location", value: "Bengaluru, Karnataka" },
-                { label: "🎓 Education", value: "B.Tech, Electronics & Communication" },
-                { label: "💼 Experience", value: "3+ Years in Full-Stack Development" },
-                { label: "🚀 Specialization", value: "React, Node.js, Azure, Real-Time Systems" }
-              ].map((item, index) => (
-                <div
-                  key={index}
-                  className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-3 text-white/90 glass-effect rounded-lg p-3 sm:p-4 hover:glass-effect-strong transition-all duration-300"
-                >
-                  <span className="text-xs sm:text-sm md:text-base font-medium">{item.label}</span>
-                  <span className="text-xs sm:text-sm md:text-base text-primary font-semibold">{item.value}</span>
+          <Reveal delay={100} className="card p-6 sm:p-8 lg:col-span-2">
+            <dl className="divide-y divide-white/[0.06]">
+              {quickInfo.map((item) => (
+                <div key={item.label} className="flex flex-col gap-1 py-3 first:pt-0 last:pb-0">
+                  <dt className="text-xs font-semibold uppercase tracking-wider text-cyan-400">{item.label}</dt>
+                  <dd className="text-slate-200">{item.value}</dd>
                 </div>
               ))}
-            </div>
-
-            {/* Quote */}
-            <div className="glass-effect rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 border-l-4 border-primary text-center max-w-3xl mx-auto">
-              <p className="text-white/90 italic text-sm sm:text-base md:text-lg leading-relaxed">
-                "Containerized with Docker, deployed to Azure, shipped through CI/CD. I own features from the interface to the APIs and data behind them."
-              </p>
-            </div>
-          </div>
+            </dl>
+            <a href="#contact" className="btn-primary mt-6 w-full">
+              Let's work together
+            </a>
+          </Reveal>
         </div>
 
-        {/* Stats Section with enhanced heading */}
-        <div 
-          ref={statsRef}
-          className="mt-6 sm:mt-8 md:mt-12 lg:mt-16"
-        >
-          <div className="text-center mb-6 sm:mb-8 md:mb-12">
-            <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent mb-4">
-              Impact & Results
-            </h3>
-            <div className="w-12 sm:w-16 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-500 mx-auto rounded-full"></div>
-          </div>
-          <div 
-            ref={statsObserverRef}
-            className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6"
-          >
-            {[
-              { icon: "🚀", value: 30, suffix: "%", label: "Faster Feature Delivery" },
-              { icon: "⚡", value: 25, suffix: "%", label: "Faster LCP" },
-              { icon: "♿", value: 96, suffix: "+", label: "Lighthouse Score" },
-              { icon: "💳", value: 15, suffix: "%", label: "Higher Payment Success" }
-            ].map((stat, index) => (
-              <div
-                key={index}
-                className="text-center group glass-effect rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 hover:glass-effect-strong transition-all duration-300 hover:scale-105 hover:animate-glow-pulse"
-              >
-                <div className="bg-primary/10 rounded-full w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-16 lg:h-16 mx-auto mb-2 sm:mb-3 md:mb-4 flex items-center justify-center group-hover:bg-primary/20 transition-all duration-300 subtle-border">
-                  <span className="text-base sm:text-lg md:text-xl lg:text-2xl group-hover:scale-110 transition-transform duration-300">{stat.icon}</span>
-                </div>
-                <div className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold text-primary mb-1">
-                  <AnimatedCounter 
-                    end={stat.value} 
-                    suffix={stat.suffix} 
-                    trigger={statsVisible}
-                    duration={1500 + (index * 200)}
-                  />
-                </div>
-                <div className="text-xs sm:text-sm text-white/60">{stat.label}</div>
+        <div ref={statsRef} className="mt-6 grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-4">
+          {stats.map((stat, i) => (
+            <Reveal key={stat.label} delay={i * 80} className="card card-hover p-5 text-center sm:p-6">
+              <div className="text-gradient text-3xl font-extrabold sm:text-4xl">
+                <AnimatedCounter
+                  end={stat.value}
+                  suffix={stat.suffix}
+                  trigger={hasIntersected}
+                  duration={1400 + i * 150}
+                />
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Skills Section with enhanced heading */}
-        <div ref={skillsRef} className="mt-8 sm:mt-12 md:mt-16">
-          <div className="text-center mb-8 sm:mb-12">
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent mb-4">
-              Technologies I Work With
-            </h3>
-            <div className="w-16 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-500 mx-auto rounded-full"></div>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3 md:gap-4">
-            {[
-              { name: "React / Next.js", icon: "⚛️", proficiency: "Expert", color: "cyan" },
-              { name: "TypeScript", icon: "📘", proficiency: "Expert", color: "blue" },
-              { name: "Node.js", icon: "🟢", proficiency: "Advanced", color: "green" },
-              { name: "Azure", icon: "☁️", proficiency: "Advanced", color: "blue" },
-              { name: "Docker", icon: "🐳", proficiency: "Advanced", color: "teal" }
-            ].map((tech, index) => (
-              <div
-                key={index}
-                className="glass-effect rounded-xl p-2 sm:p-3 md:p-4 text-center border border-white/10 hover:border-primary/30 hover:glass-effect-strong transition-all duration-500 group hover:scale-105 hover:rotate-1 cursor-pointer"
-                style={{
-                  animationDelay: `${index * 100}ms`
-                }}
-              >
-                <div className="text-xl sm:text-2xl md:text-3xl mb-1 sm:mb-2 md:mb-3 group-hover:scale-125 transition-all duration-300 group-hover:animate-bounce">
-                  {tech.icon}
-                </div>
-                <div className="text-white font-medium mb-1 text-xs sm:text-sm md:text-base group-hover:text-primary transition-colors duration-300">
-                  {tech.name}
-                </div>
-                <div className="text-xs text-white/50 group-hover:text-white/70 transition-colors duration-300">
-                  {tech.proficiency}
-                </div>
-                {/* Skill level indicator */}
-                <div className="mt-2 bg-white/10 rounded-full h-1 overflow-hidden">
-                  <div 
-                    className={`h-full bg-gradient-to-r from-primary to-cyan-400 rounded-full transition-all duration-1000 group-hover:w-full ${
-                      tech.proficiency === 'Expert' ? 'w-4/5' : 
-                      tech.proficiency === 'Advanced' ? 'w-3/4' : 'w-2/3'
-                    }`}
-                  ></div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Personal Touch & Showcase */}
-        <div ref={personalRef} className="mt-8 sm:mt-12 md:mt-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
-            {/* Core Competencies */}
-            <div className="glass-effect rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border border-white/10 hover:border-primary/20 transition-all duration-500 group">
-              <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-4 sm:mb-6 flex items-center">
-                <span className="mr-2 sm:mr-3 text-xl sm:text-2xl">🎯</span>
-                Core Competencies
-              </h3>
-              <div className="grid grid-cols-1 gap-2 sm:gap-3">
-                {[
-                  "🧩 End-to-End Feature Delivery",
-                  "📡 Real-Time Systems (MQTT)",
-                  "🔌 REST API Design (Node.js, FastAPI)",
-                  "☁️ Cloud Deployment (Azure, AWS)",
-                  "🐳 Docker & CI/CD (GitHub Actions)",
-                  "⚡ Performance Optimization",
-                  "♿ Accessibility (WCAG)",
-                  "🤝 Mentoring & Agile/Scrum"
-                ].map((competency, index) => (
-                  <div 
-                    key={index}
-                    className="text-white/80 text-xs sm:text-sm md:text-base hover:text-primary transition-all duration-300 cursor-default transform hover:translate-x-2 p-2 rounded hover:bg-white/5"
-                    style={{ animationDelay: `${index * 50}ms` }}
-                  >
-                    {competency}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Personal Statement */}
-            <div className="glass-effect rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border border-white/10 hover:border-primary/20 transition-all duration-500 group">
-              <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-4 sm:mb-6 flex items-center">
-                <span className="mr-2 sm:mr-3 text-xl sm:text-2xl">💭</span>
-                Philosophy
-              </h3>
-              <blockquote className="text-white/80 leading-relaxed text-xs sm:text-sm md:text-base italic mb-4 sm:mb-6">
-                "I believe in creating digital experiences that not only look beautiful but also solve real problems. 
-                Every line of code should serve a purpose, every interaction should feel natural, and every user should feel empowered."
-              </blockquote>
-              <p className="text-white/70 leading-relaxed text-xs sm:text-sm md:text-base">
-                I enjoy mentoring junior developers and working closely with design, product and QA. Right now I'm
-                going deep on Azure and distributed system design, and I write about what I learn.
-              </p>
-              
-              {/* Fun fact */}
-              <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-primary/10 rounded-lg border-l-4 border-primary">
-                <p className="text-primary font-medium text-xs sm:text-sm">
-                  💡 From recruitment platforms on AWS to live gaming-machine telemetry on Azure, I've shipped both sides of the stack.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Call to Action */}
-          <div className="mt-6 sm:mt-8 text-center">
-            <div className="glass-effect rounded-xl p-4 sm:p-6 inline-block hover:glass-effect-strong transition-all duration-300 group cursor-pointer hover:scale-105">
-              <p className="text-white/90 mb-3 sm:mb-4 text-sm sm:text-base">
-                Ready to bring your ideas to life? Let's collaborate!
-              </p>
-              <div className="flex items-center justify-center space-x-3 sm:space-x-4 text-primary">
-                <span className="group-hover:animate-bounce text-lg sm:text-xl">📧</span>
-                <span className="font-medium text-sm sm:text-base">Get in touch</span>
-                <span className="group-hover:animate-bounce text-lg sm:text-xl">🚀</span>
-              </div>
-            </div>
-          </div>
+              <p className="mt-2 text-sm text-slate-400">{stat.label}</p>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

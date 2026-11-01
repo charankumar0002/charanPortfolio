@@ -1,90 +1,22 @@
 import { useEffect } from "react";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin"; // ✅ Import ScrollToPlugin
-import AboutSection from "./components/AboutSection";
-import CustomCursor from "./common/CustomCursor";
+import { Analytics } from "@vercel/analytics/react";
+import SEO from "./common/SEO";
+import Header from "./common/Header";
 import EnhancedHeroSection from "./components/EnhancedHeroSection";
-import OptimizedAnimatedBackground from "./components/OptimizedAnimatedBackground";
-import OptimizedParticleSystem from "./components/OptimizedParticleSystem";
-import OptimizedInteractiveShapes from "./components/OptimizedInteractiveShapes";
-import OptimizedScrollProgress from "./common/OptimizedScrollProgress";
-import Skills from "./components/Skills";
-
+import AboutSection from "./components/AboutSection";
 import WorkExperience from "./components/WorkExperience";
 import ProjectsSection from "./components/ProjectsSection";
-import Header from "./common/Header";
-import FooterSection from "./components/FooterSection";
+import Skills from "./components/Skills";
 import ContactPage from "./components/contact";
-import { Analytics } from '@vercel/analytics/react';
-import SEO from "./common/SEO";
-// ✅ Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin); // ✅ Add ScrollToPlugin
+import FooterSection from "./components/FooterSection";
 
 function App() {
+  // Sections render after the browser tries to follow a #hash, so jump to it ourselves.
   useEffect(() => {
-    // Enhanced GSAP performance configuration
-    gsap.config({
-      autoSleep: 30, // Reduced from 60 for faster cleanup
-      force3D: true, // Hardware acceleration
-      nullTargetWarn: false,
-    });
-
-    // Mobile-specific performance optimizations
-    const isMobile = window.innerWidth < 768;
-    
-    if (isMobile) {
-      // Reduce animation complexity for mobile
-      gsap.config({
-        autoSleep: 20,
-        force3D: true,
-        nullTargetWarn: false,
-      });
-      
-      // Shorter durations for mobile
-      gsap.defaults({
-        ease: "power2.out",
-        duration: 0.6,
-        overwrite: "auto",
-      });
-    } else {
-      // Set global defaults for better performance on desktop
-      gsap.defaults({
-        ease: "power2.out",
-        duration: 0.8,
-        overwrite: "auto", // Prevent conflicting animations
-      });
-    }
-
-    // Initialize main timeline with performance optimizations
-    const mainTl = gsap.timeline({
-      defaults: {
-        ease: "power2.out",
-      },
-    });
-
-    // Enhanced scroll trigger configuration for performance
-    ScrollTrigger.config({
-      limitCallbacks: true, // Limit callback frequency
-      syncInterval: isMobile ? 150 : 120, // Higher sync interval for mobile
-    });
-
-    // Clean up function with proper cleanup
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-      mainTl.kill();
-      gsap.killTweensOf("*"); // Kill all remaining tweens
-    };
+    const id = decodeURIComponent(window.location.hash.slice(1));
+    if (id) document.getElementById(id)?.scrollIntoView();
   }, []);
 
-  const scrollToAbout = () => {
-    gsap.to(window, {
-      duration: 1.5,
-      scrollTo: "#about", // Ensure this ID matches the AboutSection's ID
-      ease: "linear",
-    });
-  };
-  
   return (
     <>
       <SEO
@@ -92,22 +24,24 @@ function App() {
         description="Portfolio of Palukuru Charan Kumar Reddy, a Full Stack Developer with 3+ years of experience building high-performance web applications with React, Next.js, TypeScript, Node.js, FastAPI, Azure and Docker."
         keywords="Full Stack Developer, React, Next.js, TypeScript, Node.js, FastAPI, Azure, AWS, Docker, MQTT, PostgreSQL, MSSQL, CI/CD, Bengaluru"
       />
-      <OptimizedAnimatedBackground />
-      <OptimizedParticleSystem />
-      <OptimizedInteractiveShapes />
+      <div className="page-bg" aria-hidden="true" />
+      <a
+        href="#about"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-black"
+      >
+        Skip to content
+      </a>
       <Header />
-      <div className="relative overflow-x-hidden">
-        <OptimizedScrollProgress />
-        <CustomCursor />
-        <EnhancedHeroSection onExploreClick={scrollToAbout} />
-        <AboutSection id="about"  />
-        <WorkExperience id="experience"/>
+      <main className="overflow-x-clip">
+        <EnhancedHeroSection />
+        <AboutSection id="about" />
+        <WorkExperience id="experience" />
         <ProjectsSection />
         <Skills id="skills" />
         <ContactPage id="contact" />
-        <FooterSection id="footer"/>
-        <Analytics />
-      </div>
+      </main>
+      <FooterSection id="footer" />
+      <Analytics />
     </>
   );
 }
