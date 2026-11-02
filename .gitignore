@@ -23,6 +23,16 @@ dist-ssr
 *.sln
 *.sw?
 
-# Environment variables
+# Environment variables (keep real keys out of git)
 .env*
+!.env.example
+
+# Tool / deploy folders
+.claude/
+.vercel/
+supabase/.temp/
+supabase/.branches/
+
+# OS files
+Thumbs.db
 
