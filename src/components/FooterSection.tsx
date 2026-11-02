@@ -1,10 +1,24 @@
+import { useEffect, useState } from "react";
 import { socialLinks } from "../common/socialLinks";
+import { getViewCount } from "../lib/supabase";
 
 interface FooterProps {
   id: string;
 }
 
 function FooterSection({ id }: FooterProps) {
+  const [views, setViews] = useState<number | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    getViewCount().then((n) => {
+      if (active) setViews(n);
+    });
+    return () => {
+      active = false;
+    };
+  }, []);
+
   return (
     <footer id={id} className="border-t border-white/[0.06] py-10">
       <div className="container-x flex flex-col items-center justify-between gap-6 text-center sm:flex-row sm:text-left">
@@ -30,9 +44,14 @@ function FooterSection({ id }: FooterProps) {
           ))}
         </div>
 
-        <p className="text-xs text-slate-500">
-          &copy; {new Date().getFullYear()} Palukuru Charan Kumar Reddy
-        </p>
+        <div className="text-xs text-slate-500">
+          <p>&copy; {new Date().getFullYear()} Palukuru Charan Kumar Reddy</p>
+          {views !== null && (
+            <p className="mt-1">
+              <span className="text-cyan-400">{views.toLocaleString()}</span> visits
+            </p>
+          )}
+        </div>
       </div>
     </footer>
   );

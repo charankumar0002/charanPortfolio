@@ -2,29 +2,58 @@ import { useState } from "react";
 import Reveal from "../common/Reveal";
 import SectionHeading from "../common/SectionHeading";
 import { contactInfo, socialLinks } from "../common/socialLinks";
+import { saveMessage, supabase } from "../lib/supabase";
 
 interface ContactProps {
   id: string;
 }
+
+type Status = "idle" | "sending" | "sent" | "error" | "mailto";
 
 const inputClass =
   "w-full rounded-xl border border-white/10 bg-slate-950/60 px-4 py-3 text-base text-white placeholder:text-slate-500 transition-colors focus:border-cyan-400/60 focus:outline-none focus:ring-2 focus:ring-cyan-400/20";
 
 function ContactPage({ id }: ContactProps) {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-  const [opened, setOpened] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
+  // Hidden field only bots fill in.
+  const [honeypot, setHoneypot] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // No backend: hand the message to the visitor's email app, prefilled.
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  // Fallback: hand the message to the visitor's email app, prefilled.
+  const openMailApp = () => {
     const subject = encodeURIComponent(`Portfolio enquiry from ${formData.name}`);
     const body = encodeURIComponent(`${formData.message}\n\n— ${formData.name} (${formData.email})`);
     window.location.href = `mailto:${contactInfo.email}?subject=${subject}&body=${body}`;
-    setOpened(true);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (honeypot) {
+      setStatus("sent");
+      return;
+    }
+    if (!supabase) {
+      openMailApp();
+      setStatus("mailto");
+      return;
+    }
+
+    setStatus("sending");
+    try {
+      await saveMessage({
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        message: formData.message.trim(),
+      });
+      setFormData({ name: "", email: "", message: "" });
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
   };
 
   const details = [
@@ -121,18 +150,46 @@ function ContactPage({ id }: ContactProps) {
                   required
                 />
               </label>
-              <button type="submit" className="btn-primary w-full">
-                Send message
+              <input
+                type="text"
+                name="website"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="hidden"
+              />
+              <button
+                type="submit"
+                className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-60"
+                disabled={status === "sending"}
+              >
+                {status === "sending" ? "Sending…" : "Send message"}
               </button>
-              {opened && (
-                <p className="text-center text-sm text-slate-400" role="status">
-                  Your email app should open with the message ready to send. If it didn't, email me at{" "}
-                  <a href={`mailto:${contactInfo.email}`} className="text-cyan-300 underline">
-                    {contactInfo.email}
-                  </a>
-                  .
-                </p>
-              )}
+              <div role="status" aria-live="polite" className="text-center text-sm">
+                {status === "sent" && (
+                  <p className="text-emerald-300">Thanks! Your message was sent. I'll get back to you soon.</p>
+                )}
+                {status === "error" && (
+                  <p className="text-rose-300">
+                    Something went wrong sending your message.{" "}
+                    <button type="button" onClick={openMailApp} className="text-cyan-300 underline">
+                      Send it by email instead
+                    </button>
+                    .
+                  </p>
+                )}
+                {status === "mailto" && (
+                  <p className="text-slate-400">
+                    Your email app should open with the message ready to send. If it didn't, email me at{" "}
+                    <a href={`mailto:${contactInfo.email}`} className="text-cyan-300 underline">
+                      {contactInfo.email}
+                    </a>
+                    .
+                  </p>
+                )}
+              </div>
             </form>
           </Reveal>
         </div>
